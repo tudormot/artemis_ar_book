@@ -25,12 +25,14 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                Debug.Log("pressed via checking the input module..expecting that the real android button was pressed now");
                 BackButtonPressed();
             }
         }
 
         public void BackButtonPressed()
         {
+            Debug.Log("Back Button Pressed");
             if (Application.CanStreamedLevelBeLoaded("Menu"))
             {
                 SceneManager.LoadScene("Menu", LoadSceneMode.Single);

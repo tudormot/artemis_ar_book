@@ -63,7 +63,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         }
 
         /// <summary>
-        /// Invoked whenever the slider's value changes
+        /// Invoked whenever them_Text slider's value changes
         /// </summary>
         public void OnSliderValueChanged()
         {

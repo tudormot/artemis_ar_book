@@ -53,7 +53,13 @@ namespace UnityEngine.XR.ARFoundation.Samples
         void Update()
         {
             if (Input.touchCount == 0 || m_Content == null)
+            {
                 return;
+            }
+            // else
+            // {
+            //     Debug.Log("But Input module also reports a click!");
+            // }
 
             var touch = Input.GetTouch(0);
 
