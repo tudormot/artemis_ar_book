@@ -32,6 +32,13 @@ namespace UnityEngine.XR.ARFoundation.Samples
             get => m_AllMenu;
             set => m_AllMenu = value;
         }
+        [SerializeField]
+        GameObject m_ARtemisMenu;
+        public GameObject ARtemisMenu
+        {
+            get => m_ARtemisMenu;
+            set => m_ARtemisMenu = value;
+        }
 
         [SerializeField]
         GameObject m_ImageTrackingMenu;
@@ -132,6 +139,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         static void LoadScene(string sceneName)
         {
             LoaderUtility.Initialize();
+            Debug.Log("Loading scene: " + sceneName);
             SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
         }
 
@@ -330,9 +338,23 @@ namespace UnityEngine.XR.ARFoundation.Samples
             LoadScene("TogglePlaneDetection");
         }
 
-        public void BackButtonPressed()
+        public void ARFoundationsButtonPressed()
         {
             ActiveMenu.currentMenu = MenuType.Main;
+            m_AllMenu.SetActive(true);
+            m_ARtemisMenu.SetActive(false);
+            ScrollToStartPosition();
+        }
+        public void ARBookButtonPressed()
+        {
+            LoadScene("ARBook");
+        }
+
+        
+
+        public void BackButtonPressed()
+        {
+            ActiveMenu.currentMenu = MenuType.ARtemisMenu;
             m_ImageTrackingMenu.SetActive(false);
             m_FaceTrackingMenu.SetActive(false);
             m_PlaneDetectionMenu.SetActive(false);
@@ -340,7 +362,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
             m_MeshingMenu.SetActive(false);
             m_DepthMenu.SetActive(false);
             m_LightEstimationMenu.SetActive(false);
-            m_AllMenu.SetActive(true);
+            m_AllMenu.SetActive(false);
+            m_ARtemisMenu.SetActive(true);
             ScrollToStartPosition();
         }
 

@@ -4,6 +4,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
 {
     public enum MenuType
     {
+        ARtemisMenu,
         Main,
         ImageTracking,
         FaceTracking,

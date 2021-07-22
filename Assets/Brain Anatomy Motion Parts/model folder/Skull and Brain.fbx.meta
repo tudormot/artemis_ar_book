@@ -1,0 +1,292 @@
+fileFormatVersion: 2
+guid: 88f3c1faa1b744a1c8a052a1487d511c
+timeCreated: 1513963049
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: brain
+    100002: brain__right
+    100004: brain_left
+    100006: brain_steam_left
+    100008: brian_steam_right
+    100010: Cerebellum
+    100012: eye__1
+    100014: Pituitary_Gland
+    100016: //RootNode
+    100018: skull_left
+    100020: skull_old_1
+    100022: skull_right
+    400000: brain
+    400002: brain__right
+    400004: brain_left
+    400006: brain_steam_left
+    400008: brian_steam_right
+    400010: Cerebellum
+    400012: eye__1
+    400014: Pituitary_Gland
+    400016: //RootNode
+    400018: skull_left
+    400020: skull_old_1
+    400022: skull_right
+    2300000: brain__right
+    2300002: brain_left
+    2300004: brain_steam_left
+    2300006: brian_steam_right
+    2300008: Cerebellum
+    2300010: eye__1
+    2300012: Pituitary_Gland
+    2300014: skull_left
+    2300016: skull_old_1
+    2300018: skull_right
+    3300000: brain__right
+    3300002: brain_left
+    3300004: brain_steam_left
+    3300006: brian_steam_right
+    3300008: Cerebellum
+    3300010: eye__1
+    3300012: Pituitary_Gland
+    3300014: skull_left
+    3300016: skull_old_1
+    3300018: skull_right
+    4300000: brian_steam_right
+    4300002: brain_steam_left
+    4300004: skull_left
+    4300006: skull_right
+    4300008: eye__1
+    4300010: brain_left
+    4300012: brain__right
+    4300014: skull_old_1
+    4300016: Cerebellum
+    4300018: Pituitary_Gland
+    7400000: idle
+    7400002: expand
+    7400004: join
+    9500000: //RootNode
+    11100000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: idle
+      takeName: C4D Animation Take
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 1
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: brain
+        weight: 1
+      - path: brain/brain__right
+        weight: 1
+      - path: brain/brain_left
+        weight: 1
+      - path: brain_steam_left
+        weight: 1
+      - path: brian_steam_right
+        weight: 1
+      - path: Cerebellum
+        weight: 1
+      - path: eye__1
+        weight: 1
+      - path: Pituitary_Gland
+        weight: 1
+      - path: skull_left
+        weight: 1
+      - path: skull_old_1
+        weight: 1
+      - path: skull_right
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: expand
+      takeName: C4D Animation Take
+      firstFrame: 2
+      lastFrame: 45
+      wrapMode: 1
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: brain
+        weight: 1
+      - path: brain/brain__right
+        weight: 1
+      - path: brain/brain_left
+        weight: 1
+      - path: brain_steam_left
+        weight: 1
+      - path: brian_steam_right
+        weight: 1
+      - path: Cerebellum
+        weight: 1
+      - path: eye__1
+        weight: 1
+      - path: Pituitary_Gland
+        weight: 1
+      - path: skull_left
+        weight: 1
+      - path: skull_old_1
+        weight: 1
+      - path: skull_right
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: join
+      takeName: C4D Animation Take
+      firstFrame: 46
+      lastFrame: 89
+      wrapMode: 1
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: brain
+        weight: 1
+      - path: brain/brain__right
+        weight: 1
+      - path: brain/brain_left
+        weight: 1
+      - path: brain_steam_left
+        weight: 1
+      - path: brian_steam_right
+        weight: 1
+      - path: Cerebellum
+        weight: 1
+      - path: eye__1
+        weight: 1
+      - path: Pituitary_Gland
+        weight: 1
+      - path: skull_left
+        weight: 1
+      - path: skull_old_1
+        weight: 1
+      - path: skull_right
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 1
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
