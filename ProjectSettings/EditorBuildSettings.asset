@@ -80,7 +80,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/ImageTracking/BasicImageTracking/BasicImageTracking.unity
     guid: e0b018a3c3b5cfd4c8e316706ec0a18c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ImageTracking/ImageTrackingWithMultiplePrefabs/ImageTrackingWithMultiplePrefabs.unity
     guid: a1bf0e7b9cece455f81c1d2731ba76e7
   - enabled: 0
@@ -129,8 +129,8 @@ EditorBuildSettings:
     path: Assets/Scenes/SimpleAR/SimpleAR.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 0
-    path: Assets/Scenes/BookAR/AR Book.unity
-    guid: 6767dba66adefe6a998d804be1e6e6d0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/BookAR/ARBook.unity
     guid: c05591f71cfe1b911a4809816a4c2d8f
