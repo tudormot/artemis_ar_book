@@ -33,12 +33,15 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 imagePrefab = prefab;
             }
         }
+        [SerializeField] private bool m_staticAssetPlacement = false;
+        [SerializeField] private bool m_debugTrackedImageEvents = true;
+
 
         [SerializeField]
         [HideInInspector]
         List<NamedPrefab> m_PrefabsList = new List<NamedPrefab>();
 
-        Dictionary<Guid, GameObject> m_PrefabsDictionary = new Dictionary<Guid, GameObject>();
+        public Dictionary<Guid, GameObject> m_PrefabsDictionary = new Dictionary<Guid, GameObject>();
         Dictionary<Guid, GameObject> m_Instantiated = new Dictionary<Guid, GameObject>();
         ARTrackedImageManager m_TrackedImageManager;
 
@@ -97,9 +100,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 trackedImage.transform.localScale = new Vector3(minLocalScalar, minLocalScalar, minLocalScalar);
                 AssignPrefab(trackedImage);
             }
+            
         }
 
-        void AssignPrefab(ARTrackedImage trackedImage)
+        protected void AssignPrefab(ARTrackedImage trackedImage)
         {
             if (m_PrefabsDictionary.TryGetValue(trackedImage.referenceImage.guid, out var prefab))
                 m_Instantiated[trackedImage.referenceImage.guid] = Instantiate(prefab, trackedImage.transform);

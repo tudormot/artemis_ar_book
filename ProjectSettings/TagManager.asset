@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - MainCanvas
+  - planet
+  - SolarSystem
+  - label
   layers:
   - Default
   - TransparentFX
