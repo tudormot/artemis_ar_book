@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Scenes.BookAR.Scripts
@@ -9,7 +10,11 @@ namespace Scenes.BookAR.Scripts
     {
         private GameObject GameUI;
         private GameObject Gun;
+        private GameObject ProjectileStartPosition;
         private GameObject SolarSystem;
+        
+        [SerializeField]
+        private GameObject Projectile;
 
         private void OnEnable()
         {
@@ -20,6 +25,7 @@ namespace Scenes.BookAR.Scripts
             GameUI = GameObject.FindGameObjectWithTag("MainCanvas").transform.Find("SolarSystemUI").Find("GameUI").gameObject;
             Gun = GameObject.Find("AR Session Origin").transform.Find("AR Camera").Find("weapon01").gameObject;
             SolarSystem = transform.parent.Find("Solar System").gameObject;
+            ProjectileStartPosition = GameObject.Find("AR Session Origin").transform.Find("AR Camera").Find("MissileLaunchPoint").gameObject;
             GameUI.SetActive(true);
             Gun.SetActive(true);
             
@@ -33,7 +39,49 @@ namespace Scenes.BookAR.Scripts
                         .bounds.size.ToString();
                     Debug.Log("button callback finished");
                 });
+            GameUI.transform.Find("ShootButton").GetComponent<Button>().onClick.AddListener(ShootProjectile);
+
+        }
+
+       
+
+        private void ShootProjectile()
+        {
+
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+            if (!EventSystem.current.IsPointerOverGameObject()) //If the mouse is not over a UI element
+            {
+                 if (Physics.Raycast(ray, out hit))
+                 {
+                     if (hit.collider.tag == "planet")
+                     {
+                         Debug.Log("Yo we just hit a planet that's cray!");
+                         // var projObj = Instantiate(Projectile,ProjectileStartPosition.transform);
+                         var projObj = Instantiate(Projectile,ProjectileStartPosition.transform.position,new Quaternion());
+                         var scale = getSmartRocketScaling(projObj);
+                         projObj.transform.localScale = new Vector3(scale, scale, scale);
+                             // ProjectileStartPosition.transform.lossyScale;
+                         projObj.GetComponent<FlyTowards>().Target = hit.collider.gameObject;
+                         projObj.SetActive(true);
+
+                     }
+                 }
+            }
             
+        }
+
+        private float getSmartRocketScaling(GameObject projectile)
+        {
+            //rocket size should be 8 times smaller than the earth lets say
+            var sunAvgSize = SolarSystem.transform.Find("Planets").Find("Sun").GetComponent<MeshRenderer>()
+                .bounds.size.magnitude;
+            var projectileAvgSize = projectile.transform.Find("Rocket12_Red").GetComponent<MeshRenderer>().bounds.size
+                .magnitude;
+            return sunAvgSize / projectileAvgSize / 4;
+
+
+
         }
 
         private void OnDisable()
@@ -41,6 +89,7 @@ namespace Scenes.BookAR.Scripts
             GameUI.SetActive(true);
             Gun.SetActive(true);
             GameUI.transform.Find("SunButton").GetComponent<Button>().onClick.RemoveAllListeners();
+            GameUI.transform.Find("ShootButton").GetComponent<Button>().onClick.RemoveAllListeners();
         }
     }
 }

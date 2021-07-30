@@ -80,6 +80,7 @@ namespace Scenes.BookAR.Scripts
         {
             rootUIObj.transform.Find("StandardUI").gameObject.SetActive(false);
             rootUIObj.transform.Find("InfoUI").gameObject.SetActive(false);
+            scriptsAsset.GetComponent<ShowInfo>().enabled = false;
             Debug.Log("got here, enabling spaceGameController script");
             transform.GetComponent<SpaceGameController>().enabled = true;
         }
