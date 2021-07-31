@@ -33,8 +33,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 imagePrefab = prefab;
             }
         }
-        [SerializeField] private bool m_staticAssetPlacement = false;
-        [SerializeField] private bool m_debugTrackedImageEvents = true;
+        [SerializeField] private bool m_staticAssetPlacement = true;
+        // [SerializeField] private bool m_debugTrackedImageEvents = true;
 
 
         [SerializeField]

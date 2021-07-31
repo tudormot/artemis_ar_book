@@ -9,9 +9,10 @@ namespace Scenes.BookAR.Scripts
     public class SpaceGameController : MonoBehaviour
     {
         private GameObject GameUI;
-        private GameObject Gun;
+        private GameObject ShootingModule;
         private GameObject ProjectileStartPosition;
         private GameObject SolarSystem;
+        private ParticleSystem GunParticleSystem;
         
         [SerializeField]
         private GameObject Projectile;
@@ -23,11 +24,13 @@ namespace Scenes.BookAR.Scripts
             //enable game gui: button available: exit game, shoot. also a label panel to communicate with the user
             
             GameUI = GameObject.FindGameObjectWithTag("MainCanvas").transform.Find("SolarSystemUI").Find("GameUI").gameObject;
-            Gun = GameObject.Find("AR Session Origin").transform.Find("AR Camera").Find("weapon01").gameObject;
+            ShootingModule = GameObject.Find("AR Session Origin").transform.Find("AR Camera").Find("Shooting").gameObject;
             SolarSystem = transform.parent.Find("Solar System").gameObject;
-            ProjectileStartPosition = GameObject.Find("AR Session Origin").transform.Find("AR Camera").Find("MissileLaunchPoint").gameObject;
+            ProjectileStartPosition = GameObject.Find("AR Session Origin").transform.Find("AR Camera").Find("Shooting").Find("MissileLaunchPoint").gameObject;
+            GunParticleSystem = GameObject.Find("AR Session Origin").transform.Find("AR Camera").Find("Shooting")
+                .Find("Electricity").GetComponent<ParticleSystem>();
             GameUI.SetActive(true);
-            Gun.SetActive(true);
+            ShootingModule.SetActive(true);
             
             GameUI.transform.Find("SunButton").GetComponent<Button>().onClick.AddListener(
                 () =>
@@ -64,6 +67,7 @@ namespace Scenes.BookAR.Scripts
                              // ProjectileStartPosition.transform.lossyScale;
                          projObj.GetComponent<FlyTowards>().Target = hit.collider.gameObject;
                          projObj.SetActive(true);
+                         GunParticleSystem.Play();
 
                      }
                  }
@@ -86,8 +90,8 @@ namespace Scenes.BookAR.Scripts
 
         private void OnDisable()
         {
-            GameUI.SetActive(true);
-            Gun.SetActive(true);
+            GameUI.SetActive(false);
+            ShootingModule.SetActive(false);
             GameUI.transform.Find("SunButton").GetComponent<Button>().onClick.RemoveAllListeners();
             GameUI.transform.Find("ShootButton").GetComponent<Button>().onClick.RemoveAllListeners();
         }
