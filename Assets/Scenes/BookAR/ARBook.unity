@@ -943,6 +943,7 @@ GameObject:
   - component: {fileID: 369467441}
   - component: {fileID: 369467440}
   - component: {fileID: 369467445}
+  - component: {fileID: 369467446}
   m_Layer: 0
   m_Name: AR Session Origin
   m_TagString: Untagged
@@ -977,7 +978,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_staticAssetPlacement: 0
-  m_debugTrackedImageEvents: 1
   m_PrefabsList:
   - imageGuid: f0340be5-710e-49ff-bc70-45f1315b9202
     imagePrefab: {fileID: 4534386966801022621, guid: fc404e091a48770a1a42c21b47350877,
@@ -1049,6 +1049,19 @@ MonoBehaviour:
   m_Text: {fileID: 1969396813}
   m_Min: 0.1
   m_Max: 10
+--- !u!114 &369467446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369467439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 728ad7fae8e460a4ba41265c7308d757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AnchorPrefab: {fileID: 0}
 --- !u!1 &404238520
 GameObject:
   m_ObjectHideFlags: 0
@@ -1732,7 +1745,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &737234197
 Transform:
   m_ObjectHideFlags: 0
@@ -10861,20 +10874,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!64 &5291007901618381685
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6180114788264191754}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 2cc0d580e1f45a54fbcde2699abadfbe, type: 3}
 --- !u!1 &5884903767605014351
 GameObject:
   m_ObjectHideFlags: 0
@@ -10953,7 +10952,6 @@ GameObject:
   - component: {fileID: 6183050654435813040}
   - component: {fileID: 6177033191791493848}
   - component: {fileID: 6166314791209792938}
-  - component: {fileID: 5291007901618381685}
   m_Layer: 0
   m_Name: DummyPositionRocket
   m_TagString: Untagged

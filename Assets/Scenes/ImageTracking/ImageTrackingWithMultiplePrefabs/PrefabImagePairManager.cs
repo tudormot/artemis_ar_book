@@ -33,7 +33,15 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 imagePrefab = prefab;
             }
         }
-        [SerializeField] private bool m_staticAssetPlacement = true;
+
+        enum AssetPlacementType
+        {
+            ViaImageTrackable,
+            ViaAnchors,
+            Static
+        }
+
+        [SerializeField] private AssetPlacementType m_staticAssetPlacement = AssetPlacementType.ViaImageTrackable;
         // [SerializeField] private bool m_debugTrackedImageEvents = true;
 
 
@@ -104,9 +112,33 @@ namespace UnityEngine.XR.ARFoundation.Samples
         }
 
         protected void AssignPrefab(ARTrackedImage trackedImage)
-        {
+        { 
             if (m_PrefabsDictionary.TryGetValue(trackedImage.referenceImage.guid, out var prefab))
-                m_Instantiated[trackedImage.referenceImage.guid] = Instantiate(prefab, trackedImage.transform);
+            {
+                switch (m_staticAssetPlacement)
+                {
+                
+                    case AssetPlacementType.ViaImageTrackable:
+                        // if (m_PrefabsDictionary.TryGetValue(trackedImage.referenceImage.guid, out var prefab))
+                        // {
+                        m_Instantiated[trackedImage.referenceImage.guid] = Instantiate(prefab, trackedImage.transform);
+                        // }
+                        break;
+                    case AssetPlacementType.ViaAnchors:
+                        //get position and scale of trackedImage
+                        var scale = trackedImage.transform.lossyScale;
+                        var position = trackedImage.transform.position;
+                        var obj = Instantiate(prefab, position, trackedImage.transform.rotation);
+                        obj.transform.localScale = scale;
+                        break;
+                    case AssetPlacementType.Static:
+                        Debug.Log("NotImplemented yet");
+                        break;
+                }
+            }
+            
+
+
         }
 
         public GameObject GetPrefabForReferenceImage(XRReferenceImage referenceImage)

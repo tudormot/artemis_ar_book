@@ -51,8 +51,8 @@ namespace Scenes.BookAR.Scripts
             if (MissileDestroyedEffect != null)
             {
                 MissileDestroyedEffect.Play();
-                Destroy(gameObject);
             }
+            Destroy(gameObject);
         }
 
         private void OnDisable()
