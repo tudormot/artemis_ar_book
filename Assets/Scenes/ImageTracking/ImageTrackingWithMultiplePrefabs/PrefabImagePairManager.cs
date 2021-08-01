@@ -41,7 +41,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             Static
         }
 
-        [SerializeField] private AssetPlacementType m_staticAssetPlacement = AssetPlacementType.ViaImageTrackable;
+        private AssetPlacementType m_staticAssetPlacement = AssetPlacementType.ViaAnchors;
         // [SerializeField] private bool m_debugTrackedImageEvents = true;
 
 
@@ -99,44 +99,56 @@ namespace UnityEngine.XR.ARFoundation.Samples
             m_TrackedImageManager.trackedImagesChanged -= OnTrackedImagesChanged;
         }
 
+        private int numberCalibrationFrames = 20;
+        private int currentFrame = 0;
+        private bool DebugNotYetInstantiated = true;
         void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
         {
-            foreach (var trackedImage in eventArgs.added)
+            if (m_staticAssetPlacement == AssetPlacementType.ViaImageTrackable)
             {
-                // Give the initial image a reasonable default scale
-                var minLocalScalar = Mathf.Min(trackedImage.size.x, trackedImage.size.y) / 2;
-                trackedImage.transform.localScale = new Vector3(minLocalScalar, minLocalScalar, minLocalScalar);
-                AssignPrefab(trackedImage);
+                Debug.Log("using ViaImageTrackable");
+                foreach (var trackedImage in eventArgs.added)
+                {
+                    Debug.Log("Tracked Image added, position : " + trackedImage.transform.position);
+                    // Give the initial image a reasonable default scale
+                    var minLocalScalar = Mathf.Min(trackedImage.size.x, trackedImage.size.y) / 2;
+                    trackedImage.transform.localScale = new Vector3(minLocalScalar, minLocalScalar, minLocalScalar);
+                    AssignPrefab(trackedImage);
+                }
             }
-            
+
+            if (m_staticAssetPlacement == AssetPlacementType.ViaAnchors && DebugNotYetInstantiated)
+            {
+                if (currentFrame < numberCalibrationFrames)
+                {
+                    currentFrame++;
+                    //do nothing here, ARCore is dumb dumb and is giving us bad measurements
+                }
+                else
+                {
+                    DebugNotYetInstantiated = false;
+                    foreach (var trackedImage in eventArgs.updated)
+                    {
+                        if (m_PrefabsDictionary.TryGetValue(trackedImage.referenceImage.guid, out var prefab))
+                        {
+                            var scale = trackedImage.transform.lossyScale;
+                            var obj = Instantiate(prefab,  trackedImage.transform.position, trackedImage.transform.rotation);
+                            obj.transform.localScale = scale;
+                        }
+                    }
+                }
+            }
         }
 
         protected void AssignPrefab(ARTrackedImage trackedImage)
-        { 
-            if (m_PrefabsDictionary.TryGetValue(trackedImage.referenceImage.guid, out var prefab))
-            {
-                switch (m_staticAssetPlacement)
+        {
+
+                if (m_PrefabsDictionary.TryGetValue(trackedImage.referenceImage.guid, out var prefab))
                 {
-                
-                    case AssetPlacementType.ViaImageTrackable:
-                        // if (m_PrefabsDictionary.TryGetValue(trackedImage.referenceImage.guid, out var prefab))
-                        // {
-                        m_Instantiated[trackedImage.referenceImage.guid] = Instantiate(prefab, trackedImage.transform);
-                        // }
-                        break;
-                    case AssetPlacementType.ViaAnchors:
-                        //get position and scale of trackedImage
-                        var scale = trackedImage.transform.lossyScale;
-                        var position = trackedImage.transform.position;
-                        var obj = Instantiate(prefab, position, trackedImage.transform.rotation);
-                        obj.transform.localScale = scale;
-                        break;
-                    case AssetPlacementType.Static:
-                        Debug.Log("NotImplemented yet");
-                        break;
+                    m_Instantiated[trackedImage.referenceImage.guid] = Instantiate(prefab, trackedImage.transform);
                 }
-            }
             
+
 
 
         }
