@@ -43,6 +43,8 @@ namespace Scenes.BookAR.Scripts
                     Debug.Log("button callback finished");
                 });
             GameUI.transform.Find("ShootButton").GetComponent<Button>().onClick.AddListener(ShootProjectile);
+            SolarSystem.GetComponent<SolarSystemManager>().ShowLabels = false;
+            SolarSystem.GetComponent<SolarSystemManager>().ShowPaths = false;
 
         }
 

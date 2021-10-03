@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Scenes.BookAR.Scripts;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -33,16 +34,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 imagePrefab = prefab;
             }
         }
-
-        enum AssetPlacementType
-        {
-            ViaImageTrackable,
-            ViaAnchors,
-            Static
-        }
-
-        [SerializeField] private AssetPlacementType m_staticAssetPlacement = AssetPlacementType.ViaImageTrackable;
-        // [SerializeField] private bool m_debugTrackedImageEvents = true;
+        
 
 
         [SerializeField]
@@ -103,42 +95,33 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             foreach (var trackedImage in eventArgs.added)
             {
-                // Give the initial image a reasonable default scale
-                var minLocalScalar = Mathf.Min(trackedImage.size.x, trackedImage.size.y) / 2;
-                trackedImage.transform.localScale = new Vector3(minLocalScalar, minLocalScalar, minLocalScalar);
+                m_PrefabsDictionary.TryGetValue(trackedImage.referenceImage.guid, out var prefab);
+                var imageSizeContainer = prefab.transform.GetComponent<ImageDimensionAware>();
+
+                if ( imageSizeContainer == null)
+                {
+                    // Give the initial image a reasonable default scale
+                    var minLocalScalar = Mathf.Min(trackedImage.size.x, trackedImage.size.y) / 2;
+                    trackedImage.transform.localScale = new Vector3(minLocalScalar, minLocalScalar, minLocalScalar);
+                }
+                else
+                {
+                    //the asset itself will take care of the scaling. Just let it know about the size
+                    Debug.Log("Size of image as reported by x,y : " + trackedImage.size.x + " " + trackedImage.size.y);
+                    imageSizeContainer.dimXaxis = trackedImage.size.x;
+                    imageSizeContainer.dimYaxis = trackedImage.size.y;
+                }
                 AssignPrefab(trackedImage);
             }
             
         }
 
         protected void AssignPrefab(ARTrackedImage trackedImage)
-        { 
+        {
             if (m_PrefabsDictionary.TryGetValue(trackedImage.referenceImage.guid, out var prefab))
             {
-                switch (m_staticAssetPlacement)
-                {
-                
-                    case AssetPlacementType.ViaImageTrackable:
-                        // if (m_PrefabsDictionary.TryGetValue(trackedImage.referenceImage.guid, out var prefab))
-                        // {
-                        m_Instantiated[trackedImage.referenceImage.guid] = Instantiate(prefab, trackedImage.transform);
-                        // }
-                        break;
-                    case AssetPlacementType.ViaAnchors:
-                        //get position and scale of trackedImage
-                        var scale = trackedImage.transform.lossyScale;
-                        var position = trackedImage.transform.position;
-                        var obj = Instantiate(prefab, position, trackedImage.transform.rotation);
-                        obj.transform.localScale = scale;
-                        break;
-                    case AssetPlacementType.Static:
-                        Debug.Log("NotImplemented yet");
-                        break;
-                }
+                m_Instantiated[trackedImage.referenceImage.guid] = Instantiate(prefab, trackedImage.transform);
             }
-            
-
-
         }
 
         public GameObject GetPrefabForReferenceImage(XRReferenceImage referenceImage)

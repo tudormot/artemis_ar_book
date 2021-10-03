@@ -886,7 +886,7 @@ Transform:
   m_GameObject: {fileID: 4534386966801022618}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2404, y: 1.2404, z: 1.2404}
   m_Children:
   - {fileID: 4534386966801022632}
   - {fileID: 4534386966801022631}
@@ -1032,7 +1032,7 @@ MonoBehaviour:
       m_Calls: []
   m_CustomReticle: {fileID: 0}
   m_MinScale: 0.75
-  m_MaxScale: 1.75
+  m_MaxScale: 3
   m_ElasticRatioLimit: 0
   m_Sensitivity: 0.75
   m_Elasticity: 0.15
@@ -1439,7 +1439,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 4534386966801022621}
+      objectReference: {fileID: 4534386966801022578}
+    - target: {fileID: 4650875919433788573, guid: 093676844ef992b37973a7ee59681ddb,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: _swapToMainObj
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650875919433788573, guid: 093676844ef992b37973a7ee59681ddb,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SkullAndBrainAssetControl, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 093676844ef992b37973a7ee59681ddb, type: 3}
 --- !u!4 &6648535272867968447 stripped

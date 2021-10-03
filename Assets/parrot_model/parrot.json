@@ -1,0 +1,110 @@
+﻿{
+    "parrot": {
+        "Version": "1.10.1822.1",
+        "Scene": {
+            "Name": true,
+            "SupportShaderSelect": true
+        },
+        "Object": {
+            "parrot": {
+                "Physics": {},
+                "Meshes": {
+                    "U3DMesh": {
+                        "Materials": {
+                            "material_2_Pbr": {
+                                "Material Type": "Pbr",
+                                "MultiUV Index": 0,
+                                "Two Side": true,
+                                "Diffuse Color": [
+                                    204.00001525878907,
+                                    204.00001525878907,
+                                    204.00001525878907
+                                ],
+                                "Ambient Color": [
+                                    0.0,
+                                    0.0,
+                                    0.0
+                                ],
+                                "Specular Color": [
+                                    0.0,
+                                    0.0,
+                                    0.0
+                                ],
+                                "Opacity": 1.0,
+                                "Self Illumination": 0.0,
+                                "Textures": {
+                                    "Metallic": {
+                                        "Texture Path": "",
+                                        "Strength": 100.0,
+                                        "Offset": [
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "Tiling": [
+                                            1.0,
+                                            1.0
+                                        ]
+                                    },
+                                    "Base Color": {
+                                        "Texture Path": "./parrot.fbm/material_2_Pbr_Diffuse.png",
+                                        "Strength": 100.0,
+                                        "Offset": [
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "Tiling": [
+                                            1.0,
+                                            1.0
+                                        ]
+                                    },
+                                    "Roughness": {
+                                        "Texture Path": "",
+                                        "Strength": 100.0,
+                                        "Offset": [
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "Tiling": [
+                                            1.0,
+                                            1.0
+                                        ]
+                                    },
+                                    "Opacity": {
+                                        "Texture Path": "./parrot.fbm/material_2_Pbr_Opacity.png",
+                                        "Strength": 100.0,
+                                        "Offset": [
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "Tiling": [
+                                            1.0,
+                                            1.0
+                                        ]
+                                    },
+                                    "Normal": {
+                                        "Texture Path": "./parrot.fbm/material_2_Pbr_Normal.png",
+                                        "Strength": 110.0,
+                                        "Offset": [
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "Tiling": [
+                                            1.0,
+                                            1.0
+                                        ]
+                                    },
+                                    "MetallicAlpha": {
+                                        "Texture Path": "./textures/parrot/parrot/U3DMesh/material_2_Pbr/material_2_Pbr_MetallicAlpha.png"
+                                    },
+                                    "HDRP": {
+                                        "Texture Path": "./textures/parrot/parrot/U3DMesh/material_2_Pbr/material_2_Pbr_HDRP.png"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

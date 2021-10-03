@@ -29,7 +29,7 @@ public class SkullAndBrainAssetControl : MonoBehaviour
             Debug.Log("Having trouble initialising Skull and Brain asset");
         }
         //touchToInteractObj is a world canvas, that apparently needs to have its camera set. Do that here:
-        touchToInteractObj.transform.GetChild(1).GetComponent<Canvas>().worldCamera = Camera.main;
+        touchToInteractObj.transform.Find("Canvas").GetComponent<Canvas>().worldCamera = Camera.main;
 
         mainObj.SetActive(false);
         touchToInteractObj.SetActive(true);

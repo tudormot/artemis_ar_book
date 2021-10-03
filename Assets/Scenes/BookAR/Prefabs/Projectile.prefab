@@ -61,7 +61,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
-  Speed: 1
+  Speed: 0.8
+  MissileDestroyedEffect: {fileID: 0}
 --- !u!54 &693831391891339666
 Rigidbody:
   m_ObjectHideFlags: 0

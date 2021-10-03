@@ -1,0 +1,369 @@
+fileFormatVersion: 2
+guid: a812ec737cd52d7b6a16d9df0f7efe67
+ModelImporter:
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      74: 972345315310182323
+    second: Idle_anim
+  - first:
+      74: 2203777976846807636
+    second: RootNode_TempMotion //// root
+  - first:
+      74: -5679460851448538532
+    second: RootNode_TempMotion //// RootNode_0_
+  - first:
+      74: -6127113047234360168
+    second: RootNode_TempMotion //// Hips
+  - first:
+      74: -7528485151086262661
+    second: RootNode_TempMotion //// Bip01_Pelvis
+  - first:
+      74: -2343429308583837756
+    second: RootNode_TempMotion //// BN_Tail_01
+  - first:
+      74: 5506451357753322954
+    second: RootNode_TempMotion //// BN_Tail_02
+  - first:
+      74: -817546747760693696
+    second: RootNode_TempMotion //// BN_Tail_03
+  - first:
+      74: -4170158815346066234
+    second: RootNode_TempMotion //// BN_Tail_04
+  - first:
+      74: -2307342241883984520
+    second: RootNode_TempMotion //// BN_Tail_05
+  - first:
+      74: 9140319983495637399
+    second: RootNode_TempMotion //// Bip01_Spine
+  - first:
+      74: -4095669006161391791
+    second: RootNode_TempMotion //// Bip01_R_Thigh
+  - first:
+      74: 1974396961456806163
+    second: RootNode_TempMotion //// Bip01_R_Calf
+  - first:
+      74: 8363894881031325537
+    second: RootNode_TempMotion //// Bip01_R_HorseLink
+  - first:
+      74: -6133543727751329246
+    second: RootNode_TempMotion //// Bip01_R_Foot
+  - first:
+      74: 437406344133703308
+    second: RootNode_TempMotion //// Bip01_R_Toe3
+  - first:
+      74: -8200225079441016294
+    second: RootNode_TempMotion //// Bip01_R_Toe31
+  - first:
+      74: 4067658763742476405
+    second: RootNode_TempMotion //// Bip01_R_Toe3Nub
+  - first:
+      74: 9034927012644802203
+    second: RootNode_TempMotion //// Bip01_R_Toe2
+  - first:
+      74: -1990204217032577619
+    second: RootNode_TempMotion //// Bip01_R_Toe21
+  - first:
+      74: -2553261072904002718
+    second: RootNode_TempMotion //// Bip01_R_Toe2Nub
+  - first:
+      74: 4327224504925531338
+    second: RootNode_TempMotion //// Bip01_R_Toe1
+  - first:
+      74: -1701549943760670715
+    second: RootNode_TempMotion //// Bip01_R_Toe11
+  - first:
+      74: 1043254084922910079
+    second: RootNode_TempMotion //// Bip01_R_Toe1Nub
+  - first:
+      74: 2987050677281826227
+    second: RootNode_TempMotion //// Bip01_R_Toe0
+  - first:
+      74: -6007549232899776951
+    second: RootNode_TempMotion //// Bip01_R_Toe01
+  - first:
+      74: -9184649878240521066
+    second: RootNode_TempMotion //// Bip01_R_Toe0Nub
+  - first:
+      74: -6771576088276946576
+    second: RootNode_TempMotion //// Bip01_L_Thigh
+  - first:
+      74: 8492971270238462856
+    second: RootNode_TempMotion //// Bip01_L_Calf
+  - first:
+      74: 2630665541497570311
+    second: RootNode_TempMotion //// Bip01_L_HorseLink
+  - first:
+      74: -4002821112868605964
+    second: RootNode_TempMotion //// Bip01_L_Foot
+  - first:
+      74: -5496895353007456814
+    second: RootNode_TempMotion //// Bip01_L_Toe3
+  - first:
+      74: -9074527115169500213
+    second: RootNode_TempMotion //// Bip01_L_Toe31
+  - first:
+      74: -2154663406121597876
+    second: RootNode_TempMotion //// Bip01_L_Toe3Nub
+  - first:
+      74: -8039220308163751476
+    second: RootNode_TempMotion //// Bip01_L_Toe2
+  - first:
+      74: -1325834538360475598
+    second: RootNode_TempMotion //// Bip01_L_Toe21
+  - first:
+      74: 3414139723984334106
+    second: RootNode_TempMotion //// Bip01_L_Toe2Nub
+  - first:
+      74: -8276304334744785067
+    second: RootNode_TempMotion //// Bip01_L_Toe1
+  - first:
+      74: -6763342853576613457
+    second: RootNode_TempMotion //// Bip01_L_Toe11
+  - first:
+      74: 3289368672679943713
+    second: RootNode_TempMotion //// Bip01_L_Toe1Nub
+  - first:
+      74: -7902760385811456101
+    second: RootNode_TempMotion //// Bip01_L_Toe0
+  - first:
+      74: -8734320289901857018
+    second: RootNode_TempMotion //// Bip01_L_Toe01
+  - first:
+      74: 2355553091824228282
+    second: RootNode_TempMotion //// Bip01_L_Toe0Nub
+  - first:
+      74: -1684040763009542464
+    second: RootNode_TempMotion //// Bip01_Spine1
+  - first:
+      74: -7904491919135080031
+    second: RootNode_TempMotion //// BN_Wing_R_01
+  - first:
+      74: -8917893860828382532
+    second: RootNode_TempMotion //// BN_Wing_R_05
+  - first:
+      74: 658897701079455564
+    second: RootNode_TempMotion //// BN_Wing_R_02
+  - first:
+      74: -414826319973169960
+    second: RootNode_TempMotion //// BN_Wing_R_03
+  - first:
+      74: -5011917730277016487
+    second: RootNode_TempMotion //// BN_Wing_R_04
+  - first:
+      74: 351854400396737510
+    second: RootNode_TempMotion //// BN_Wing_R_06
+  - first:
+      74: 153793725826514332
+    second: RootNode_TempMotion //// BN_Wing_R_07
+  - first:
+      74: -7774730252757948789
+    second: RootNode_TempMotion //// BN_Wing_L_01
+  - first:
+      74: -2238100631466165632
+    second: RootNode_TempMotion //// BN_Wing_L_02
+  - first:
+      74: -7662324253067360160
+    second: RootNode_TempMotion //// BN_Wing_L_06
+  - first:
+      74: 6725801512524347471
+    second: RootNode_TempMotion //// BN_Wing_L_07
+  - first:
+      74: 7522038551330203217
+    second: RootNode_TempMotion //// BN_Wing_L_03
+  - first:
+      74: -1971997082147142588
+    second: RootNode_TempMotion //// BN_Wing_L_04
+  - first:
+      74: -5269084127821293164
+    second: RootNode_TempMotion //// BN_Wing_L_05
+  - first:
+      74: -519853012143997571
+    second: RootNode_TempMotion //// Bip01_Neck
+  - first:
+      74: 7979147391105088304
+    second: RootNode_TempMotion //// Bip01_Neck1
+  - first:
+      74: 3393451332676318969
+    second: RootNode_TempMotion //// Bip01_Head
+  - first:
+      74: 6761742832882674884
+    second: RootNode_TempMotion //// BN_Eye_L_02
+  - first:
+      74: -5062108123635158369
+    second: RootNode_TempMotion //// BN_Eye_R_02
+  - first:
+      74: -8824025626933427018
+    second: RootNode_TempMotion //// BN_Eye_L_01
+  - first:
+      74: 5643786417974416259
+    second: RootNode_TempMotion //// BN_Jaw
+  - first:
+      74: -7708630889805244271
+    second: RootNode_TempMotion //// Bip01_HeadNub
+  - first:
+      74: 5897127930929764171
+    second: RootNode_TempMotion //// U3DMesh
+  - first:
+      74: -1826690671305274925
+    second: Takeflight_anim
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: material_2_Pbr
+    second: {fileID: 2100000, guid: 82f2984a3851baf28a3199c5c5e3e25e, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 3
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: root
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle_anim
+      takeName: RootNode_TempMotion
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 184
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Takeflight_anim
+      takeName: RootNode_TempMotion
+      internalID: 0
+      firstFrame: 213
+      lastFrame: 257
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 1
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

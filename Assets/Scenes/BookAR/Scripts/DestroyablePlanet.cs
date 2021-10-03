@@ -1,4 +1,5 @@
 using System;
+using System.Security.Cryptography;
 using UnityEngine;
 
 namespace Scenes.BookAR.Scripts
@@ -48,8 +49,14 @@ namespace Scenes.BookAR.Scripts
         private void ExplodePlanet()
         {
             Debug.Log("Planet " + transform.name + " just exploded! wow!");
+            var finalExplosion = Instantiate(PlanetExplosionParticleSystem, gameObject.transform.position,
+                gameObject.transform.rotation);
             PlanetExplosionParticleSystem.Play();
-            Destroy(gameObject);
+            finalExplosion.Play();
+            Destroy(finalExplosion,3); //destroy the final explosion in 3 seconds, this should give it plenty of time to play until the end
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+
+            Destroy(gameObject,3);
         }
 
 

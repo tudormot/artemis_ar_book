@@ -45,3 +45,63 @@ MonoBehaviour:
     m_SpecifySize: 1
     m_Name: QRCode
     m_Texture: {fileID: 2800000, guid: a6fd8503774c0402aa403884f5b77f39, type: 3}
+  - m_SerializedGuid:
+      m_GuidLow: 4639857636807220514
+      m_GuidHigh: 3436318050181928356
+    m_SerializedTextureGuid:
+      m_GuidLow: 11254427986987660151
+      m_GuidHigh: 4456216178882126186
+    m_Size: {x: 0.15, y: 0.0885}
+    m_SpecifySize: 1
+    m_Name: solar_system
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5048671539853333108
+      m_GuidHigh: 10668139246961059209
+    m_SerializedTextureGuid:
+      m_GuidLow: 11433702875403412291
+      m_GuidHigh: 9173356837407719240
+    m_Size: {x: 0.192, y: 0.12617142}
+    m_SpecifySize: 1
+    m_Name: humans_chatting
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5717170919216001202
+      m_GuidHigh: 11083978156817963691
+    m_SerializedTextureGuid:
+      m_GuidLow: 2715485745375552029
+      m_GuidHigh: 12948472276213360506
+    m_Size: {x: 0.165, y: 0.12375}
+    m_SpecifySize: 1
+    m_Name: TeethImage
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5105824242353127660
+      m_GuidHigh: 8643775332469551284
+    m_SerializedTextureGuid:
+      m_GuidLow: 5980534797504755792
+      m_GuidHigh: 16026282013009539752
+    m_Size: {x: 0.1378125, y: 0.245}
+    m_SpecifySize: 1
+    m_Name: JaberAnimationImage
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 4864931111889084648
+      m_GuidHigh: 11442869286581209018
+    m_SerializedTextureGuid:
+      m_GuidLow: 18012712841429738535
+      m_GuidHigh: 7389900987536120841
+    m_Size: {x: 0.231, y: 0.15242322}
+    m_SpecifySize: 1
+    m_Name: BrilliantImage
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5669908910366565948
+      m_GuidHigh: 4655334049210042259
+    m_SerializedTextureGuid:
+      m_GuidLow: 9548336274737174455
+      m_GuidHigh: 17438366339772458139
+    m_Size: {x: 0.159, y: 0.1991868}
+    m_SpecifySize: 1
+    m_Name: BrainImage
+    m_Texture: {fileID: 0}
