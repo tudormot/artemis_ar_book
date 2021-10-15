@@ -27,6 +27,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             // System.Guid isn't serializable, so we store the Guid as a string. At runtime, this is converted back to a System.Guid
             public string imageGuid;
             public GameObject imagePrefab;
+            
 
             public NamedPrefab(Guid guid, GameObject prefab)
             {
@@ -36,7 +37,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         }
         
 
-
+        public bool ExtendedTrackableImageMode = true;
         [SerializeField]
         [HideInInspector]
         List<NamedPrefab> m_PrefabsList = new List<NamedPrefab>();
@@ -102,6 +103,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 {
                     // Give the initial image a reasonable default scale
                     var minLocalScalar = Mathf.Min(trackedImage.size.x, trackedImage.size.y) / 2;
+                    Debug.Log("In PrefabImgePairManager. Setting trackable to scale: "+minLocalScalar.ToString());
                     trackedImage.transform.localScale = new Vector3(minLocalScalar, minLocalScalar, minLocalScalar);
                 }
                 else
@@ -120,7 +122,22 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             if (m_PrefabsDictionary.TryGetValue(trackedImage.referenceImage.guid, out var prefab))
             {
-                m_Instantiated[trackedImage.referenceImage.guid] = Instantiate(prefab, trackedImage.transform);
+                if (ExtendedTrackableImageMode)
+                {
+                    var ExtendedTrackable = trackedImage.transform.GetComponent<ARTrackedImageExtended>();
+                    ExtendedTrackable.Asset = prefab;
+                    ExtendedTrackable.enabled = true;
+
+                }
+                else
+                {
+                    m_Instantiated[trackedImage.referenceImage.guid] = Instantiate(prefab, trackedImage.transform);
+                }
+
+            }
+            else
+            {
+                throw new Exception("Is this even possible? ");
             }
         }
 

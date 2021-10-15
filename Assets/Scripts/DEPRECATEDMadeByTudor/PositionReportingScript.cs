@@ -29,8 +29,8 @@ public class PositionReportingScript : MonoBehaviour
 
     void printObjectPositionInfo(GameObject obj)
     {
-        Debug.Log(obj.name + ". Position: " + obj.transform.position.ToString());
-        Debug.Log(obj.name + ". Local position: " + obj.transform.localPosition.ToString());
+        Debug.Log(". Position: " + obj.transform.position.ToString("F4"));
+        // Debug.Log(obj.name + ". Local position: " + obj.transform.localPosition.ToString("F4"));
     }
 
     IEnumerator executeFunPeriodically(Action fun, float waitTime = 1f) 
