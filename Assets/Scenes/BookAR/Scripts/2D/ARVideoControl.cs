@@ -11,6 +11,7 @@ namespace Scenes.BookAR.Scripts
         private GameObject rawImage;
         private GameObject playButton;
         private GameObject hideButton;
+        private GameObject BlurringCube;
         private void OnEnable()
         {
             playButton = transform.GetChild(0).gameObject;
@@ -26,6 +27,7 @@ namespace Scenes.BookAR.Scripts
             //not much to do, just hide this button and enable the raw image containing the video
             playButton.SetActive(false);
             rawImage.SetActive(true);
+            BlurringCube.SetActive(true);
             hideButton.SetActive(true);
         }
 
@@ -34,6 +36,8 @@ namespace Scenes.BookAR.Scripts
             playButton.SetActive(true);
             rawImage.SetActive(false);
             hideButton.SetActive(false);
+            BlurringCube.SetActive(false);
+
 
         }
 
@@ -54,6 +58,17 @@ namespace Scenes.BookAR.Scripts
             var playButtonSize = transform.Find("PlayButton").GetComponent<RectTransform>();
             var minLocalScalar = Mathf.Min(sizeContainer.dimXaxis, sizeContainer.dimYaxis);
             playButtonSize.sizeDelta = new Vector2(minLocalScalar, minLocalScalar);
+            
+            //If this asset by any chance contains a "Blurring cube", then scale that as well:
+            BlurringCube = transform.parent.Find("BlurringCuber").gameObject;
+            if (BlurringCube != null)
+            {
+                BlurringCube.transform.localScale = new Vector3( sizeContainer.dimXaxis*2,sizeContainer.dimYaxis*2, 0.01f);
+            }
+            else
+            {
+                Debug.Log("Detected that this video asset does not have a 'BlurringCuber'. Wouldnt it be nice if it had one? ");
+            }
 
         }
     }
