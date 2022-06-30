@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -35,7 +36,7 @@ namespace Scenes.BookAR.Scripts
                 () =>
                 {
                     Debug.Log("SubButton clicked!");
-                    var debugLabel = GameUI.transform.Find("DebugPanel").Find("Text (TMP)").GetComponent<TextMeshProUGUI>();
+                    var debugLabel = GameUI.transform.Find("Panel").Find("Text (TMP)").GetComponent<TextMeshProUGUI>();
                     Debug.Log("Found the debug canvas label");
                     debugLabel.text = SolarSystem.transform.Find("Planets").Find("Sun").GetComponent<MeshRenderer>()
                         .bounds.size.ToString();
