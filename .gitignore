@@ -45,3 +45,8 @@ sysinfo.txt
 *.unitypackage
 
 .DS_Store
+
+
+#Added by tudor starting from here:
+#android build directories, don't think they should be versioned:
+android_build_*
