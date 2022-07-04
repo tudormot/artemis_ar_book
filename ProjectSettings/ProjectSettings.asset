@@ -135,7 +135,15 @@ PlayerSettings:
     16:9: 1
     Others: 1
   bundleVersion: 0.1
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 0}
+  - {fileID: 4800000, guid: c9f956787b1d945e7b36e0516201fc76, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: -6122771651556369562, guid: e2f869774b12e400996eb546603602e3, type: 2}
+  - {fileID: 0}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -240,10 +248,10 @@ PlayerSettings:
   clonedFromGUID: 56e7a2d3a00f33d44bdd161b773c35b5
   templatePackageId: com.unity.3d@1.0.0
   templateDefaultScene: Assets/Scenes/SampleScene.unity
-  useCustomMainManifest: 0
+  useCustomMainManifest: 1
   useCustomLauncherManifest: 0
-  useCustomMainGradleTemplate: 0
-  useCustomLauncherGradleManifest: 0
+  useCustomMainGradleTemplate: 1
+  useCustomLauncherGradleManifest: 1
   useCustomBaseGradleTemplate: 0
   useCustomGradlePropertiesTemplate: 0
   useCustomProguardFile: 0
@@ -647,6 +655,7 @@ PlayerSettings:
   ps4videoRecordingFeaturesUsed: 0
   ps4contentSearchFeaturesUsed: 0
   ps4CompatibilityPS5: 0
+  ps4AllowPS5Detection: 0
   ps4GPU800MHz: 1
   ps4attribEyeToEyeDistanceSettingVR: 0
   ps4IncludedModules: []
