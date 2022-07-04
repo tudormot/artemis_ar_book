@@ -45,3 +45,7 @@ sysinfo.txt
 *.unitypackage
 
 .DS_Store
+
+
+#added by Tudor:
+android_build_BurstDebugInformation_DoNotShip
