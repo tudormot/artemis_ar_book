@@ -1,42 +1,39 @@
 # AR Foundation Samples
 
-Example projects that use [*AR Foundation 4.2*](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@4.2/manual/index.html) and demonstrate its functionality with sample assets and components.
+Example projects that use [*AR Foundation 5.0*](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.0/manual/index.html) and demonstrate its functionality with sample assets and components.
 
-This set of samples relies on five Unity packages:
+This set of samples relies on three Unity packages:
 
-* ARSubsystems ([documentation](https://docs.unity3d.com/Packages/com.unity.xr.arsubsystems@4.2/manual/index.html))
-* ARCore XR Plug-in ([documentation](https://docs.unity3d.com/Packages/com.unity.xr.arcore@4.2/manual/index.html))
-* ARKit XR Plug-in ([documentation](https://docs.unity3d.com/Packages/com.unity.xr.arkit@4.2/manual/index.html))
-* ARKit Face Tracking ([documentation](https://docs.unity3d.com/Packages/com.unity.xr.arkit-face-tracking@4.2/manual/index.html))
-* ARFoundation ([documentation](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@4.2/manual/index.html))
+* Google ARCore XR Plug-in ([documentation](https://docs.unity3d.com/Packages/com.unity.xr.arcore@5.0/manual/index.html))
+* Apple ARKit XR Plug-in ([documentation](https://docs.unity3d.com/Packages/com.unity.xr.arkit@5.0/manual/index.html))
+* ARFoundation ([documentation](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.0/manual/index.html))
 
 ## What version should I use?
 
 | Unity Version | ARFoundation Version |
 | ------------- | -------------------- |
+|    2018.4     | [1.5 (preview)](https://github.com/Unity-Technologies/arfoundation-samples/tree/1.5-preview)  |
 |    2019.4     | [2.1 (verified)](https://github.com/Unity-Technologies/arfoundation-samples/tree/2.1)         |
 |    2020.3     | [4.1 (verified)](https://github.com/Unity-Technologies/arfoundation-samples/tree/4.1)         |
 |    2021.3     | [4.2 (verified)](https://github.com/Unity-Technologies/arfoundation-samples/tree/4.2)         |
+|    2022.1     | 5.0 (prerelease)                                                                              |
+|    2022.2     | 5.0 (prerelease)                                                                              |
 
 ## ARSubsystems
 
-ARFoundation is built on "[subsystems](https://docs.unity3d.com/2020.3/Documentation/ScriptReference/Subsystem.html)" and depends on a separate package called [ARSubsystems](https://docs.unity3d.com/Packages/com.unity.xr.arsubsystems@4.2/manual/index.html). ARSubsystems defines an interface, and the platform-specific implementations are in the [ARCore](https://docs.unity3d.com/Packages/com.unity.xr.arcore@4.2/manual/index.html) and [ARKit](https://docs.unity3d.com/Packages/com.unity.xr.arkit@4.2/manual/index.html) packages. ARFoundation turns the AR data provided by ARSubsystems into Unity `GameObject`s and `MonoBehavour`s.
+ARFoundation is built on "[subsystems](https://docs.unity3d.com/2021.3/Documentation/ScriptReference/Subsystem.html)" and depends on subsystems defined in `UnityEngine.XR.ARSubsystems` namespace. This namespace defines an interface, and the platform-specific implementations are in the [Google ARCore](https://docs.unity3d.com/Packages/com.unity.xr.arcore@5.0/manual/index.html) and [Apple ARKit](https://docs.unity3d.com/Packages/com.unity.xr.arkit@5.0/manual/index.html) packages. ARFoundation turns the AR data provided by ARSubsystems into Unity `GameObject`s and `MonoBehavour`s.
 
-This branch is compatible with Unity 2020.3 and later. For earlier versions, see the table above.
-
-## Why is ARKit Face Tracking a separate package?
-
-For privacy reasons, use of ARKit's face tracking feature requires additional validation in order to publish your app on the App Store. If your application binary contains certain face tracking related symbols, your app may fail validation. For this reason, we provide this feature as a separate package which must be explicitly included.
+The `main` branch is compatible with Unity 2021.2 and later. For earlier versions, see the table above.
 
 ## Instructions for installing AR Foundation
 
-1. Download the latest version of Unity 2020.3 or later.
+1. Download the latest version of Unity 2021.2 or later.
 
 2. Open Unity, and load the project at the root of the *arfoundation-samples* repository.
 
 3. Open your choice of sample scene.
 
-4. See the [AR Foundation Documentation](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@4.2/manual/index.html) for usage instructions and more information.
+4. See the [AR Foundation Documentation](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.0/manual/index.html) for usage instructions and more information.
 
 # Samples
 
@@ -44,7 +41,7 @@ For privacy reasons, use of ARKit's face tracking feature requires additional va
 
 This is a good starting sample that enables point cloud visualization and plane detection. There are buttons on screen that let you pause, resume, reset, and reload the ARSession.
 
-When a plane is detected, you can tap on the detected plane to place a cube on it. This uses the `ARRaycastManager` to perform a raycast against the plane.
+When a plane is detected, you can tap on the detected plane to place a cube on it. This uses the `ARRaycastManager` to perform a raycast against the plane. If the plane is in `TrackingState.Limited`, it will highlight red. In the case of ARCore, this means that raycasting will not be available until the plane is in `TrackingState.Tracking` again.
 
 | Action | Meaning |
 | ------ | ------- |
@@ -75,15 +72,7 @@ This sample shows how to create anchors as the result of a raycast hit. The "Cle
 
 This script can create two kinds of anchors:
 1. If a feature point is hit, it creates a normal anchor at the hit pose using the `GameObject.AddComponent<ARAnchor>()` method.
-1. If a plane is hit, it creates an anchor "attached" to the plane using the [AttachAnchor](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@4.2/api/UnityEngine.XR.ARFoundation.ARAnchorManager.html#UnityEngine_XR_ARFoundation_ARAnchorManager_AttachAnchor_UnityEngine_XR_ARFoundation_ARPlane_UnityEngine_Pose_) method.
-
-## Scale
-
-This sample shows how to adjust the apparent scale of content in an AR scene. It does this by moving, rotating, and scaling the `ARSessionOrigin` instead of the content. Complex scenes often can't be moved after creation (e.g., terrain), and scale can negatively affect other systems such as physics, particle effects, and AI navigation. The `ARSessionOrigin`'s scale feature is useful if you want to make your content "appear" at a position on a detected plane and to scale, for example, a building sized object to a table-top miniature.
-
-To use this sample, first move the device around until a plane is detected, then tap on the plane. Content will appear at the touch point. After the content is placed, you can adjust its rotation and scale using the on-screen sliders. Note that the content itself is never moved, rotated, or scaled.
-
-The relevant script is [`MakeAppearOnPlane.cs`](https://github.com/Unity-Technologies/arfoundation-samples/blob/master/Assets/Scripts/MakeAppearOnPlane.cs).
+1. If a plane is hit, it creates an anchor "attached" to the plane using the [AttachAnchor](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.0/api/UnityEngine.XR.ARFoundation.ARAnchorManager.html#UnityEngine_XR_ARFoundation_ARAnchorManager_AttachAnchor_UnityEngine_XR_ARFoundation_ARPlane_Pose_) method.
 
 ## CpuImages
 
@@ -155,15 +144,15 @@ This sample requires iOS 13.
 
 ## ARKitGeoAnchors
 
-[ARKit's ARGeoAnchors](https://developer.apple.com/documentation/arkit/argeoanchor?language=objc) are not yet supported by ARFoundation, but you can still access this feature with a bit of Objective-C. This sample uses a custom [ConfigurationChooser](https://docs.unity3d.com/Packages/com.unity.xr.arsubsystems@4.2/api/UnityEngine.XR.ARSubsystems.ConfigurationChooser.html) to instruct the ARKit XR Plug-in to use an [ARGeoTrackingConfiguration](https://developer.apple.com/documentation/arkit/argeotrackingconfiguration?language=objc).
+[ARKit's ARGeoAnchors](https://developer.apple.com/documentation/arkit/argeoanchor?language=objc) are not yet supported by ARFoundation, but you can still access this feature with a bit of Objective-C. This sample uses a custom [ConfigurationChooser](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.0/api/UnityEngine.XR.ARSubsystems.ConfigurationChooser.html) to instruct the Apple ARKit XR Plug-in to use an [ARGeoTrackingConfiguration](https://developer.apple.com/documentation/arkit/argeotrackingconfiguration?language=objc).
 
-This sample also shows how to interpret the [nativePtr](https://docs.unity3d.com/Packages/com.unity.xr.arsubsystems@4.2/api/UnityEngine.XR.ARSubsystems.XRSessionSubsystem.html#UnityEngine_XR_ARSubsystems_XRSessionSubsystem_nativePtr) provided by the [XRSessionSubsystem](https://docs.unity3d.com/Packages/com.unity.xr.arsubsystems@4.2/api/UnityEngine.XR.ARSubsystems.XRSessionSubsystem.html) as an ARKit [ARSession](https://developer.apple.com/documentation/arkit/arsession?language=objc) pointer.
+This sample also shows how to interpret the [nativePtr](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.0/api/UnityEngine.XR.ARSubsystems.XRSessionSubsystem.html#UnityEngine_XR_ARSubsystems_XRSessionSubsystem_nativePtr) provided by the [XRSessionSubsystem](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.0/api/UnityEngine.XR.ARSubsystems.XRSessionSubsystem.html) as an ARKit [ARSession](https://developer.apple.com/documentation/arkit/arsession?language=objc) pointer.
 
 This sample requires an iOS device running iOS 14.0 or later, an A12 chip or later, location services enabled, and cellular capability.
 
 ## ImageTracking
 
-There are two samples demonstrating image tracking. The image tracking samples are supported on ARCore, ARKit, and Magic Leap. To enable image tracking, you must first create an `XRReferenceImageLibrary`. This is the set of images to look for in the environment. [Click here](https://docs.unity3d.com/Packages/com.unity.xr.arsubsystems@4.2/manual/image-tracking.html) for instructions on creating one.
+There are two samples demonstrating image tracking. The image tracking samples are supported on ARCore and ARKit. To enable image tracking, you must first create an `XRReferenceImageLibrary`. This is the set of images to look for in the environment. [Click here](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.0/manual/arsubsystems/image-tracking.html) for instructions on creating one.
 
 You can also add images to the reference image library at runtime. This sample includes a button that adds the images `one.png` and `two.png` to the reference image library. See the script `DynamicLibrary.cs` for example code.
 
@@ -180,7 +169,7 @@ With [`PrefabImagePairManager.cs`](https://github.com/Unity-Technologies/arfound
 You can also change prefabs at runtime. This sample includes a button that switch between the original and alternative prefab for the first image in the reference image library. See the script [`DynamicPrefab.cs`](https://github.com/Unity-Technologies/arfoundation-samples/blob/master/Assets/Scenes/ImageTracking/ImageTrackingWithMultiplePrefabs/DynamicPrefab.cs) for example code.
 ## ObjectTracking
 
-Similar to the image tracking sample, this sample detects a 3D object from a set of reference objects in an `XRReferenceObjectLibrary`. [Click here](https://docs.unity3d.com/Packages/com.unity.xr.arsubsystems@4.2/manual/object-tracking.html) for instructions on creating one.
+Similar to the image tracking sample, this sample detects a 3D object from a set of reference objects in an `XRReferenceObjectLibrary`. [Click here](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.0/manual/arsubsystems/object-tracking.html) for instructions on creating one.
 
 To use this sample, you must have a physical object the device can recognize. The sample's reference object library is built using two reference objects. The sample includes [printable templates](https://github.com/Unity-Technologies/arfoundation-samples/tree/master/Assets/Scenes/Object%20Tracking/Printable%20Templates) which can be printed on 8.5x11 inch paper and folded into a cube and cylinder.
 
@@ -291,7 +280,7 @@ At first, this scene may appear to be doing nothing. However, it is rendering a 
 
 ## Interaction
 
-This sample scene demonstrates the functionality of the `XR Interaction Toolkit` package. In the scene, you are able to place a cube on a plane which you can translate, rotate and scale with gestures. See the [`XR Interaction Toolkit Documentation`](https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@1.0/manual/index.html) for more details.
+This sample scene demonstrates the functionality of the `XR Interaction Toolkit` package. In the scene, you are able to place a cube on a plane which you can translate, rotate and scale with gestures. See the [`XR Interaction Toolkit Documentation`](https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@2.0/manual/index.html) for more details.
 
 ## Input System
 

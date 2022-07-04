@@ -36,7 +36,19 @@ extern void SessionStateChanged_Invoke_mB9195B30A226CB3E53E470C24FD31E039E5BB4F5
 extern void IdentityTokenChanged__ctor_m1970F8BEEDAA84A8FC5ABB973C0DB62FA2AA8312 (void);
 // 0x0000000C System.Void UnityEngine.Analytics.AnalyticsSessionInfo/IdentityTokenChanged::Invoke(System.String)
 extern void IdentityTokenChanged_Invoke_m22D3DA825F0D6E701D050EFA3D35E84DFAC7F8D9 (void);
-static Il2CppMethodPointer s_methodPointers[12] = 
+// 0x0000000D System.Boolean UnityEngine.Analytics.Analytics::IsInitialized()
+extern void Analytics_IsInitialized_m4D3EB447EAA86548B7EB17B75F00BFE63202948C (void);
+// 0x0000000E UnityEngine.Analytics.AnalyticsResult UnityEngine.Analytics.Analytics::RegisterEventWithLimit(System.String,System.Int32,System.Int32,System.String,System.Int32,System.String,System.String,System.Boolean)
+extern void Analytics_RegisterEventWithLimit_mB6366B0FDFE87968A8F28198918F912FDF5B29CB (void);
+// 0x0000000F UnityEngine.Analytics.AnalyticsResult UnityEngine.Analytics.Analytics::SendEventWithLimit(System.String,System.Object,System.Int32,System.String)
+extern void Analytics_SendEventWithLimit_m60146D4A7F1B94B4AB69012C59733C705D173594 (void);
+// 0x00000010 UnityEngine.Analytics.AnalyticsResult UnityEngine.Analytics.Analytics::RegisterEvent(System.String,System.Int32,System.Int32,System.String,System.String)
+extern void Analytics_RegisterEvent_m04F47ED2958F38CE0CE9538B3DBB3E46E08B49B0 (void);
+// 0x00000011 UnityEngine.Analytics.AnalyticsResult UnityEngine.Analytics.Analytics::RegisterEvent(System.String,System.Int32,System.Int32,System.String,System.Int32,System.String,System.String)
+extern void Analytics_RegisterEvent_m1269DF3E05F1A44ECCF9F7A1A3EC5ACE1AC7F889 (void);
+// 0x00000012 UnityEngine.Analytics.AnalyticsResult UnityEngine.Analytics.Analytics::SendEvent(System.String,System.Object,System.Int32,System.String)
+extern void Analytics_SendEvent_m4B1708AD606946C8D5E41DECA1C76960129E0C62 (void);
+static Il2CppMethodPointer s_methodPointers[18] = 
 {
 	RemoteSettings_RemoteSettingsUpdated_mC219C2BAA771BF07A1388264A931E49419142F56,
 	RemoteSettings_RemoteSettingsBeforeFetchFromServer_m84AAE01E2E6C81CDD55965748FF10883348483B3,
@@ -50,27 +62,39 @@ static Il2CppMethodPointer s_methodPointers[12] =
 	SessionStateChanged_Invoke_mB9195B30A226CB3E53E470C24FD31E039E5BB4F5,
 	IdentityTokenChanged__ctor_m1970F8BEEDAA84A8FC5ABB973C0DB62FA2AA8312,
 	IdentityTokenChanged_Invoke_m22D3DA825F0D6E701D050EFA3D35E84DFAC7F8D9,
+	Analytics_IsInitialized_m4D3EB447EAA86548B7EB17B75F00BFE63202948C,
+	Analytics_RegisterEventWithLimit_mB6366B0FDFE87968A8F28198918F912FDF5B29CB,
+	Analytics_SendEventWithLimit_m60146D4A7F1B94B4AB69012C59733C705D173594,
+	Analytics_RegisterEvent_m04F47ED2958F38CE0CE9538B3DBB3E46E08B49B0,
+	Analytics_RegisterEvent_m1269DF3E05F1A44ECCF9F7A1A3EC5ACE1AC7F889,
+	Analytics_SendEvent_m4B1708AD606946C8D5E41DECA1C76960129E0C62,
 };
-static const int32_t s_InvokerIndices[12] = 
+static const int32_t s_InvokerIndices[18] = 
 {
-	12797,
-	13695,
-	10038,
-	3249,
-	7643,
-	11317,
-	9189,
-	12810,
-	3249,
-	1044,
-	3249,
-	6027,
+	8757,
+	8954,
+	7342,
+	2404,
+	5722,
+	8102,
+	6780,
+	8770,
+	2404,
+	782,
+	2404,
+	4519,
+	8880,
+	5913,
+	6559,
+	6153,
+	5948,
+	6559,
 };
 IL2CPP_EXTERN_C const Il2CppCodeGenModule g_UnityEngine_UnityAnalyticsModule_CodeGenModule;
 const Il2CppCodeGenModule g_UnityEngine_UnityAnalyticsModule_CodeGenModule = 
 {
 	"UnityEngine.UnityAnalyticsModule.dll",
-	12,
+	18,
 	s_methodPointers,
 	0,
 	NULL,
