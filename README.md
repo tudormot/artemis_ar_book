@@ -1,4 +1,8 @@
-# AR Foundation Samples
+# ARtemis AR book
+Showcase project of Artemis learning.
+Based On ARfoundations Samples, see their README below:
+
+#AR Foundation Samples
 
 Example projects that use [*AR Foundation 5.0*](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.0/manual/index.html) and demonstrate its functionality with sample assets and components.
 
