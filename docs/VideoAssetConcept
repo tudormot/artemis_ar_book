@@ -1,9 +1,0 @@
-Concept of Video Assets of our product:
-
-Videos should perfectly fit the detected image. 
---> To do this, all input should have the correct ration. Initially this will not be checked 
-How will it work. The asset instatiator will check it the asset is "Size aware". If yes, then it will not performa any scaling ,and simply instantiate it, while also passing the size of the image to the asset. The asset then takes care of the rest
-
-Video asset: They have 2 states: 
-1. Display play button state
-2. Play video state. This state should also have controls (TODO). Controls should be in AR, to keep the AR theme

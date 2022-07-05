@@ -1,0 +1,47 @@
+Others:
+1. A unified UI for all the assets. Or for the time being just use the ar-foudnation style buttons as they are quite nice
+Potential post-AR video editing: fake the ui overlay to make it prettier
+2. For every experience, a common button, that moves the asset from "AR space", to a fake space ("Virtual Mode"/"Detach")
+3. For faking a better AR Experience (not sure if this is required on iOS, thats why it would be nice to compile there sooner rather than later), a method to detach the prefabs from the spawned ARTrackedImage.
+4. A selection material/shader, which emits a bit of light and highlights that a particular Game Object is being highlighted
+
+
+Asset nr1. (showcasing gamification)
+Solar system game + normal solar system asset
+Extra details: the solar system should spawn only after the animation of the rocket taking off and flying upwards
+Potetntial work for tudor: The gun in the game is a bit shitty, the explosions could be better ,the ui could be better etc.
+Potential fiverr work: make an animation for the rocket launch, Optionally choose a more realistic rocket.
+Potential post-AR video editing: -
+
+Asset nr2.
+Skull and Brain Asset (showing 3d educational asset)
+Extra details/work for Tudor : 
+--> Jaber complained about the ugly "selection cube". Do something about that, or remove it for the time being.
+--> buttons of this experience are particularly ugly. Change them
+--> WE also want labels in AR on the expanded skull. This can be done on fiverr, or maybe in post-AR video processing
+Potential fiverr work: labels that seem in AR, of differrent brain parts.
+Potential post-AR video editing: labels that seem in AR, of differrent brain parts.
+
+Asset nr3. (showcasing flashy hd 3d art)
+Dinosaur:
+--> This asset should highlight the possibility of displaying quality HD stuff in AR.
+--> The dinosaur currently has only a walk animation. This should be changed
+Fiverr work: -- An impressive animation of this dinosaur doing something <--we should think about this and discuss in a bit
+             -- An "entering" animation, need to think a bit but maybe something like the dinosaur coming out of a little bush/forest, maybe a time lapse of the forest quickly growing from the book
+
+Asset nr 4.: (showcasing video on page functionality)
+The pi song/ the area of circle explained video
+Potential work tudor: controls for this video, rather than just an initial play button
+Potential post-AR video editing: Whether they could just fake this asset completely , ie introduce a video on a plane, in their video
+
+
+Asset nr 4.: (showcasing audio ar)
+--> Beethoven symphonies
+-->work for tudor: when you select a button after another one was selected, the first one should show that it is paused.
+Potential post-AR video editing: The audio should be added by them, together with effects if they feel it adds quality
+
+Other assets:
+Links: --> Basically show that our technology can do whatever qr codes can do, and more...
+Animal farm --> showcasing multiple assets in same view, etc...
+Aquarium: an aquarium spawned on the book, including a game to find specific fish. 
+
