@@ -32514,7 +32514,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool CurrentRenderModeText_FindObjectIfNull_T
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// if (obj == null)
 		RuntimeObject** L_0 = ___obj0;
 		RuntimeObject* L_1 = (*(RuntimeObject**)L_0);
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
@@ -32526,14 +32525,12 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool CurrentRenderModeText_FindObjectIfNull_T
 		}
 	}
 	{
-		// obj = FindObjectOfType<T>();
 		RuntimeObject** L_3 = ___obj0;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		RuntimeObject* L_4;
 		L_4 = ((  RuntimeObject* (*) (const RuntimeMethod*))il2cpp_codegen_get_method_pointer(il2cpp_rgctx_method(method->rgctx_data, 1)))(il2cpp_rgctx_method(method->rgctx_data, 1));
 		*(RuntimeObject**)L_3 = L_4;
 		Il2CppCodeGenWriteBarrier((void**)(RuntimeObject**)L_3, (void*)L_4);
-		// return obj != null;
 		RuntimeObject** L_5 = ___obj0;
 		RuntimeObject* L_6 = (*(RuntimeObject**)L_5);
 		bool L_7;
@@ -32543,7 +32540,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool CurrentRenderModeText_FindObjectIfNull_T
 
 IL_0030:
 	{
-		// return true;
 		return (bool)1;
 	}
 }
@@ -32791,7 +32787,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// public static void AddCommand<T1>( string command, string description, Action<T1> method ) { AddCommand( command, description, method.Method, method.Target, null ); }
 		String_t* L_0 = ___command0;
 		String_t* L_1 = ___description1;
 		Action_1_t6F9EB113EB3F16226AEF811A2744F4111C116C87* L_2 = ___method2;
@@ -32804,7 +32799,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		L_5 = Delegate_get_Target_m6E203F111C1548193A5AB7E616BD5834CD269753_inline((Delegate_t*)L_4, NULL);
 		il2cpp_codegen_runtime_class_init_inline(DebugLogConsole_tD4575289A02D94FC8841D22AE24DE8216C32A707_il2cpp_TypeInfo_var);
 		DebugLogConsole_AddCommand_m1319538F466ECEA4D813BC4532CF4BE773A1CBB2(L_0, L_1, L_3, L_5, (StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248*)NULL, NULL);
-		// public static void AddCommand<T1>( string command, string description, Action<T1> method ) { AddCommand( command, description, method.Method, method.Target, null ); }
 		return;
 	}
 }
@@ -32818,7 +32812,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// public static void AddCommand<T1>( string command, string description, Func<T1> method ) { AddCommand( command, description, method.Method, method.Target, null ); }
 		String_t* L_0 = ___command0;
 		String_t* L_1 = ___description1;
 		Func_1_tD5C081AE11746B200C711DD48DBEB00E3A9276D4* L_2 = ___method2;
@@ -32831,7 +32824,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		L_5 = Delegate_get_Target_m6E203F111C1548193A5AB7E616BD5834CD269753_inline((Delegate_t*)L_4, NULL);
 		il2cpp_codegen_runtime_class_init_inline(DebugLogConsole_tD4575289A02D94FC8841D22AE24DE8216C32A707_il2cpp_TypeInfo_var);
 		DebugLogConsole_AddCommand_m1319538F466ECEA4D813BC4532CF4BE773A1CBB2(L_0, L_1, L_3, L_5, (StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248*)NULL, NULL);
-		// public static void AddCommand<T1>( string command, string description, Func<T1> method ) { AddCommand( command, description, method.Method, method.Target, null ); }
 		return;
 	}
 }
@@ -32845,7 +32837,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// public static void AddCommand<T1, T2>( string command, string description, Action<T1, T2> method ) { AddCommand( command, description, method.Method, method.Target, null ); }
 		String_t* L_0 = ___command0;
 		String_t* L_1 = ___description1;
 		Action_2_t156C43F079E7E68155FCDCD12DC77DD11AEF7E3C* L_2 = ___method2;
@@ -32858,7 +32849,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		L_5 = Delegate_get_Target_m6E203F111C1548193A5AB7E616BD5834CD269753_inline((Delegate_t*)L_4, NULL);
 		il2cpp_codegen_runtime_class_init_inline(DebugLogConsole_tD4575289A02D94FC8841D22AE24DE8216C32A707_il2cpp_TypeInfo_var);
 		DebugLogConsole_AddCommand_m1319538F466ECEA4D813BC4532CF4BE773A1CBB2(L_0, L_1, L_3, L_5, (StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248*)NULL, NULL);
-		// public static void AddCommand<T1, T2>( string command, string description, Action<T1, T2> method ) { AddCommand( command, description, method.Method, method.Target, null ); }
 		return;
 	}
 }
@@ -32872,7 +32862,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// public static void AddCommand<T1, T2>( string command, string description, Func<T1, T2> method ) { AddCommand( command, description, method.Method, method.Target, null ); }
 		String_t* L_0 = ___command0;
 		String_t* L_1 = ___description1;
 		Func_2_tACBF5A1656250800CE861707354491F0611F6624* L_2 = ___method2;
@@ -32885,7 +32874,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		L_5 = Delegate_get_Target_m6E203F111C1548193A5AB7E616BD5834CD269753_inline((Delegate_t*)L_4, NULL);
 		il2cpp_codegen_runtime_class_init_inline(DebugLogConsole_tD4575289A02D94FC8841D22AE24DE8216C32A707_il2cpp_TypeInfo_var);
 		DebugLogConsole_AddCommand_m1319538F466ECEA4D813BC4532CF4BE773A1CBB2(L_0, L_1, L_3, L_5, (StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248*)NULL, NULL);
-		// public static void AddCommand<T1, T2>( string command, string description, Func<T1, T2> method ) { AddCommand( command, description, method.Method, method.Target, null ); }
 		return;
 	}
 }
@@ -32899,7 +32887,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// public static void AddCommand<T1, T2, T3>( string command, string description, Action<T1, T2, T3> method ) { AddCommand( command, description, method.Method, method.Target, null ); }
 		String_t* L_0 = ___command0;
 		String_t* L_1 = ___description1;
 		Action_3_tCDB60724FE7702C8848DCEE7A25283B015D0DA58* L_2 = ___method2;
@@ -32912,7 +32899,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		L_5 = Delegate_get_Target_m6E203F111C1548193A5AB7E616BD5834CD269753_inline((Delegate_t*)L_4, NULL);
 		il2cpp_codegen_runtime_class_init_inline(DebugLogConsole_tD4575289A02D94FC8841D22AE24DE8216C32A707_il2cpp_TypeInfo_var);
 		DebugLogConsole_AddCommand_m1319538F466ECEA4D813BC4532CF4BE773A1CBB2(L_0, L_1, L_3, L_5, (StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248*)NULL, NULL);
-		// public static void AddCommand<T1, T2, T3>( string command, string description, Action<T1, T2, T3> method ) { AddCommand( command, description, method.Method, method.Target, null ); }
 		return;
 	}
 }
@@ -32926,7 +32912,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// public static void AddCommand<T1, T2, T3>( string command, string description, Func<T1, T2, T3> method ) { AddCommand( command, description, method.Method, method.Target, null ); }
 		String_t* L_0 = ___command0;
 		String_t* L_1 = ___description1;
 		Func_3_tAB0692B406AF1455ADB5F518BF283E084B5E8566* L_2 = ___method2;
@@ -32939,7 +32924,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		L_5 = Delegate_get_Target_m6E203F111C1548193A5AB7E616BD5834CD269753_inline((Delegate_t*)L_4, NULL);
 		il2cpp_codegen_runtime_class_init_inline(DebugLogConsole_tD4575289A02D94FC8841D22AE24DE8216C32A707_il2cpp_TypeInfo_var);
 		DebugLogConsole_AddCommand_m1319538F466ECEA4D813BC4532CF4BE773A1CBB2(L_0, L_1, L_3, L_5, (StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248*)NULL, NULL);
-		// public static void AddCommand<T1, T2, T3>( string command, string description, Func<T1, T2, T3> method ) { AddCommand( command, description, method.Method, method.Target, null ); }
 		return;
 	}
 }
@@ -32953,7 +32937,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// public static void AddCommand<T1, T2, T3, T4>( string command, string description, Action<T1, T2, T3, T4> method ) { AddCommand( command, description, method.Method, method.Target, null ); }
 		String_t* L_0 = ___command0;
 		String_t* L_1 = ___description1;
 		Action_4_tAF05E98E3DA1B2D4E4629E152AB8AE2793BEE120* L_2 = ___method2;
@@ -32966,7 +32949,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		L_5 = Delegate_get_Target_m6E203F111C1548193A5AB7E616BD5834CD269753_inline((Delegate_t*)L_4, NULL);
 		il2cpp_codegen_runtime_class_init_inline(DebugLogConsole_tD4575289A02D94FC8841D22AE24DE8216C32A707_il2cpp_TypeInfo_var);
 		DebugLogConsole_AddCommand_m1319538F466ECEA4D813BC4532CF4BE773A1CBB2(L_0, L_1, L_3, L_5, (StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248*)NULL, NULL);
-		// public static void AddCommand<T1, T2, T3, T4>( string command, string description, Action<T1, T2, T3, T4> method ) { AddCommand( command, description, method.Method, method.Target, null ); }
 		return;
 	}
 }
@@ -32980,7 +32962,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// public static void AddCommand<T1, T2, T3, T4>( string command, string description, Func<T1, T2, T3, T4> method ) { AddCommand( command, description, method.Method, method.Target, null ); }
 		String_t* L_0 = ___command0;
 		String_t* L_1 = ___description1;
 		Func_4_t5BEC908E1F7894319A22CA9728A897FA95522DAD* L_2 = ___method2;
@@ -32993,7 +32974,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		L_5 = Delegate_get_Target_m6E203F111C1548193A5AB7E616BD5834CD269753_inline((Delegate_t*)L_4, NULL);
 		il2cpp_codegen_runtime_class_init_inline(DebugLogConsole_tD4575289A02D94FC8841D22AE24DE8216C32A707_il2cpp_TypeInfo_var);
 		DebugLogConsole_AddCommand_m1319538F466ECEA4D813BC4532CF4BE773A1CBB2(L_0, L_1, L_3, L_5, (StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248*)NULL, NULL);
-		// public static void AddCommand<T1, T2, T3, T4>( string command, string description, Func<T1, T2, T3, T4> method ) { AddCommand( command, description, method.Method, method.Target, null ); }
 		return;
 	}
 }
@@ -33007,7 +32987,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// public static void AddCommand<T1, T2, T3, T4, T5>( string command, string description, Func<T1, T2, T3, T4, T5> method ) { AddCommand( command, description, method.Method, method.Target, null ); }
 		String_t* L_0 = ___command0;
 		String_t* L_1 = ___description1;
 		Func_5_tCAF2203A305DC98F7249111653223E3D03B7549A* L_2 = ___method2;
@@ -33020,7 +32999,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		L_5 = Delegate_get_Target_m6E203F111C1548193A5AB7E616BD5834CD269753_inline((Delegate_t*)L_4, NULL);
 		il2cpp_codegen_runtime_class_init_inline(DebugLogConsole_tD4575289A02D94FC8841D22AE24DE8216C32A707_il2cpp_TypeInfo_var);
 		DebugLogConsole_AddCommand_m1319538F466ECEA4D813BC4532CF4BE773A1CBB2(L_0, L_1, L_3, L_5, (StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248*)NULL, NULL);
-		// public static void AddCommand<T1, T2, T3, T4, T5>( string command, string description, Func<T1, T2, T3, T4, T5> method ) { AddCommand( command, description, method.Method, method.Target, null ); }
 		return;
 	}
 }
@@ -33035,7 +33013,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// public static void AddCommand<T1>( string command, string description, Action<T1> method, string parameterName ) { AddCommand( command, description, method.Method, method.Target, new string[1] { parameterName } ); }
 		String_t* L_0 = ___command0;
 		String_t* L_1 = ___description1;
 		Action_1_t6F9EB113EB3F16226AEF811A2744F4111C116C87* L_2 = ___method2;
@@ -33054,7 +33031,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		(L_7)->SetAt(static_cast<il2cpp_array_size_t>(0), (String_t*)L_8);
 		il2cpp_codegen_runtime_class_init_inline(DebugLogConsole_tD4575289A02D94FC8841D22AE24DE8216C32A707_il2cpp_TypeInfo_var);
 		DebugLogConsole_AddCommand_m1319538F466ECEA4D813BC4532CF4BE773A1CBB2(L_0, L_1, L_3, L_5, L_7, NULL);
-		// public static void AddCommand<T1>( string command, string description, Action<T1> method, string parameterName ) { AddCommand( command, description, method.Method, method.Target, new string[1] { parameterName } ); }
 		return;
 	}
 }
@@ -33069,7 +33045,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// public static void AddCommand<T1, T2>( string command, string description, Func<T1, T2> method, string parameterName ) { AddCommand( command, description, method.Method, method.Target, new string[1] { parameterName } ); }
 		String_t* L_0 = ___command0;
 		String_t* L_1 = ___description1;
 		Func_2_tACBF5A1656250800CE861707354491F0611F6624* L_2 = ___method2;
@@ -33088,7 +33063,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		(L_7)->SetAt(static_cast<il2cpp_array_size_t>(0), (String_t*)L_8);
 		il2cpp_codegen_runtime_class_init_inline(DebugLogConsole_tD4575289A02D94FC8841D22AE24DE8216C32A707_il2cpp_TypeInfo_var);
 		DebugLogConsole_AddCommand_m1319538F466ECEA4D813BC4532CF4BE773A1CBB2(L_0, L_1, L_3, L_5, L_7, NULL);
-		// public static void AddCommand<T1, T2>( string command, string description, Func<T1, T2> method, string parameterName ) { AddCommand( command, description, method.Method, method.Target, new string[1] { parameterName } ); }
 		return;
 	}
 }
@@ -33103,7 +33077,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// public static void AddCommand<T1, T2>( string command, string description, Action<T1, T2> method, string parameterName1, string parameterName2 ) { AddCommand( command, description, method.Method, method.Target, new string[2] { parameterName1, parameterName2 } ); }
 		String_t* L_0 = ___command0;
 		String_t* L_1 = ___description1;
 		Action_2_t156C43F079E7E68155FCDCD12DC77DD11AEF7E3C* L_2 = ___method2;
@@ -33127,7 +33100,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		(L_9)->SetAt(static_cast<il2cpp_array_size_t>(1), (String_t*)L_10);
 		il2cpp_codegen_runtime_class_init_inline(DebugLogConsole_tD4575289A02D94FC8841D22AE24DE8216C32A707_il2cpp_TypeInfo_var);
 		DebugLogConsole_AddCommand_m1319538F466ECEA4D813BC4532CF4BE773A1CBB2(L_0, L_1, L_3, L_5, L_9, NULL);
-		// public static void AddCommand<T1, T2>( string command, string description, Action<T1, T2> method, string parameterName1, string parameterName2 ) { AddCommand( command, description, method.Method, method.Target, new string[2] { parameterName1, parameterName2 } ); }
 		return;
 	}
 }
@@ -33142,7 +33114,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// public static void AddCommand<T1, T2, T3>( string command, string description, Func<T1, T2, T3> method, string parameterName1, string parameterName2 ) { AddCommand( command, description, method.Method, method.Target, new string[2] { parameterName1, parameterName2 } ); }
 		String_t* L_0 = ___command0;
 		String_t* L_1 = ___description1;
 		Func_3_tAB0692B406AF1455ADB5F518BF283E084B5E8566* L_2 = ___method2;
@@ -33166,7 +33137,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		(L_9)->SetAt(static_cast<il2cpp_array_size_t>(1), (String_t*)L_10);
 		il2cpp_codegen_runtime_class_init_inline(DebugLogConsole_tD4575289A02D94FC8841D22AE24DE8216C32A707_il2cpp_TypeInfo_var);
 		DebugLogConsole_AddCommand_m1319538F466ECEA4D813BC4532CF4BE773A1CBB2(L_0, L_1, L_3, L_5, L_9, NULL);
-		// public static void AddCommand<T1, T2, T3>( string command, string description, Func<T1, T2, T3> method, string parameterName1, string parameterName2 ) { AddCommand( command, description, method.Method, method.Target, new string[2] { parameterName1, parameterName2 } ); }
 		return;
 	}
 }
@@ -33181,7 +33151,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// public static void AddCommand<T1, T2, T3>( string command, string description, Action<T1, T2, T3> method, string parameterName1, string parameterName2, string parameterName3 ) { AddCommand( command, description, method.Method, method.Target, new string[3] { parameterName1, parameterName2, parameterName3 } ); }
 		String_t* L_0 = ___command0;
 		String_t* L_1 = ___description1;
 		Action_3_tCDB60724FE7702C8848DCEE7A25283B015D0DA58* L_2 = ___method2;
@@ -33210,7 +33179,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		(L_11)->SetAt(static_cast<il2cpp_array_size_t>(2), (String_t*)L_12);
 		il2cpp_codegen_runtime_class_init_inline(DebugLogConsole_tD4575289A02D94FC8841D22AE24DE8216C32A707_il2cpp_TypeInfo_var);
 		DebugLogConsole_AddCommand_m1319538F466ECEA4D813BC4532CF4BE773A1CBB2(L_0, L_1, L_3, L_5, L_11, NULL);
-		// public static void AddCommand<T1, T2, T3>( string command, string description, Action<T1, T2, T3> method, string parameterName1, string parameterName2, string parameterName3 ) { AddCommand( command, description, method.Method, method.Target, new string[3] { parameterName1, parameterName2, parameterName3 } ); }
 		return;
 	}
 }
@@ -33225,7 +33193,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// public static void AddCommand<T1, T2, T3, T4>( string command, string description, Func<T1, T2, T3, T4> method, string parameterName1, string parameterName2, string parameterName3 ) { AddCommand( command, description, method.Method, method.Target, new string[3] { parameterName1, parameterName2, parameterName3 } ); }
 		String_t* L_0 = ___command0;
 		String_t* L_1 = ___description1;
 		Func_4_t5BEC908E1F7894319A22CA9728A897FA95522DAD* L_2 = ___method2;
@@ -33254,7 +33221,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		(L_11)->SetAt(static_cast<il2cpp_array_size_t>(2), (String_t*)L_12);
 		il2cpp_codegen_runtime_class_init_inline(DebugLogConsole_tD4575289A02D94FC8841D22AE24DE8216C32A707_il2cpp_TypeInfo_var);
 		DebugLogConsole_AddCommand_m1319538F466ECEA4D813BC4532CF4BE773A1CBB2(L_0, L_1, L_3, L_5, L_11, NULL);
-		// public static void AddCommand<T1, T2, T3, T4>( string command, string description, Func<T1, T2, T3, T4> method, string parameterName1, string parameterName2, string parameterName3 ) { AddCommand( command, description, method.Method, method.Target, new string[3] { parameterName1, parameterName2, parameterName3 } ); }
 		return;
 	}
 }
@@ -33269,7 +33235,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// public static void AddCommand<T1, T2, T3, T4>( string command, string description, Action<T1, T2, T3, T4> method, string parameterName1, string parameterName2, string parameterName3, string parameterName4 ) { AddCommand( command, description, method.Method, method.Target, new string[4] { parameterName1, parameterName2, parameterName3, parameterName4 } ); }
 		String_t* L_0 = ___command0;
 		String_t* L_1 = ___description1;
 		Action_4_tAF05E98E3DA1B2D4E4629E152AB8AE2793BEE120* L_2 = ___method2;
@@ -33303,7 +33268,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		(L_13)->SetAt(static_cast<il2cpp_array_size_t>(3), (String_t*)L_14);
 		il2cpp_codegen_runtime_class_init_inline(DebugLogConsole_tD4575289A02D94FC8841D22AE24DE8216C32A707_il2cpp_TypeInfo_var);
 		DebugLogConsole_AddCommand_m1319538F466ECEA4D813BC4532CF4BE773A1CBB2(L_0, L_1, L_3, L_5, L_13, NULL);
-		// public static void AddCommand<T1, T2, T3, T4>( string command, string description, Action<T1, T2, T3, T4> method, string parameterName1, string parameterName2, string parameterName3, string parameterName4 ) { AddCommand( command, description, method.Method, method.Target, new string[4] { parameterName1, parameterName2, parameterName3, parameterName4 } ); }
 		return;
 	}
 }
@@ -33318,7 +33282,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// public static void AddCommand<T1, T2, T3, T4, T5>( string command, string description, Func<T1, T2, T3, T4, T5> method, string parameterName1, string parameterName2, string parameterName3, string parameterName4 ) { AddCommand( command, description, method.Method, method.Target, new string[4] { parameterName1, parameterName2, parameterName3, parameterName4 } ); }
 		String_t* L_0 = ___command0;
 		String_t* L_1 = ___description1;
 		Func_5_tCAF2203A305DC98F7249111653223E3D03B7549A* L_2 = ___method2;
@@ -33352,7 +33315,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_AddCommand_TisRuntimeObj
 		(L_13)->SetAt(static_cast<il2cpp_array_size_t>(3), (String_t*)L_14);
 		il2cpp_codegen_runtime_class_init_inline(DebugLogConsole_tD4575289A02D94FC8841D22AE24DE8216C32A707_il2cpp_TypeInfo_var);
 		DebugLogConsole_AddCommand_m1319538F466ECEA4D813BC4532CF4BE773A1CBB2(L_0, L_1, L_3, L_5, L_13, NULL);
-		// public static void AddCommand<T1, T2, T3, T4, T5>( string command, string description, Func<T1, T2, T3, T4, T5> method, string parameterName1, string parameterName2, string parameterName3, string parameterName4 ) { AddCommand( command, description, method.Method, method.Target, new string[4] { parameterName1, parameterName2, parameterName3, parameterName4 } ); }
 		return;
 	}
 }
@@ -33366,14 +33328,12 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_RemoveCommand_TisRuntime
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// public static void RemoveCommand<T1>( Action<T1> method ) { RemoveCommand( method.Method ); }
 		Action_1_t6F9EB113EB3F16226AEF811A2744F4111C116C87* L_0 = ___method0;
 		NullCheck((Delegate_t*)L_0);
 		MethodInfo_t* L_1;
 		L_1 = Delegate_get_Method_mB684A7525653DFE0EFC35E58449E1FC8E2A9F019((Delegate_t*)L_0, NULL);
 		il2cpp_codegen_runtime_class_init_inline(DebugLogConsole_tD4575289A02D94FC8841D22AE24DE8216C32A707_il2cpp_TypeInfo_var);
 		DebugLogConsole_RemoveCommand_mC94216D492F67A3A8639683DAA058AD134B6B67F(L_1, NULL);
-		// public static void RemoveCommand<T1>( Action<T1> method ) { RemoveCommand( method.Method ); }
 		return;
 	}
 }
@@ -33387,14 +33347,12 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_RemoveCommand_TisRuntime
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// public static void RemoveCommand<T1>( Func<T1> method ) { RemoveCommand( method.Method ); }
 		Func_1_tD5C081AE11746B200C711DD48DBEB00E3A9276D4* L_0 = ___method0;
 		NullCheck((Delegate_t*)L_0);
 		MethodInfo_t* L_1;
 		L_1 = Delegate_get_Method_mB684A7525653DFE0EFC35E58449E1FC8E2A9F019((Delegate_t*)L_0, NULL);
 		il2cpp_codegen_runtime_class_init_inline(DebugLogConsole_tD4575289A02D94FC8841D22AE24DE8216C32A707_il2cpp_TypeInfo_var);
 		DebugLogConsole_RemoveCommand_mC94216D492F67A3A8639683DAA058AD134B6B67F(L_1, NULL);
-		// public static void RemoveCommand<T1>( Func<T1> method ) { RemoveCommand( method.Method ); }
 		return;
 	}
 }
@@ -33408,14 +33366,12 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_RemoveCommand_TisRuntime
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// public static void RemoveCommand<T1, T2>( Action<T1, T2> method ) { RemoveCommand( method.Method ); }
 		Action_2_t156C43F079E7E68155FCDCD12DC77DD11AEF7E3C* L_0 = ___method0;
 		NullCheck((Delegate_t*)L_0);
 		MethodInfo_t* L_1;
 		L_1 = Delegate_get_Method_mB684A7525653DFE0EFC35E58449E1FC8E2A9F019((Delegate_t*)L_0, NULL);
 		il2cpp_codegen_runtime_class_init_inline(DebugLogConsole_tD4575289A02D94FC8841D22AE24DE8216C32A707_il2cpp_TypeInfo_var);
 		DebugLogConsole_RemoveCommand_mC94216D492F67A3A8639683DAA058AD134B6B67F(L_1, NULL);
-		// public static void RemoveCommand<T1, T2>( Action<T1, T2> method ) { RemoveCommand( method.Method ); }
 		return;
 	}
 }
@@ -33429,14 +33385,12 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_RemoveCommand_TisRuntime
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// public static void RemoveCommand<T1, T2>( Func<T1, T2> method ) { RemoveCommand( method.Method ); }
 		Func_2_tACBF5A1656250800CE861707354491F0611F6624* L_0 = ___method0;
 		NullCheck((Delegate_t*)L_0);
 		MethodInfo_t* L_1;
 		L_1 = Delegate_get_Method_mB684A7525653DFE0EFC35E58449E1FC8E2A9F019((Delegate_t*)L_0, NULL);
 		il2cpp_codegen_runtime_class_init_inline(DebugLogConsole_tD4575289A02D94FC8841D22AE24DE8216C32A707_il2cpp_TypeInfo_var);
 		DebugLogConsole_RemoveCommand_mC94216D492F67A3A8639683DAA058AD134B6B67F(L_1, NULL);
-		// public static void RemoveCommand<T1, T2>( Func<T1, T2> method ) { RemoveCommand( method.Method ); }
 		return;
 	}
 }
@@ -33450,14 +33404,12 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_RemoveCommand_TisRuntime
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// public static void RemoveCommand<T1, T2, T3>( Action<T1, T2, T3> method ) { RemoveCommand( method.Method ); }
 		Action_3_tCDB60724FE7702C8848DCEE7A25283B015D0DA58* L_0 = ___method0;
 		NullCheck((Delegate_t*)L_0);
 		MethodInfo_t* L_1;
 		L_1 = Delegate_get_Method_mB684A7525653DFE0EFC35E58449E1FC8E2A9F019((Delegate_t*)L_0, NULL);
 		il2cpp_codegen_runtime_class_init_inline(DebugLogConsole_tD4575289A02D94FC8841D22AE24DE8216C32A707_il2cpp_TypeInfo_var);
 		DebugLogConsole_RemoveCommand_mC94216D492F67A3A8639683DAA058AD134B6B67F(L_1, NULL);
-		// public static void RemoveCommand<T1, T2, T3>( Action<T1, T2, T3> method ) { RemoveCommand( method.Method ); }
 		return;
 	}
 }
@@ -33471,14 +33423,12 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_RemoveCommand_TisRuntime
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// public static void RemoveCommand<T1, T2, T3>( Func<T1, T2, T3> method ) { RemoveCommand( method.Method ); }
 		Func_3_tAB0692B406AF1455ADB5F518BF283E084B5E8566* L_0 = ___method0;
 		NullCheck((Delegate_t*)L_0);
 		MethodInfo_t* L_1;
 		L_1 = Delegate_get_Method_mB684A7525653DFE0EFC35E58449E1FC8E2A9F019((Delegate_t*)L_0, NULL);
 		il2cpp_codegen_runtime_class_init_inline(DebugLogConsole_tD4575289A02D94FC8841D22AE24DE8216C32A707_il2cpp_TypeInfo_var);
 		DebugLogConsole_RemoveCommand_mC94216D492F67A3A8639683DAA058AD134B6B67F(L_1, NULL);
-		// public static void RemoveCommand<T1, T2, T3>( Func<T1, T2, T3> method ) { RemoveCommand( method.Method ); }
 		return;
 	}
 }
@@ -33492,14 +33442,12 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_RemoveCommand_TisRuntime
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// public static void RemoveCommand<T1, T2, T3, T4>( Action<T1, T2, T3, T4> method ) { RemoveCommand( method.Method ); }
 		Action_4_tAF05E98E3DA1B2D4E4629E152AB8AE2793BEE120* L_0 = ___method0;
 		NullCheck((Delegate_t*)L_0);
 		MethodInfo_t* L_1;
 		L_1 = Delegate_get_Method_mB684A7525653DFE0EFC35E58449E1FC8E2A9F019((Delegate_t*)L_0, NULL);
 		il2cpp_codegen_runtime_class_init_inline(DebugLogConsole_tD4575289A02D94FC8841D22AE24DE8216C32A707_il2cpp_TypeInfo_var);
 		DebugLogConsole_RemoveCommand_mC94216D492F67A3A8639683DAA058AD134B6B67F(L_1, NULL);
-		// public static void RemoveCommand<T1, T2, T3, T4>( Action<T1, T2, T3, T4> method ) { RemoveCommand( method.Method ); }
 		return;
 	}
 }
@@ -33513,14 +33461,12 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_RemoveCommand_TisRuntime
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// public static void RemoveCommand<T1, T2, T3, T4>( Func<T1, T2, T3, T4> method ) { RemoveCommand( method.Method ); }
 		Func_4_t5BEC908E1F7894319A22CA9728A897FA95522DAD* L_0 = ___method0;
 		NullCheck((Delegate_t*)L_0);
 		MethodInfo_t* L_1;
 		L_1 = Delegate_get_Method_mB684A7525653DFE0EFC35E58449E1FC8E2A9F019((Delegate_t*)L_0, NULL);
 		il2cpp_codegen_runtime_class_init_inline(DebugLogConsole_tD4575289A02D94FC8841D22AE24DE8216C32A707_il2cpp_TypeInfo_var);
 		DebugLogConsole_RemoveCommand_mC94216D492F67A3A8639683DAA058AD134B6B67F(L_1, NULL);
-		// public static void RemoveCommand<T1, T2, T3, T4>( Func<T1, T2, T3, T4> method ) { RemoveCommand( method.Method ); }
 		return;
 	}
 }
@@ -33534,14 +33480,12 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DebugLogConsole_RemoveCommand_TisRuntime
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// public static void RemoveCommand<T1, T2, T3, T4, T5>( Func<T1, T2, T3, T4, T5> method ) { RemoveCommand( method.Method ); }
 		Func_5_tCAF2203A305DC98F7249111653223E3D03B7549A* L_0 = ___method0;
 		NullCheck((Delegate_t*)L_0);
 		MethodInfo_t* L_1;
 		L_1 = Delegate_get_Method_mB684A7525653DFE0EFC35E58449E1FC8E2A9F019((Delegate_t*)L_0, NULL);
 		il2cpp_codegen_runtime_class_init_inline(DebugLogConsole_tD4575289A02D94FC8841D22AE24DE8216C32A707_il2cpp_TypeInfo_var);
 		DebugLogConsole_RemoveCommand_mC94216D492F67A3A8639683DAA058AD134B6B67F(L_1, NULL);
-		// public static void RemoveCommand<T1, T2, T3, T4, T5>( Func<T1, T2, T3, T4, T5> method ) { RemoveCommand( method.Method ); }
 		return;
 	}
 }

@@ -10955,7 +10955,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ChangeEvent_1__ctor_m0D1BEDC09C2229492B2
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t CircularBuffer_1_get_Count_mD43A95B88B324220E62C43C054A08F5D4D0EE748_gshared (CircularBuffer_1_tCE48A157807D790AE588042B34881E85CC57CEB6* __this, const RuntimeMethod* method) 
 {
 	{
-		// public int Count { get; private set; }
 		int32_t L_0 = (int32_t)__this->___U3CCountU3Ek__BackingField_2;
 		return L_0;
 	}
@@ -10964,7 +10963,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t CircularBuffer_1_get_Count_mD43A95B88
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void CircularBuffer_1_set_Count_mE4CC6AC8376D762026A1A5FD37A41C071DE85C0E_gshared (CircularBuffer_1_tCE48A157807D790AE588042B34881E85CC57CEB6* __this, int32_t ___value0, const RuntimeMethod* method) 
 {
 	{
-		// public int Count { get; private set; }
 		int32_t L_0 = ___value0;
 		__this->___U3CCountU3Ek__BackingField_2 = L_0;
 		return;
@@ -10974,7 +10972,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void CircularBuffer_1_set_Count_mE4CC6AC8376D
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* CircularBuffer_1_get_Item_mDA9F74D5D86FB841E444EFC95E581F369C73D02B_gshared (CircularBuffer_1_tCE48A157807D790AE588042B34881E85CC57CEB6* __this, int32_t ___index0, const RuntimeMethod* method) 
 {
 	{
-		// public T this[int index] { get { return arr[( startIndex + index ) % arr.Length]; } }
 		ObjectU5BU5D_t8061030B0A12A55D5AD8652A20C922FE99450918* L_0 = (ObjectU5BU5D_t8061030B0A12A55D5AD8652A20C922FE99450918*)__this->___arr_0;
 		int32_t L_1 = (int32_t)__this->___startIndex_1;
 		int32_t L_2 = ___index0;
@@ -10990,14 +10987,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* CircularBuffer_1_get_Item_mDA9
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void CircularBuffer_1__ctor_m1BF8285E1909E019FA9D57390464A13F4CE4A495_gshared (CircularBuffer_1_tCE48A157807D790AE588042B34881E85CC57CEB6* __this, int32_t ___capacity0, const RuntimeMethod* method) 
 {
 	{
-		// public CircularBuffer( int capacity )
 		Object__ctor_mE837C6B9FA8C6D5D109F4B2EC885D79919AC0EA2((RuntimeObject*)__this, NULL);
-		// arr = new T[capacity];
 		int32_t L_0 = ___capacity0;
 		ObjectU5BU5D_t8061030B0A12A55D5AD8652A20C922FE99450918* L_1 = (ObjectU5BU5D_t8061030B0A12A55D5AD8652A20C922FE99450918*)(ObjectU5BU5D_t8061030B0A12A55D5AD8652A20C922FE99450918*)SZArrayNew(il2cpp_rgctx_data(method->klass->rgctx_data, 0), (uint32_t)L_0);
 		__this->___arr_0 = L_1;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___arr_0), (void*)L_1);
-		// }
 		return;
 	}
 }
@@ -11006,7 +11000,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void CircularBuffer_1_Add_m3E8794C8A9B1F0B7B0
 {
 	int32_t V_0 = 0;
 	{
-		// if( Count < arr.Length )
 		int32_t L_0;
 		L_0 = ((  int32_t (*) (CircularBuffer_1_tCE48A157807D790AE588042B34881E85CC57CEB6*, const RuntimeMethod*))il2cpp_codegen_get_method_pointer(il2cpp_rgctx_method(method->klass->rgctx_data, 1)))(__this, il2cpp_rgctx_method(method->klass->rgctx_data, 1));
 		ObjectU5BU5D_t8061030B0A12A55D5AD8652A20C922FE99450918* L_1 = (ObjectU5BU5D_t8061030B0A12A55D5AD8652A20C922FE99450918*)__this->___arr_0;
@@ -11017,7 +11010,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void CircularBuffer_1_Add_m3E8794C8A9B1F0B7B0
 		}
 	}
 	{
-		// arr[Count++] = value;
 		ObjectU5BU5D_t8061030B0A12A55D5AD8652A20C922FE99450918* L_2 = (ObjectU5BU5D_t8061030B0A12A55D5AD8652A20C922FE99450918*)__this->___arr_0;
 		int32_t L_3;
 		L_3 = ((  int32_t (*) (CircularBuffer_1_tCE48A157807D790AE588042B34881E85CC57CEB6*, const RuntimeMethod*))il2cpp_codegen_get_method_pointer(il2cpp_rgctx_method(method->klass->rgctx_data, 1)))(__this, il2cpp_rgctx_method(method->klass->rgctx_data, 1));
@@ -11033,13 +11025,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void CircularBuffer_1_Add_m3E8794C8A9B1F0B7B0
 
 IL_002e:
 	{
-		// arr[startIndex] = value;
 		ObjectU5BU5D_t8061030B0A12A55D5AD8652A20C922FE99450918* L_7 = (ObjectU5BU5D_t8061030B0A12A55D5AD8652A20C922FE99450918*)__this->___arr_0;
 		int32_t L_8 = (int32_t)__this->___startIndex_1;
 		RuntimeObject* L_9 = ___value0;
 		NullCheck(L_7);
 		(L_7)->SetAt(static_cast<il2cpp_array_size_t>(L_8), (RuntimeObject*)L_9);
-		// if( ++startIndex >= arr.Length )
 		int32_t L_10 = (int32_t)__this->___startIndex_1;
 		V_0 = ((int32_t)il2cpp_codegen_add(L_10, 1));
 		int32_t L_11 = V_0;
@@ -11053,13 +11043,11 @@ IL_002e:
 		}
 	}
 	{
-		// startIndex = 0;
 		__this->___startIndex_1 = 0;
 	}
 
 IL_0062:
 	{
-		// }
 		return;
 	}
 }
