@@ -26,11 +26,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
         }
 
         [SerializeField]
-        GameObject m_AllMenu;
+        GameObject m_SamplesMenu;
         public GameObject allMenu
         {
-            get => m_AllMenu;
-            set => m_AllMenu = value;
+            get => m_SamplesMenu;
+            set => m_SamplesMenu = value;
         }
         [SerializeField]
         GameObject m_ARtemisMenu;
@@ -98,40 +98,46 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         void Start()
         {
+            if(ActiveMenu.currentMenu == MenuType.ARtemisMenu)
+            {
+                m_ARtemisMenu.SetActive(true);
+                m_FaceTrackingMenu.SetActive(false);
+                m_SamplesMenu.SetActive(false);
+            }
             if(ActiveMenu.currentMenu == MenuType.FaceTracking)
             {
                 m_FaceTrackingMenu.SetActive(true);
-                m_AllMenu.SetActive(false);
+                m_SamplesMenu.SetActive(false);
             }
             else if(ActiveMenu.currentMenu == MenuType.ImageTracking)
             {
                 m_ImageTrackingMenu.SetActive(true);
-                m_AllMenu.SetActive(false);
+                m_SamplesMenu.SetActive(false);
             }
             else if(ActiveMenu.currentMenu == MenuType.PlaneDetection)
             {
                 m_PlaneDetectionMenu.SetActive(true);
-                m_AllMenu.SetActive(false);
+                m_SamplesMenu.SetActive(false);
             }
             else if(ActiveMenu.currentMenu == MenuType.BodyTracking)
             {
                 m_BodyTrackingMenu.SetActive(true);
-                m_AllMenu.SetActive(false);
+                m_SamplesMenu.SetActive(false);
             }
             else if(ActiveMenu.currentMenu == MenuType.Meshing)
             {
                 m_MeshingMenu.SetActive(true);
-                m_AllMenu.SetActive(false);
+                m_SamplesMenu.SetActive(false);
             }
             else if(ActiveMenu.currentMenu == MenuType.Depth)
             {
                 m_DepthMenu.SetActive(true);
-                m_AllMenu.SetActive(false);
+                m_SamplesMenu.SetActive(false);
             }
             else if(ActiveMenu.currentMenu == MenuType.LightEstimation)
             {
                 m_LightEstimationMenu.SetActive(true);
-                m_AllMenu.SetActive(false);
+                m_SamplesMenu.SetActive(false);
             }
             ScrollToStartPosition();
         }
@@ -151,7 +157,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             ActiveMenu.currentMenu = MenuType.ImageTracking;
             m_ImageTrackingMenu.SetActive(true);
-            m_AllMenu.SetActive(false);
+            m_SamplesMenu.SetActive(false);
             ScrollToStartPosition();
         }
 
@@ -229,7 +235,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             ActiveMenu.currentMenu = MenuType.FaceTracking;
             m_FaceTrackingMenu.SetActive(true);
-            m_AllMenu.SetActive(false);
+            m_SamplesMenu.SetActive(false);
             ScrollToStartPosition();
         }
 
@@ -277,7 +283,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             ActiveMenu.currentMenu = MenuType.BodyTracking;
             m_BodyTrackingMenu.SetActive(true);
-            m_AllMenu.SetActive(false);
+            m_SamplesMenu.SetActive(false);
             ScrollToStartPosition();
         }
 
@@ -295,7 +301,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             ActiveMenu.currentMenu = MenuType.LightEstimation;
             m_LightEstimationMenu.SetActive(true);
-            m_AllMenu.SetActive(false);
+            m_SamplesMenu.SetActive(false);
             ScrollToStartPosition();
         }
 
@@ -313,7 +319,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             ActiveMenu.currentMenu = MenuType.PlaneDetection;
             m_PlaneDetectionMenu.SetActive(true);
-            m_AllMenu.SetActive(false);
+            m_SamplesMenu.SetActive(false);
             ScrollToStartPosition();
         }
 
@@ -332,23 +338,20 @@ namespace UnityEngine.XR.ARFoundation.Samples
             LoadScene("TogglePlaneDetection");
         }
 
-        public void ARFoundationsButtonPressed()
+        public void SamplesButtonPressed()
         {
-            ActiveMenu.currentMenu = MenuType.Main;
-            m_AllMenu.SetActive(true);
+            ActiveMenu.currentMenu = MenuType.SamplesMenu;
+            m_SamplesMenu.SetActive(true);
             m_ARtemisMenu.SetActive(false);
             ScrollToStartPosition();
         }
-        public void ARBookButtonPressed()
+        public void ArtemisBookButtonPressed()
         {
             LoadScene("ARBook");
         }
-
-        
-
         public void BackButtonPressed()
         {
-            ActiveMenu.currentMenu = MenuType.Main;
+            ActiveMenu.currentMenu = MenuType.ARtemisMenu;
             m_ImageTrackingMenu.SetActive(false);
             m_FaceTrackingMenu.SetActive(false);
             m_PlaneDetectionMenu.SetActive(false);
@@ -356,7 +359,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
             m_MeshingMenu.SetActive(false);
             m_DepthMenu.SetActive(false);
             m_LightEstimationMenu.SetActive(false);
-            m_AllMenu.SetActive(true);
+            m_SamplesMenu.SetActive(false);
+            m_ARtemisMenu.SetActive(true);
             ScrollToStartPosition();
         }
 
@@ -364,7 +368,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             ActiveMenu.currentMenu = MenuType.Meshing;
             m_MeshingMenu.SetActive(true);
-            m_AllMenu.SetActive(false);
+            m_SamplesMenu.SetActive(false);
             ScrollToStartPosition();
         }
 
@@ -372,7 +376,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             ActiveMenu.currentMenu = MenuType.Depth;
             m_DepthMenu.SetActive(true);
-            m_AllMenu.SetActive(false);
+            m_SamplesMenu.SetActive(false);
             ScrollToStartPosition();
         }
 
