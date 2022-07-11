@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -340,6 +341,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         public void SamplesButtonPressed()
         {
+            Debug.Log("Samples Button Pressed!");
             ActiveMenu.currentMenu = MenuType.SamplesMenu;
             m_SamplesMenu.SetActive(true);
             m_ARtemisMenu.SetActive(false);
@@ -347,6 +349,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         }
         public void ArtemisBookButtonPressed()
         {
+            Debug.Log("Artemis Book Button Pressed!");
             LoadScene("ARBook");
         }
         public void BackButtonPressed()
@@ -439,6 +442,28 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             m_HorizontalScrollBar.value = 0;
             m_VerticalScrollBar.value = 1;
+        }
+
+       
+        public void EscapeButtonPressed()
+        {
+            Debug.Log("Escape button pressed!");
+            if (Application.platform == RuntimePlatform.Android)
+            {
+                if (ActiveMenu.currentMenu == MenuType.ARtemisMenu)
+                {
+                    
+                    // Application.Quit();
+                    BackButtonPressed();
+
+                }
+                else
+                    BackButtonPressed();
+            }
+            else
+            {
+                Debug.LogWarning("We would not expect this event to trigger on iOS. Please check");
+            }
         }
     }
 }

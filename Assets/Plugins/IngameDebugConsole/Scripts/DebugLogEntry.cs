@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Globalization;
+using System.Text;
+using UnityEngine;
 
 // Container for a simple debug entry
 namespace IngameDebugConsole
@@ -39,8 +41,8 @@ namespace IngameDebugConsole
 		// Checks if logString or stackTrace contains the search term
 		public bool MatchesSearchTerm( string searchTerm )
 		{
-			return ( logString != null && logString.IndexOf( searchTerm, System.StringComparison.OrdinalIgnoreCase ) >= 0 ) ||
-				( stackTrace != null && stackTrace.IndexOf( searchTerm, System.StringComparison.OrdinalIgnoreCase ) >= 0 );
+			return ( logString != null && DebugLogConsole.caseInsensitiveComparer.IndexOf( logString, searchTerm, CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace ) >= 0 ) ||
+				( stackTrace != null && DebugLogConsole.caseInsensitiveComparer.IndexOf( stackTrace, searchTerm, CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace ) >= 0 );
 		}
 
 		// Return a string containing complete information about this debug entry
@@ -85,8 +87,84 @@ namespace IngameDebugConsole
 		// Checks if logString or stackTrace contains the search term
 		public bool MatchesSearchTerm( string searchTerm )
 		{
-			return ( logString != null && logString.IndexOf( searchTerm, System.StringComparison.OrdinalIgnoreCase ) >= 0 ) ||
-				( stackTrace != null && stackTrace.IndexOf( searchTerm, System.StringComparison.OrdinalIgnoreCase ) >= 0 );
+			return ( logString != null && DebugLogConsole.caseInsensitiveComparer.IndexOf( logString, searchTerm, CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace ) >= 0 ) ||
+				( stackTrace != null && DebugLogConsole.caseInsensitiveComparer.IndexOf( stackTrace, searchTerm, CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace ) >= 0 );
+		}
+	}
+
+	public struct DebugLogEntryTimestamp
+	{
+		public readonly System.DateTime dateTime;
+#if !IDG_OMIT_ELAPSED_TIME
+		public readonly float elapsedSeconds;
+#endif
+#if !IDG_OMIT_FRAMECOUNT
+		public readonly int frameCount;
+#endif
+
+#if !IDG_OMIT_ELAPSED_TIME && !IDG_OMIT_FRAMECOUNT
+		public DebugLogEntryTimestamp( System.DateTime dateTime, float elapsedSeconds, int frameCount )
+#elif !IDG_OMIT_ELAPSED_TIME
+		public DebugLogEntryTimestamp( System.DateTime dateTime, float elapsedSeconds )
+#elif !IDG_OMIT_FRAMECOUNT
+		public DebugLogEntryTimestamp( System.DateTime dateTime, int frameCount )
+#else
+		public DebugLogEntryTimestamp( System.DateTime dateTime )
+#endif
+		{
+			this.dateTime = dateTime;
+#if !IDG_OMIT_ELAPSED_TIME
+			this.elapsedSeconds = elapsedSeconds;
+#endif
+#if !IDG_OMIT_FRAMECOUNT
+			this.frameCount = frameCount;
+#endif
+		}
+
+		public void AppendTime( StringBuilder sb )
+		{
+			// Add DateTime in format: [HH:mm:ss]
+			sb.Append( "[" );
+
+			int hour = dateTime.Hour;
+			if( hour >= 10 )
+				sb.Append( hour );
+			else
+				sb.Append( "0" ).Append( hour );
+
+			sb.Append( ":" );
+
+			int minute = dateTime.Minute;
+			if( minute >= 10 )
+				sb.Append( minute );
+			else
+				sb.Append( "0" ).Append( minute );
+
+			sb.Append( ":" );
+
+			int second = dateTime.Second;
+			if( second >= 10 )
+				sb.Append( second );
+			else
+				sb.Append( "0" ).Append( second );
+
+			sb.Append( "]" );
+		}
+
+		public void AppendFullTimestamp( StringBuilder sb )
+		{
+			AppendTime( sb );
+
+#if !IDG_OMIT_ELAPSED_TIME && !IDG_OMIT_FRAMECOUNT
+			// Append elapsed seconds and frame count in format: [1.0s at #Frame]
+			sb.Append( "[" ).Append( elapsedSeconds.ToString( "F1" ) ).Append( "s at " ).Append( "#" ).Append( frameCount ).Append( "]" );
+#elif !IDG_OMIT_ELAPSED_TIME
+			// Append elapsed seconds in format: [1.0s]
+			sb.Append( "[" ).Append( elapsedSeconds.ToString( "F1" ) ).Append( "s]" );
+#elif !IDG_OMIT_FRAMECOUNT
+			// Append frame count in format: [#Frame]
+			sb.Append( "[#" ).Append( frameCount ).Append( "]" );
+#endif
 		}
 	}
 }

@@ -119,7 +119,7 @@ namespace IngameDebugConsole
 		private static readonly string[] inputDelimiters = new string[] { "\"\"", "''", "{}", "()", "[]" };
 
 		// CompareInfo used for case-insensitive command name comparison
-		private static readonly CompareInfo caseInsensitiveComparer = new CultureInfo( "en-US" ).CompareInfo;
+		internal static readonly CompareInfo caseInsensitiveComparer = new CultureInfo( "en-US" ).CompareInfo;
 
 		static DebugLogConsole()
 		{
@@ -199,6 +199,7 @@ namespace IngameDebugConsole
 				}
 				catch( NotSupportedException ) { }
 				catch( System.IO.FileNotFoundException ) { }
+				catch( ReflectionTypeLoadException ) { }
 				catch( Exception e )
 				{
 					Debug.LogError( "Couldn't search assembly for [ConsoleMethod] attributes: " + assemblyName + "\n" + e.ToString() );
@@ -229,10 +230,7 @@ namespace IngameDebugConsole
 
 			// After typing help, the log that lists all the commands should automatically be expanded for better UX
 			if( DebugLogManager.Instance )
-			{
-				DebugLogManager.Instance.ExpandLatestPendingLog();
-				DebugLogManager.Instance.StripStackTraceFromLatestPendingLog();
-			}
+				DebugLogManager.Instance.AdjustLatestPendingLog( true, true );
 		}
 
 		// Logs the list of available commands that are either equal to commandName or contain commandName as substring
@@ -263,10 +261,7 @@ namespace IngameDebugConsole
 				Debug.Log( stringBuilder.ToString() );
 
 				if( DebugLogManager.Instance )
-				{
-					DebugLogManager.Instance.ExpandLatestPendingLog();
-					DebugLogManager.Instance.StripStackTraceFromLatestPendingLog();
-				}
+					DebugLogManager.Instance.AdjustLatestPendingLog( true, true );
 			}
 		}
 
@@ -311,10 +306,7 @@ namespace IngameDebugConsole
 
 			// After typing sysinfo, the log that lists system information should automatically be expanded for better UX
 			if( DebugLogManager.Instance )
-			{
-				DebugLogManager.Instance.ExpandLatestPendingLog();
-				DebugLogManager.Instance.StripStackTraceFromLatestPendingLog();
-			}
+				DebugLogManager.Instance.AdjustLatestPendingLog( true, true );
 		}
 
 		private static StringBuilder AppendSysInfoIfPresent( this StringBuilder sb, string info, string postfix = null )
@@ -589,21 +581,30 @@ namespace IngameDebugConsole
 		}
 
 		// Returns the first command that starts with the entered argument
-		public static string GetAutoCompleteCommand( string commandStart )
+		public static string GetAutoCompleteCommand( string commandStart, string previousSuggestion )
 		{
-			int commandIndex = FindCommandIndex( commandStart );
+			int commandIndex = FindCommandIndex( !string.IsNullOrEmpty( previousSuggestion ) ? previousSuggestion : commandStart );
 			if( commandIndex < 0 )
-				commandIndex = ~commandIndex;
-
-			string result = null;
-			for( int i = commandIndex; i >= 0 && caseInsensitiveComparer.IsPrefix( methods[i].command, commandStart, CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace ); i-- )
-				result = methods[i].command;
-
-			if( result == null )
 			{
-				for( int i = commandIndex + 1; i < methods.Count && caseInsensitiveComparer.IsPrefix( methods[i].command, commandStart, CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace ); i++ )
-					result = methods[i].command;
+				commandIndex = ~commandIndex;
+				return ( commandIndex < methods.Count && caseInsensitiveComparer.IsPrefix( methods[commandIndex].command, commandStart, CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace ) ) ? methods[commandIndex].command : null;
 			}
+
+			// Find the next command that starts with commandStart and is different from previousSuggestion
+			for( int i = commandIndex + 1; i < methods.Count; i++ )
+			{
+				if( caseInsensitiveComparer.Compare( methods[i].command, previousSuggestion, CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace ) == 0 )
+					continue;
+				else if( caseInsensitiveComparer.IsPrefix( methods[i].command, commandStart, CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace ) )
+					return methods[i].command;
+				else
+					break;
+			}
+
+			// Couldn't find a command that follows previousSuggestion and satisfies commandStart, loop back to the beginning of the autocomplete suggestions
+			string result = null;
+			for( int i = commandIndex - 1; i >= 0 && caseInsensitiveComparer.IsPrefix( methods[i].command, commandStart, CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace ); i-- )
+				result = methods[i].command;
 
 			return result;
 		}
@@ -683,10 +684,7 @@ namespace IngameDebugConsole
 
 					// The log that lists method signature(s) for this command should automatically be expanded for better UX
 					if( DebugLogManager.Instance )
-					{
-						DebugLogManager.Instance.ExpandLatestPendingLog();
-						DebugLogManager.Instance.StripStackTraceFromLatestPendingLog();
-					}
+						DebugLogManager.Instance.AdjustLatestPendingLog( true, true );
 				}
 
 				return;

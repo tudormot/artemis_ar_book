@@ -166,6 +166,18 @@ MonoBehaviour:
   - imageGuid: aae75228-1973-4dc0-b7a2-53d1566ee402
     imagePrefab: {fileID: 3279860958548870494, guid: 2584331523bd14e8898965d93034efdb,
       type: 3}
+  - imageGuid: 0a471d22-15f0-4064-a455-5b6c0f41b02f
+    imagePrefab: {fileID: 0}
+  - imageGuid: 38951274-7c04-4610-8965-84751fd80c94
+    imagePrefab: {fileID: 0}
+  - imageGuid: 001030b2-78a9-4f57-abda-527f6833d299
+    imagePrefab: {fileID: 0}
+  - imageGuid: bb0940ec-8818-46db-b4b0-2142dedbf477
+    imagePrefab: {fileID: 0}
+  - imageGuid: 1ce520e8-b512-4383-ba87-e63dfd3ccd9e
+    imagePrefab: {fileID: 0}
+  - imageGuid: 0f38a63c-901d-4eaf-9307-f219a7119b40
+    imagePrefab: {fileID: 0}
   m_ImageLibrary: {fileID: 11400000, guid: c86e375d7e7430442a1104e88fa21f21, type: 2}
 --- !u!114 &143437354
 MonoBehaviour:
@@ -675,10 +687,10 @@ MonoBehaviour:
   m_TrackingStateAction:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Tracking State
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: 86b9104b-325a-43c6-b422-fed1ba2cc4a3
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -707,10 +719,10 @@ MonoBehaviour:
   m_SelectActionValue:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Select Action Value
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: 910e5163-8a62-4337-9a5a-de1bb12a410d
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -731,10 +743,10 @@ MonoBehaviour:
   m_ActivateActionValue:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Activate Action Value
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: 1d63883c-940e-407f-a8d8-066c087be4bd
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -771,10 +783,10 @@ MonoBehaviour:
   m_UIPressActionValue:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: UI Press Action Value
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: 813dbde0-ea86-42dc-87ff-9ce206b4a0d7
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -827,6 +839,7 @@ GameObject:
   m_Component:
   - component: {fileID: 287391696}
   - component: {fileID: 287391695}
+  - component: {fileID: 287391697}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -911,6 +924,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &287391697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287391694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &732175967
 GameObject:
   m_ObjectHideFlags: 0
@@ -1537,10 +1570,10 @@ MonoBehaviour:
   m_TrackingStateAction:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Tracking State
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: 3017c955-fbc3-4051-9b92-4d59b251d59f
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -1569,10 +1602,10 @@ MonoBehaviour:
   m_SelectActionValue:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Select Action Value
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: 601ea2cf-6faf-4e67-b4e5-b5525cbc809f
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -1593,10 +1626,10 @@ MonoBehaviour:
   m_ActivateActionValue:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Activate Action Value
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: 80874140-0558-4344-880c-380534d2764e
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -1649,10 +1682,10 @@ MonoBehaviour:
   m_UIPressActionValue:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: UI Press Action Value
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: 878e300a-3bd1-483c-a8b6-5d15b5b65c1e
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -1709,6 +1742,7 @@ GameObject:
   - component: {fileID: 1718838892}
   - component: {fileID: 1718838891}
   - component: {fileID: 1718838890}
+  - component: {fileID: 1718838895}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1967,6 +2001,39 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &1718838895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718838888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &1809621586
 GameObject:
   m_ObjectHideFlags: 0
@@ -2075,6 +2142,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1809621590}
     m_Modifications:
+    - target: {fileID: 695456426910825035, guid: 4ee22c1f54b174122b6a766fe09e0de8,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 695456426910825035, guid: 4ee22c1f54b174122b6a766fe09e0de8,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 695456426910825035, guid: 4ee22c1f54b174122b6a766fe09e0de8,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2304810881573073946, guid: 4ee22c1f54b174122b6a766fe09e0de8,
         type: 3}
       propertyPath: m_Pivot.x
