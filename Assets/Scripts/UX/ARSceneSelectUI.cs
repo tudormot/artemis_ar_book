@@ -445,25 +445,33 @@ namespace UnityEngine.XR.ARFoundation.Samples
         }
 
        
+        private EventDebouncingHelper debouncer = new(
+            () =>
+            {
+                if (Application.platform == RuntimePlatform.Android)
+                {
+                    if (ActiveMenu.currentMenu == MenuType.ARtemisMenu)
+                    {
+                    
+                        // Application.Quit();
+                        BackButtonPressed();
+
+                    }
+                    else
+                        BackButtonPressed();
+                }
+                else
+                {
+                    Debug.LogWarning("We would not expect this event to trigger on iOS. Please check");
+                }
+            },
+            this
+        );
         public void EscapeButtonPressed()
         {
             Debug.Log("Escape button pressed!");
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                if (ActiveMenu.currentMenu == MenuType.ARtemisMenu)
-                {
-                    
-                    // Application.Quit();
-                    BackButtonPressed();
-
-                }
-                else
-                    BackButtonPressed();
-            }
-            else
-            {
-                Debug.LogWarning("We would not expect this event to trigger on iOS. Please check");
-            }
+            
+            
         }
     }
 }
