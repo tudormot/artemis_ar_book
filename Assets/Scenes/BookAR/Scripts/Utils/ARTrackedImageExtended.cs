@@ -34,10 +34,6 @@ namespace UnityEngine
             }
         }
 
-        private void Update()
-        {
-            // throw new NotImplementedException();
-        }
 
         void OnGUI()
         {

@@ -7,13 +7,13 @@ namespace UnityEngine
 {
     public class EventDebouncingHelper<T> where T:MonoBehaviour
     {
-        public EventDebouncingHelper(Action<T> callbackToDebounce, MonoBehaviour context)
+        public EventDebouncingHelper(Action<T> callbackToDebounce, T context)
         {
             this.callbackToDebounce = callbackToDebounce;
             this.context = context;
         }
 
-        private MonoBehaviour context;
+        private T context;
         private Action<T> callbackToDebounce;
         private const float DEBOUNCE_PERIOD = 0.5f; //in seconds
         private bool isDuringDebouncePeriod = false;
@@ -30,7 +30,7 @@ namespace UnityEngine
         {
             if (!isDuringDebouncePeriod)
             {
-                callbackToDebounce.Invoke();
+                callbackToDebounce.Invoke(this.context);
                 context.StartCoroutine(debounceCooldown(DEBOUNCE_PERIOD));
             }
         }

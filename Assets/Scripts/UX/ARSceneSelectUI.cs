@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -437,41 +438,41 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             LoadScene("BackgroundRenderOrder");
         }
-
         void ScrollToStartPosition()
         {
             m_HorizontalScrollBar.value = 0;
             m_VerticalScrollBar.value = 1;
         }
 
-       
-        private EventDebouncingHelper debouncer = new(
-            () =>
-            {
-                if (Application.platform == RuntimePlatform.Android)
-                {
-                    if (ActiveMenu.currentMenu == MenuType.ARtemisMenu)
-                    {
-                    
-                        // Application.Quit();
-                        BackButtonPressed();
 
-                    }
-                    else
-                        BackButtonPressed();
-                }
-                else
-                {
-                    Debug.LogWarning("We would not expect this event to trigger on iOS. Please check");
-                }
-            },
-            this
-        );
+        private EventDebouncingHelper<ARSceneSelectUI> debouncer = null;
         public void EscapeButtonPressed()
         {
-            Debug.Log("Escape button pressed!");
-            
-            
+            if (this.debouncer == null)
+            {
+                debouncer = new EventDebouncingHelper<ARSceneSelectUI>(
+                    (context) =>
+                    {
+                        if (Application.platform == RuntimePlatform.Android)
+                        {
+                            if (ActiveMenu.currentMenu == MenuType.ARtemisMenu)
+                            {
+                                Application.Quit();
+                            }
+                            else
+                                context.BackButtonPressed();
+                        }
+                        else
+                        {
+                            Debug.LogWarning("We would not expect this event to trigger on iOS. Please check");
+                        }
+                    },
+                    this
+                );
+            }
+
+            debouncer.executeCallback();
+
         }
     }
 }
