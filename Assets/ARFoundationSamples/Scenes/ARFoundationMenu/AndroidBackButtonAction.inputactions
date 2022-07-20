@@ -1,0 +1,34 @@
+{
+    "name": "AndroidBackButtonAction",
+    "maps": [
+        {
+            "name": "TheOnlyActionMap",
+            "id": "070c0739-ea68-4721-b94c-85b85fad3168",
+            "actions": [
+                {
+                    "name": "GoBackAction",
+                    "type": "Button",
+                    "id": "77826f40-bccb-4b40-98e3-ab865e2a096c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "39eef0fe-7e08-45fc-83d3-0f82ff350715",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GoBackAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
