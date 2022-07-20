@@ -8,16 +8,19 @@ using Button = UnityEngine.UI.Button;
 
 namespace Scenes.BookAR.Scripts.UI
 {
-    public class CommonSettingsController : MonoBehaviour
+    [RequireComponent(typeof(Animator))]
+    public class CommonSettingsUIController : MonoBehaviour
     {
-        [SerializeField] private GameObject expandedUI;
-        [SerializeField] private GameObject contractedUI;
+        // [SerializeField] private GameObject expandedUI;
+        // [SerializeField] private GameObject contractedUI;
         
-        [SerializeField] private EventTrigger expandCanvasTrigger;
-        [SerializeField] private EventTrigger contractCanvasTrigger;
+        [SerializeField] private Button expandCanvasButton;
+        [SerializeField] private Button contractCanvasButton;
 
-        [SerializeField] private Animation expandAnimation;
-        [SerializeField] private Animation contractAnimation;
+        // [SerializeField] private Animation expandAnimation;
+        // [SerializeField] private Animation contractAnimation;
+        private Animator globalSettingsUIAnimator;
+
         
         [SerializeField] private Toggle manualAssetPositionUpdateToggle;
         [SerializeField] public Button manualAssetPositionUpdateButton;
@@ -25,6 +28,8 @@ namespace Scenes.BookAR.Scripts.UI
         
 
         private SettingsUIState _state = SettingsUIState.SETTINGS_PANEL_CONTRACTED;
+        private static readonly int isPanelExpandedHash = Animator.StringToHash("isPanelExpanded");
+
         private SettingsUIState state
         {
             get => _state;
@@ -37,18 +42,22 @@ namespace Scenes.BookAR.Scripts.UI
 
         private void OnEnable()
         {
-            EventTrigger.Entry entry = new EventTrigger.Entry
-            {
-                eventID = EventTriggerType.PointerDown
-            };
-            entry.callback.AddListener( ( data ) => state = SettingsUIState.SETTINGS_PANEL_EXPANDED);
-            expandCanvasTrigger.triggers.Add( entry );
-            entry = new EventTrigger.Entry
-            {
-                eventID = EventTriggerType.PointerDown
-            };
-            entry.callback.AddListener( ( data ) => state = SettingsUIState.SETTINGS_PANEL_CONTRACTED);
-            contractCanvasTrigger.triggers.Add( entry );
+            globalSettingsUIAnimator = GetComponent<Animator>();
+            expandCanvasButton.onClick.AddListener(
+                () =>
+                {
+                    Debug.Log("We are clicking the settings image!");
+                    state = SettingsUIState.SETTINGS_PANEL_EXPANDED;
+                }
+            );
+            contractCanvasButton.onClick.AddListener(
+                () =>
+                {
+                    Debug.Log("We are clicking the transparent canvas!");
+                    state = SettingsUIState.SETTINGS_PANEL_CONTRACTED;
+                }
+            );
+
             manualAssetPositionUpdateToggle.onValueChanged.AddListener(
                 (bool isToggleChecked) =>
                 {
@@ -58,29 +67,28 @@ namespace Scenes.BookAR.Scripts.UI
                     };
                 }
             );
+            manualAssetPositionUpdateButton.onClick.AddListener(
+                ()=>Debug.Log("Sanity check. We are clicking this button.")
+            );
         }
 
         private void OnDisable()
         {
-            foreach (var trigger in expandCanvasTrigger.triggers)
-            {
-                trigger.callback.RemoveAllListeners();
-            }
-            foreach (var trigger in contractCanvasTrigger.triggers)
-            {
-                trigger.callback.RemoveAllListeners();
-            }
+            contractCanvasButton.onClick.RemoveAllListeners();
+            expandCanvasButton.onClick.RemoveAllListeners();
             manualAssetPositionUpdateToggle.onValueChanged.RemoveAllListeners();
         }
 
         private void OnStateChanged(SettingsUIState oldState, SettingsUIState newState)
         {
+            Debug.Log("OnStateChanged called!");
             switch (newState)
             {
                 case SettingsUIState.SETTINGS_PANEL_EXPANDED:
-                    
+                    globalSettingsUIAnimator.SetBool(isPanelExpandedHash,true);
                     break;
                 case SettingsUIState.SETTINGS_PANEL_CONTRACTED:
+                    globalSettingsUIAnimator.SetBool(isPanelExpandedHash,false);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
