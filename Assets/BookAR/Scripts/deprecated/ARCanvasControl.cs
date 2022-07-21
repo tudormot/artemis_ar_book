@@ -7,7 +7,7 @@ namespace Scenes.BookAR.Scripts
     {
         private void Awake()
         {
-            Debug.LogError("In Script ARCanvasControl. This script is deprecated!");
+            Debug.Log("In Script ARCanvasControl. This script is deprecated! Why is it still used?");
             var worldARCamera = FindObjectOfType<Camera>();
             if (worldARCamera == null)
             {

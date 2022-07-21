@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BookAR.Scripts.AR;
 using Scenes.BookAR.Scripts;
 #if UNITY_EDITOR
 using UnityEditor;

@@ -104,7 +104,7 @@ namespace BookAR.Scripts.AR
                 {
                     // Give the initial image a reasonable default scale
                     var minLocalScalar = Mathf.Min(trackedImage.size.x, trackedImage.size.y) / 2;
-                    Debug.Log("In PrefabImgePairManager. Setting trackable to scale: "+minLocalScalar.ToString());
+                    Debug.Log("In PrefabImagePairManager. Setting trackable to scale: "+minLocalScalar.ToString());
                     trackedImage.transform.localScale = new Vector3(minLocalScalar, minLocalScalar, minLocalScalar);
                 }
                 else
@@ -125,7 +125,16 @@ namespace BookAR.Scripts.AR
             {
                 if (ExtendedTrackableImageMode)
                 {
+                    if (prefab == null)
+                    {
+                        Debug.Log("Prefab reported as null. PROBLEM");
+                    }
+
                     var ExtendedTrackable = trackedImage.transform.GetComponent<ARTrackedImageExtended>();
+                    if (ExtendedTrackable == null)
+                    {
+                        Debug.Log("ExtendedTrackable reported as null. PROBLEM");
+                    }
                     ExtendedTrackable.Asset = prefab;
                     ExtendedTrackable.enabled = true;
 

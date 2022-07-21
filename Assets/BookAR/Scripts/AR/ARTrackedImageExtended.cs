@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.Assertions;
+using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
-namespace UnityEngine
+namespace BookAR.Scripts.AR
 {
     public class ARTrackedImageExtended : UnityEngine.MonoBehaviour
     {
@@ -67,7 +67,7 @@ namespace UnityEngine
         }
 
         private IEnumerator ComputeRunningMeanTransform()
-        /*see wikipedia article on moving averrages for some background.
+        /*see wikipedia article on moving averages.
          Chose something which I think is pretty much equivalent to EMA for quaternion 
          average, as I don't want to get involved with quaternion arithmetics*/
         {
@@ -94,7 +94,6 @@ namespace UnityEngine
                 {
                     QueueDim++;
                     RunningMeanPosition = Sum / QueueDim;
-
                 }
                 else
                 {
@@ -112,11 +111,6 @@ namespace UnityEngine
                     PlacedAsset.transform.localRotation = RunningMeanRotation;
                 }
             }
-
-            
-
-
-
         }
 
         private void printObjectPositionInfo(GameObject obj)
@@ -133,7 +127,6 @@ namespace UnityEngine
                 yield return new WaitForSeconds(waitTime);
             }
         }
-
         private void SafetyCheck()
         {
             BaseTrackable = transform.GetComponent<ARTrackedImage>();
@@ -147,8 +140,6 @@ namespace UnityEngine
                 throw new Exception(
                     "Asset to spawn is null. Make sure the calling script sets the script, and then enables this object.");
             }
-
-
         }
     }
 }

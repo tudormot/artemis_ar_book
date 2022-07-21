@@ -114,7 +114,7 @@ QualitySettings:
     asyncUploadBufferSize: 4
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    customRenderPipeline: {fileID: 11400000, guid: 33e804f4ef36847a483bdd489b0e5576,
+    customRenderPipeline: {fileID: 11400000, guid: 07529920877fa4b158b06df085305fea,
       type: 2}
     excludedTargetPlatforms: []
   - serializedVersion: 2
@@ -234,8 +234,8 @@ QualitySettings:
     Nintendo Switch: 5
     PS4: 5
     PSP2: 2
-    Server: 0
-    Standalone: 5
+    Server: 2
+    Standalone: 2
     Tizen: 2
     WebGL: 3
     WiiU: 5

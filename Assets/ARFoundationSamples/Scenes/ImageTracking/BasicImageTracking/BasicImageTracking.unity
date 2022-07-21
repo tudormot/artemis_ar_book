@@ -942,10 +942,10 @@ MonoBehaviour:
   m_TrackingStateAction:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Tracking State
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: 402ef50f-0104-4dea-903f-ea122e2f268b
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -974,10 +974,10 @@ MonoBehaviour:
   m_SelectActionValue:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Select Action Value
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: f28349fe-a0ab-4cdd-ab9e-09f2bc1961fd
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -998,10 +998,10 @@ MonoBehaviour:
   m_ActivateActionValue:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Activate Action Value
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: 15a830f6-08cd-442c-9caf-06ff12ce0651
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -1054,10 +1054,10 @@ MonoBehaviour:
   m_UIPressActionValue:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: UI Press Action Value
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: fda34b0b-80ca-429a-a09c-8a42da5bc4a1
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -1114,6 +1114,7 @@ GameObject:
   - component: {fileID: 923721517}
   - component: {fileID: 923721516}
   - component: {fileID: 923721515}
+  - component: {fileID: 923721520}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1372,6 +1373,39 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &923721520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 923721513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &1338354114
 GameObject:
   m_ObjectHideFlags: 0
@@ -2020,10 +2054,10 @@ MonoBehaviour:
   m_TrackingStateAction:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Tracking State
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: 1268b0a5-cd09-46f4-ac98-9a5ddaac53a2
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -2052,10 +2086,10 @@ MonoBehaviour:
   m_SelectActionValue:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Select Action Value
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: a44d530d-2978-4f5c-a7df-29de849755e3
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -2076,10 +2110,10 @@ MonoBehaviour:
   m_ActivateActionValue:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Activate Action Value
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: 83a183af-7d3c-4a44-848f-e077536ae325
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -2116,10 +2150,10 @@ MonoBehaviour:
   m_UIPressActionValue:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: UI Press Action Value
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: 7d269349-9590-4599-933f-daa7c995f67f
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -2172,6 +2206,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2017973562}
   - component: {fileID: 2017973561}
+  - component: {fileID: 2017973563}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -2256,3 +2291,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &2017973563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017973560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
