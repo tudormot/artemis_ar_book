@@ -63,7 +63,8 @@ namespace Scenes.BookAR.Scripts.UI
                 {
                     GlobalSettingsSingleton.instance.state = GlobalSettingsSingleton.instance.state with
                     {
-                        automatedAssetPlacementUpdating = isToggleChecked
+                        placementUpdateMode = isToggleChecked ? AssetPlacementUpdateMode.UPDATE_ON_BUTTON_CLICK
+                                                              : AssetPlacementUpdateMode.CONTINUOUS_UPDATE
                     };
                 }
             );

@@ -22,6 +22,7 @@ namespace BookAR.Scripts.AR
 
         private void OnEnable()
         {
+            throw new Exception("ARTrackedImageExtended is deprecated!");
             SafetyCheck();
             if (classicBehaviour)
             {

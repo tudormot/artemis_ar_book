@@ -103,7 +103,7 @@ MonoBehaviour:
     m_SerializedTextureGuid:
       m_GuidLow: 9548336274737174455
       m_GuidHigh: 17438366339772458139
-    m_Size: {x: 0.159, y: 0.1991868}
+    m_Size: {x: 0.637, y: 0.79800004}
     m_SpecifySize: 1
     m_Name: BrainImage
-    m_Texture: {fileID: 0}
+    m_Texture: {fileID: 2800000, guid: abaf97b7814084829b244429cb8501f2, type: 3}

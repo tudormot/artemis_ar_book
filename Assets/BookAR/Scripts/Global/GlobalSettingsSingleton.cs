@@ -10,11 +10,10 @@ namespace Scenes.BookAR.Scripts.Global
         public static GlobalSettingsSingleton instance { get { return lazy.Value; } }
         
         
-        public event EventHandler GlobalSettingsChanged; 
+        public event EventHandler<GlobalSettingsEventData> GlobalSettingsChanged; 
         private State _state = new(){
-            automatedAssetPlacementUpdating = true,
-            freeAssetPlacement = false,
-            assetInSandboxMode = false,
+            placementUpdateMode = AssetPlacementUpdateMode.CONTINUOUS_UPDATE,
+            smoothPositionReporting = false,
             depthFog = false,
             cameraGrain = false,
         };
@@ -23,22 +22,43 @@ namespace Scenes.BookAR.Scripts.Global
             get => _state;
             set
             {
+                GlobalSettingsChanged?.Invoke(
+                    this,
+                    new GlobalSettingsEventData{
+                        newState = value,
+                        oldState = _state
+                    }
+                );
                 _state = value;
-                GlobalSettingsChanged?.Invoke(this,EventArgs.Empty);
+                
             }
         }
         
         public record State
         {
-            public bool automatedAssetPlacementUpdating { get; set; }
-            public bool freeAssetPlacement { get; set; }
-            public bool assetInSandboxMode { get; set; }
+            public AssetPlacementUpdateMode placementUpdateMode { get; set; }
+
             public bool depthFog { get; set; }
+            public bool smoothPositionReporting { get; set; }
             public bool cameraGrain { get; set; }
            
         }  
         private GlobalSettingsSingleton()
         { }
     }
-    
+
+    public enum AssetPlacementUpdateMode
+    {
+        UPDATE_ON_BUTTON_CLICK,
+        CONTINUOUS_UPDATE,
+        SANDBOX_MODE
+    }
+
+    public class GlobalSettingsEventData : EventArgs
+    {
+        public GlobalSettingsSingleton.State oldState;
+        public GlobalSettingsSingleton.State newState;
+
+    }
+
 }

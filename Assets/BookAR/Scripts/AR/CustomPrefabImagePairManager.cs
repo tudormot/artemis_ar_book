@@ -16,7 +16,6 @@ namespace BookAR.Scripts.AR
     /// This component listens for images detected by the <c>XRImageTrackingSubsystem</c>
     /// and overlays some prefabs on top of the detected image.
     /// </summary>
-    [RequireComponent(typeof(ARTrackedImageManager))]
     public class CustomPrefabImagePairManager : MonoBehaviour, ISerializationCallbackReceiver
     {
         /// <summary>
@@ -45,7 +44,6 @@ namespace BookAR.Scripts.AR
 
         public Dictionary<Guid, GameObject> m_PrefabsDictionary = new Dictionary<Guid, GameObject>();
         Dictionary<Guid, GameObject> m_Instantiated = new Dictionary<Guid, GameObject>();
-        ARTrackedImageManager m_TrackedImageManager;
 
         [SerializeField]
         [Tooltip("Reference Image Library")]
@@ -77,92 +75,13 @@ namespace BookAR.Scripts.AR
                 m_PrefabsDictionary.Add(Guid.Parse(entry.imageGuid), entry.imagePrefab);
             }
         }
+        
 
-        void Awake()
-        {
-            m_TrackedImageManager = GetComponent<ARTrackedImageManager>();
-        }
-
-        void OnEnable()
-        {
-            m_TrackedImageManager.trackedImagesChanged += OnTrackedImagesChanged;
-        }
-
-        void OnDisable()
-        {
-            m_TrackedImageManager.trackedImagesChanged -= OnTrackedImagesChanged;
-        }
-
-        void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
-        {
-            foreach (var trackedImage in eventArgs.added)
-            {
-                m_PrefabsDictionary.TryGetValue(trackedImage.referenceImage.guid, out var prefab);
-                var imageSizeContainer = prefab.transform.GetComponent<ImageDimensionAware>();
-
-                if ( imageSizeContainer == null)
-                {
-                    // Give the initial image a reasonable default scale
-                    var minLocalScalar = Mathf.Min(trackedImage.size.x, trackedImage.size.y) / 2;
-                    Debug.Log("In PrefabImagePairManager. Setting trackable to scale: "+minLocalScalar.ToString());
-                    trackedImage.transform.localScale = new Vector3(minLocalScalar, minLocalScalar, minLocalScalar);
-                }
-                else
-                {
-                    //the asset itself will take care of the scaling. Just let it know about the size
-                    Debug.Log("Size of image as reported by x,y : " + trackedImage.size.x + " " + trackedImage.size.y);
-                    imageSizeContainer.dimXaxis = trackedImage.size.x;
-                    imageSizeContainer.dimYaxis = trackedImage.size.y;
-                }
-                AssignPrefab(trackedImage);
-            }
-            
-        }
-
-        protected void AssignPrefab(ARTrackedImage trackedImage)
-        {
-            if (m_PrefabsDictionary.TryGetValue(trackedImage.referenceImage.guid, out var prefab))
-            {
-                if (ExtendedTrackableImageMode)
-                {
-                    if (prefab == null)
-                    {
-                        Debug.Log("Prefab reported as null. PROBLEM");
-                    }
-
-                    var ExtendedTrackable = trackedImage.transform.GetComponent<ARTrackedImageExtended>();
-                    if (ExtendedTrackable == null)
-                    {
-                        Debug.Log("ExtendedTrackable reported as null. PROBLEM");
-                    }
-                    ExtendedTrackable.Asset = prefab;
-                    ExtendedTrackable.enabled = true;
-
-                }
-                else
-                {
-                    m_Instantiated[trackedImage.referenceImage.guid] = Instantiate(prefab, trackedImage.transform);
-                }
-
-            }
-            else
-            {
-                throw new Exception("Is this even possible? ");
-            }
-        }
 
         public GameObject GetPrefabForReferenceImage(XRReferenceImage referenceImage)
             => m_PrefabsDictionary.TryGetValue(referenceImage.guid, out var prefab) ? prefab : null;
 
-        public void SetPrefabForReferenceImage(XRReferenceImage referenceImage, GameObject alternativePrefab)
-        {
-            m_PrefabsDictionary[referenceImage.guid] = alternativePrefab;
-            if (m_Instantiated.TryGetValue(referenceImage.guid, out var instantiatedPrefab))
-            {
-                m_Instantiated[referenceImage.guid] = Instantiate(alternativePrefab, instantiatedPrefab.transform.parent);
-                Destroy(instantiatedPrefab);
-            }
-        }
+
 
 #if UNITY_EDITOR
         /// <summary>
