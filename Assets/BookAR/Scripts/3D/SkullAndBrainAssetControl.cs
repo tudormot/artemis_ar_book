@@ -31,7 +31,7 @@ public class SkullAndBrainAssetControl : MonoBehaviour
         //touchToInteractObj is a world canvas, that apparently needs to have its camera set. Do that here:
         touchToInteractObj.transform.Find("Canvas").GetComponent<Canvas>().worldCamera = Camera.main;
 
-        mainObj.SetActive(false);
+        mainObj.SetActive(true); //todo this should be set to false, but just for debugging purposes
         touchToInteractObj.SetActive(true);
         
         //Add listeners internal to this asset.. I don't think that they need to be removed OnDestroy, as the observable get destroyed at the same time 

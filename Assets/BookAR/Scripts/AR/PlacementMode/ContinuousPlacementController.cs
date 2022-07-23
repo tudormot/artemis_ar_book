@@ -16,12 +16,9 @@ namespace BookAR.Scripts.AR.PlacementMode
             this.context = context;
         }
 
-        public void startPrefabPlacementControl(GameObject prefab, bool prefabInstantiatedAlready = false)
+        public void startPrefabPlacementControl(GameObject prefab, bool prefabInstantiatedAlready )
         {
-            if (!prefabInstantiatedAlready)
-            {
-                controlledAsset = Object.Instantiate(prefab, GameObject.Find("/_Dynamic").transform);
-            }
+            controlledAsset = prefabInstantiatedAlready ? prefab : Object.Instantiate(prefab, GameObject.Find("/_Dynamic").transform);
             controlCoroutine = context.StartCoroutine(updatePositionContinuously());
         }
         
@@ -30,10 +27,6 @@ namespace BookAR.Scripts.AR.PlacementMode
             context.StopCoroutine(controlCoroutine);
             var assetOnWhichToGiveUp = controlledAsset;
             controlledAsset = null;
-            Debug.Log(assetOnWhichToGiveUp == null
-                ? "reread obj reference vs instance and blabla csharp, no good"
-                : "Remove this code pls");
-
             return assetOnWhichToGiveUp;
         }
 
@@ -45,11 +38,14 @@ namespace BookAR.Scripts.AR.PlacementMode
 
         private IEnumerator updatePositionContinuously()
         {
-            var transform = posReporter.getTransform();
-            controlledAsset.transform.localPosition = transform.localPosition;
-            controlledAsset.transform.localRotation = transform.localRotation;
-            controlledAsset.transform.localScale = transform.localScale;
-            yield return new WaitForEndOfFrame();
+            while (true)
+            {
+                var transform = posReporter.getTransform();
+                controlledAsset.transform.localPosition = transform.localPosition;
+                controlledAsset.transform.localRotation = transform.localRotation;
+                controlledAsset.transform.localScale = transform.localScale;
+                yield return new WaitForEndOfFrame();
+            }
         }
 
     }

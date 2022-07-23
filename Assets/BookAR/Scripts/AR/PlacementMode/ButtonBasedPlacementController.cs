@@ -8,14 +8,11 @@ namespace BookAR.Scripts.AR.PlacementMode
     public class ButtonBasedPlacementController: IPlacementController
     {
         private IPositionReporter posReporter;
-        private MonoBehaviour context;
         private GameObject controlledAsset;
-        private Coroutine controlCoroutine;
         private Button updatePositionButton;
-        public ButtonBasedPlacementController(IPositionReporter posReporter, MonoBehaviour context)
+        public ButtonBasedPlacementController(IPositionReporter posReporter)
         {
             this.posReporter = posReporter;
-            this.context = context;
             var buttonObj = GameObject.Find("ManualAssetUpdateButton");
             if (buttonObj == null)
             {
@@ -27,17 +24,12 @@ namespace BookAR.Scripts.AR.PlacementMode
 
         public void startPrefabPlacementControl(GameObject prefab, bool prefabInstantiatedAlready = false)
         {
-            if (!prefabInstantiatedAlready)
-            {
-                controlledAsset = Object.Instantiate(prefab, GameObject.Find("/_Dynamic").transform);
-            }
-
+            controlledAsset = prefabInstantiatedAlready ? prefab : Object.Instantiate(prefab, GameObject.Find("/_Dynamic").transform);
             updatePositionButton.onClick.AddListener(onUpdateButtonClick);
         }
         
         public GameObject giveUpPrefabPlacementControl()
         {
-            context.StopCoroutine(controlCoroutine);
             var assetOnWhichToGiveUp = controlledAsset;
             controlledAsset = null;
             updatePositionButton.onClick.RemoveListener(onUpdateButtonClick);

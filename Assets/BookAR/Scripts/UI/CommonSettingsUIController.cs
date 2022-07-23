@@ -42,6 +42,11 @@ namespace Scenes.BookAR.Scripts.UI
 
         private void OnEnable()
         {
+            manualAssetPositionUpdateToggle.isOn = GlobalSettingsSingleton.instance.state.placementUpdateMode ==
+                                                   AssetPlacementUpdateMode.UPDATE_ON_BUTTON_CLICK;
+            manualAssetPositionUpdateButton.interactable = GlobalSettingsSingleton.instance.state.placementUpdateMode ==
+                                                           AssetPlacementUpdateMode.UPDATE_ON_BUTTON_CLICK;
+            
             globalSettingsUIAnimator = GetComponent<Animator>();
             expandCanvasButton.onClick.AddListener(
                 () =>
@@ -66,6 +71,7 @@ namespace Scenes.BookAR.Scripts.UI
                         placementUpdateMode = isToggleChecked ? AssetPlacementUpdateMode.UPDATE_ON_BUTTON_CLICK
                                                               : AssetPlacementUpdateMode.CONTINUOUS_UPDATE
                     };
+                    manualAssetPositionUpdateButton.interactable = isToggleChecked;
                 }
             );
             manualAssetPositionUpdateButton.onClick.AddListener(

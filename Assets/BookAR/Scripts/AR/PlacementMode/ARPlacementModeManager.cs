@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Scenes.BookAR.Scripts;
 using Scenes.BookAR.Scripts.Global;
-using UnityEditor.Scripting;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
@@ -62,10 +61,14 @@ namespace BookAR.Scripts.AR.PlacementMode
                 var posReporter = new PositionReporter(trackedImage);
                 var newPair = new PlacementControlPair(
                     posReporter,
-                    new ContinuousPlacementController(posReporter, this)
+                    createPlaceController(
+                        posReporter,
+                        GlobalSettingsSingleton.instance.state.placementUpdateMode,
+                        this
+                    )
                 );
                 managedControlPairs.Add(newPair);
-                newPair.placementController.startPrefabPlacementControl(prefab);
+                newPair.placementController.startPrefabPlacementControl(prefab,prefabInstantiatedAlready:false);
             }
 
             foreach (var trackedImage in eventArgs.removed)
@@ -78,58 +81,51 @@ namespace BookAR.Scripts.AR.PlacementMode
         private void OnGlobalSettingsChanged(object sender, GlobalSettingsEventData data)
         {
             Debug.Log("OnGlobalSettingsChanged!");
-            if (data.oldState.placementUpdateMode != data.newState.placementUpdateMode)
+            if (data.oldState.placementUpdateMode == data.newState.placementUpdateMode) return;
+            
+            var newManagedControlPairs = new List<PlacementControlPair>();
+            foreach (var placementControlPair in managedControlPairs)
             {
-                switch (data.newState.placementUpdateMode)
+                var newPair = new PlacementControlPair(
+                    placementControlPair.posReporter,
+                    createPlaceController(
+                        placementControlPair.posReporter,
+                        data.newState.placementUpdateMode,
+                        this)
+                );
+                var managedObject = placementControlPair.placementController.giveUpPrefabPlacementControl();
+                newPair.placementController.startPrefabPlacementControl(managedObject,prefabInstantiatedAlready:true);
+                newManagedControlPairs.Add(newPair);
+            }
+            managedControlPairs = newManagedControlPairs;
+            
+        }
+
+        private IPlacementController createPlaceController(IPositionReporter posRep, AssetPlacementUpdateMode mode,
+            MonoBehaviour context)
+        {
+            switch (mode)
+            {
+                case AssetPlacementUpdateMode.CONTINUOUS_UPDATE:
                 {
-                    case AssetPlacementUpdateMode.CONTINUOUS_UPDATE:
-                    {
-                        var newManagedControlPairs = new List<PlacementControlPair>();
-                        foreach (var placementControlPair in managedControlPairs)
-                        {
-                            var newPair = new PlacementControlPair(
-                                placementControlPair.posReporter,
-                                new ContinuousPlacementController(
-                                    placementControlPair.posReporter,
-                                    this
-                                )
-                            );
-                            var managedObject = placementControlPair.placementController.giveUpPrefabPlacementControl();
-                            newPair.placementController.startPrefabPlacementControl(managedObject);
-                            newManagedControlPairs.Add(newPair);
-                        }
-
-                        managedControlPairs = newManagedControlPairs;
-                        break;
-                    }
-                    case AssetPlacementUpdateMode.UPDATE_ON_BUTTON_CLICK:
-                    {
-                        var newManagedControlPairs = new List<PlacementControlPair>();
-                        foreach (var placementControlPair in managedControlPairs)
-                        {
-                            var newPair = new PlacementControlPair(
-                                placementControlPair.posReporter,
-                                new ButtonBasedPlacementController(
-                                    placementControlPair.posReporter,
-                                    this
-                                )
-                            );
-                            var managedObject = placementControlPair.placementController.giveUpPrefabPlacementControl();
-                            newPair.placementController.startPrefabPlacementControl(managedObject);
-                            newManagedControlPairs.Add(newPair);
-                        }
-
-                        managedControlPairs = newManagedControlPairs;
-                        break;
-                    }
-                    default:
-                    {
-                        throw new Exception("This control mode is not yet implemented, oops!");
-                    }
+                    return new ContinuousPlacementController(
+                        posRep,
+                        context
+                    );
+                }
+                case AssetPlacementUpdateMode.UPDATE_ON_BUTTON_CLICK:
+                {
+                    return new ButtonBasedPlacementController(
+                        posRep
+                    );
+                }
+                default:
+                {
+                    throw new Exception("This control mode is not yet implemented, oops!");
                 }
             }
         }
-        
+
         private void AssignPrefab(ARTrackedImage trackedImage)
         {
             
