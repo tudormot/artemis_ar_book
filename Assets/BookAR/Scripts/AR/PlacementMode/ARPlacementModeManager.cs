@@ -58,7 +58,8 @@ namespace BookAR.Scripts.AR.PlacementMode
                     Debug.LogError("Could not find a prefab to instantiate for the detected image. Check the ImagePairManager, whether the pair exists.");
                 }
 
-                var posReporter = new PositionReporter(trackedImage);
+                var posReporter = createPosReporter(GlobalSettingsSingleton.instance.state
+                    .smoothPositionReporting, this, trackedImage);
                 var newPair = new PlacementControlPair(
                     posReporter,
                     createPlaceController(
@@ -73,7 +74,7 @@ namespace BookAR.Scripts.AR.PlacementMode
 
             foreach (var trackedImage in eventArgs.removed)
             {
-                throw new Exception("trackedImages removed event cleanup not implemented yet");
+                Debug.LogError("trackedImages removed event cleanup not implemented yet");
             }
             
         }
@@ -81,26 +82,73 @@ namespace BookAR.Scripts.AR.PlacementMode
         private void OnGlobalSettingsChanged(object sender, GlobalSettingsEventData data)
         {
             Debug.Log("OnGlobalSettingsChanged!");
-            if (data.oldState.placementUpdateMode == data.newState.placementUpdateMode) return;
-            
-            var newManagedControlPairs = new List<PlacementControlPair>();
-            foreach (var placementControlPair in managedControlPairs)
+            if (data.oldState.placementUpdateMode != data.newState.placementUpdateMode)
             {
-                var newPair = new PlacementControlPair(
-                    placementControlPair.posReporter,
-                    createPlaceController(
+                var newManagedControlPairs = new List<PlacementControlPair>();
+                foreach (var placementControlPair in managedControlPairs)
+                {
+                    var newPair = new PlacementControlPair(
                         placementControlPair.posReporter,
-                        data.newState.placementUpdateMode,
-                        this)
-                );
-                var managedObject = placementControlPair.placementController.giveUpPrefabPlacementControl();
-                newPair.placementController.startPrefabPlacementControl(managedObject,prefabInstantiatedAlready:true);
-                newManagedControlPairs.Add(newPair);
+                        createPlaceController(
+                            placementControlPair.posReporter,
+                            data.newState.placementUpdateMode,
+                            this)
+                    );
+                    var managedObject = placementControlPair.placementController.giveUpPrefabPlacementControl();
+                    newPair.placementController.startPrefabPlacementControl(managedObject,prefabInstantiatedAlready:true);
+                    newManagedControlPairs.Add(newPair);
+                }
+                managedControlPairs = newManagedControlPairs;
             }
-            managedControlPairs = newManagedControlPairs;
+            if (data.oldState.smoothPositionReporting != data.newState.smoothPositionReporting)
+            {
+                var newManagedControlPairs = new List<PlacementControlPair>();
+                foreach (var placementControlPair in managedControlPairs)
+                {
+                    Debug.Log("DEBUG1");
+                    var newPosReporter = createPosReporter(
+                        data.newState.smoothPositionReporting,
+                        this,
+                        placementControlPair.posReporter.giveUpPositionReporting()
+                    );
+                    Debug.Log("DEBUG2");
+                    placementControlPair.placementController.changePositionReporter(newPosReporter);
+                    var newPair = new PlacementControlPair(
+                        newPosReporter,
+                        placementControlPair.placementController
+                    );
+                    newManagedControlPairs.Add(newPair);
+                }
+                managedControlPairs = newManagedControlPairs;
+            }
+
+            
             
         }
 
+        private IPositionReporter createPosReporter( bool smoothPosReportingMode,
+            MonoBehaviour context, ARTrackedImage trackedImage)
+        {
+            if (trackedImage == null)
+            {
+                Debug.Log("TrackedImage is null in createPosReporter!");
+            }
+
+            if (smoothPosReportingMode)
+            {
+                return new SmoothPositionReporter(
+                    trackedImage,
+                    context
+                );
+            }
+            else
+            {
+                return new RawPositionReporter(
+                    trackedImage
+                );
+            }
+           
+        }
         private IPlacementController createPlaceController(IPositionReporter posRep, AssetPlacementUpdateMode mode,
             MonoBehaviour context)
         {
@@ -124,44 +172,6 @@ namespace BookAR.Scripts.AR.PlacementMode
                     throw new Exception("This control mode is not yet implemented, oops!");
                 }
             }
-        }
-
-        private void AssignPrefab(ARTrackedImage trackedImage)
-        {
-            
-            // Give the initial image a reasonable default scale
-            //     var minLocalScalar = Mathf.Min(trackedImage.size.x, trackedImage.size.y) / 2;
-            //     Debug.Log("In PrefabImagePairManager. Setting trackable to scale: "+minLocalScalar.ToString());
-            //     trackedImage.transform.localScale = new Vector3(minLocalScalar, minLocalScalar, minLocalScalar);
-            // AssignPrefab(trackedImage);
-            
-            
-            // if (m_PrefabsDictionary.TryGetValue(trackedImage.referenceImage.guid, out var prefab))
-            // {
-            //     if (ExtendedTrackableImageMode)
-            //     {
-            //         if (prefab == null)
-            //         {
-            //             Debug.Log("Prefab reported as null. PROBLEM");
-            //         }
-            //
-            //         var ExtendedTrackable = trackedImage.transform.GetComponent<ARTrackedImageExtended>();
-            //         if (ExtendedTrackable == null)
-            //         {
-            //             Debug.Log("ExtendedTrackable reported as null. PROBLEM");
-            //         }
-            //         ExtendedTrackable.Asset = prefab;
-            //         ExtendedTrackable.enabled = true;
-            //     }
-            //     else
-            //     {
-            //         m_Instantiated[trackedImage.referenceImage.guid] = Instantiate(prefab, trackedImage.transform);
-            //     }
-            // }
-            // else
-            // {
-            //     throw new Exception("Is this even possible? ");
-            // }
         }
         
     }

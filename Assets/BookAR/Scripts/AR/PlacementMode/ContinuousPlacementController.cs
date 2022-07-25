@@ -32,8 +32,7 @@ namespace BookAR.Scripts.AR.PlacementMode
 
         public void changePositionReporter(IPositionReporter newReporter)
         {
-            Debug.Log("In changePositionReporter, this is not implemented yet");
-            throw new System.NotImplementedException();
+            posReporter = newReporter;
         }
 
         private IEnumerator updatePositionContinuously()
@@ -41,9 +40,9 @@ namespace BookAR.Scripts.AR.PlacementMode
             while (true)
             {
                 var transform = posReporter.getTransform();
-                controlledAsset.transform.localPosition = transform.localPosition;
-                controlledAsset.transform.localRotation = transform.localRotation;
-                controlledAsset.transform.localScale = transform.localScale;
+                controlledAsset.transform.localPosition = transform.pos;
+                controlledAsset.transform.localRotation = transform.rot;
+                controlledAsset.transform.localScale = transform.scale;
                 yield return new WaitForEndOfFrame();
             }
         }

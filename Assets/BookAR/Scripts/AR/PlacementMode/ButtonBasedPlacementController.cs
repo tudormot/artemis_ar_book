@@ -45,9 +45,9 @@ namespace BookAR.Scripts.AR.PlacementMode
         private void onUpdateButtonClick()
         {
             var transform = posReporter.getTransform();
-            controlledAsset.transform.localPosition = transform.localPosition;
-            controlledAsset.transform.localRotation = transform.localRotation;
-            controlledAsset.transform.localScale = transform.localScale;
+            controlledAsset.transform.localPosition = transform.pos;
+            controlledAsset.transform.localRotation = transform.rot;
+            controlledAsset.transform.localScale = transform.scale;
         }
 
         // private IEnumerator updatePositionContinuously()

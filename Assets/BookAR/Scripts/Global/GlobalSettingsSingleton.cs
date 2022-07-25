@@ -14,6 +14,7 @@ namespace Scenes.BookAR.Scripts.Global
         private State _state = new(){
             placementUpdateMode = AssetPlacementUpdateMode.CONTINUOUS_UPDATE,
             smoothPositionReporting = false,
+            enableOnScreenDebugMessages = false,
             depthFog = false,
             cameraGrain = false,
         };
@@ -37,6 +38,8 @@ namespace Scenes.BookAR.Scripts.Global
         public record State
         {
             public AssetPlacementUpdateMode placementUpdateMode { get; set; }
+            public bool enableOnScreenDebugMessages { get; set; }
+
 
             public bool depthFog { get; set; }
             public bool smoothPositionReporting { get; set; }

@@ -11,17 +11,14 @@ namespace Scenes.BookAR.Scripts.UI
     [RequireComponent(typeof(Animator))]
     public class CommonSettingsUIController : MonoBehaviour
     {
-        // [SerializeField] private GameObject expandedUI;
-        // [SerializeField] private GameObject contractedUI;
-        
+
         [SerializeField] private Button expandCanvasButton;
         [SerializeField] private Button contractCanvasButton;
-
-        // [SerializeField] private Animation expandAnimation;
-        // [SerializeField] private Animation contractAnimation;
-        private Animator globalSettingsUIAnimator;
-
         
+        private Animator globalSettingsUIAnimator;
+        
+        [SerializeField] private Toggle screenDebuggingToggle;
+        [SerializeField] private Toggle smoothPositionToggle;
         [SerializeField] private Toggle manualAssetPositionUpdateToggle;
         [SerializeField] public Button manualAssetPositionUpdateButton;
         
@@ -42,6 +39,9 @@ namespace Scenes.BookAR.Scripts.UI
 
         private void OnEnable()
         {
+            screenDebuggingToggle.isOn = GlobalSettingsSingleton.instance.state.enableOnScreenDebugMessages;
+            smoothPositionToggle.isOn = GlobalSettingsSingleton.instance.state.smoothPositionReporting;
+
             manualAssetPositionUpdateToggle.isOn = GlobalSettingsSingleton.instance.state.placementUpdateMode ==
                                                    AssetPlacementUpdateMode.UPDATE_ON_BUTTON_CLICK;
             manualAssetPositionUpdateButton.interactable = GlobalSettingsSingleton.instance.state.placementUpdateMode ==
@@ -60,6 +60,24 @@ namespace Scenes.BookAR.Scripts.UI
                 {
                     Debug.Log("We are clicking the transparent canvas!");
                     state = SettingsUIState.SETTINGS_PANEL_CONTRACTED;
+                }
+            );
+            screenDebuggingToggle.onValueChanged.AddListener(
+                (bool isToggleChecked) =>
+                {
+                    GlobalSettingsSingleton.instance.state = GlobalSettingsSingleton.instance.state with
+                    {
+                        enableOnScreenDebugMessages = isToggleChecked
+                    };
+                }
+            );
+            smoothPositionToggle.onValueChanged.AddListener(
+                (bool isToggleChecked) =>
+                {
+                    GlobalSettingsSingleton.instance.state = GlobalSettingsSingleton.instance.state with
+                    {
+                        smoothPositionReporting = isToggleChecked
+                    };
                 }
             );
 
