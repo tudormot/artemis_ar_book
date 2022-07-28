@@ -7498,15 +7498,15 @@ struct TouchState_tB05024FB4BCE85BAB82D2224AD4BF1E8B4589A97
 	};
 };
 
-// BookAR.Scripts.AR.PlacementMode.TransformData
-struct TransformData_t22CF00C1744EF07EF71073A6E7F01F24521C641A 
+// BookAR.Scripts.AR.PlacementMode.TrackedImageData
+struct TrackedImageData_tD0BDA0691C303DDCBC930DE9F32232D16A2A6E7D 
 {
-	// UnityEngine.Vector3 BookAR.Scripts.AR.PlacementMode.TransformData::pos
+	// UnityEngine.Vector3 BookAR.Scripts.AR.PlacementMode.TrackedImageData::pos
 	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___pos_0;
-	// UnityEngine.Quaternion BookAR.Scripts.AR.PlacementMode.TransformData::rot
+	// UnityEngine.Quaternion BookAR.Scripts.AR.PlacementMode.TrackedImageData::rot
 	Quaternion_tDA59F214EF07D7700B26E40E562F267AF7306974 ___rot_1;
-	// UnityEngine.Vector3 BookAR.Scripts.AR.PlacementMode.TransformData::scale
-	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___scale_2;
+	// UnityEngine.Vector2 BookAR.Scripts.AR.PlacementMode.TrackedImageData::imageSize
+	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___imageSize_2;
 };
 
 // UnityEngine.UIElements.TransformOrigin
@@ -18871,9 +18871,9 @@ static  TrackableId_t49EAE8AA4B9584E314518723DC22B66496D47AD7 UnresolvedVirtualC
 	method->invoker_method(il2cpp_codegen_get_method_pointer(method), method, __this, NULL, &il2cppRetVal);
 	return il2cppRetVal;
 }
-static  TransformData_t22CF00C1744EF07EF71073A6E7F01F24521C641A UnresolvedVirtualCall_1232 (RuntimeObject* __this, const RuntimeMethod* method)
+static  TrackedImageData_tD0BDA0691C303DDCBC930DE9F32232D16A2A6E7D UnresolvedVirtualCall_1232 (RuntimeObject* __this, const RuntimeMethod* method)
 {
-	TransformData_t22CF00C1744EF07EF71073A6E7F01F24521C641A il2cppRetVal;
+	TrackedImageData_tD0BDA0691C303DDCBC930DE9F32232D16A2A6E7D il2cppRetVal;
 	method->invoker_method(il2cpp_codegen_get_method_pointer(method), method, __this, NULL, &il2cppRetVal);
 	return il2cppRetVal;
 }

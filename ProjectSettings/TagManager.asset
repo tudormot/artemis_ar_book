@@ -8,6 +8,7 @@ TagManager:
   - planet
   - SolarSystem
   - label
+  - DynamicObjects
   layers:
   - Default
   - TransparentFX

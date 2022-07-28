@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using BookAR.Scripts.AR.PlacementMode.PositionReporters;
 using Scenes.BookAR.Scripts;
 using Scenes.BookAR.Scripts.Global;
 using UnityEngine;
@@ -105,13 +106,11 @@ namespace BookAR.Scripts.AR.PlacementMode
                 var newManagedControlPairs = new List<PlacementControlPair>();
                 foreach (var placementControlPair in managedControlPairs)
                 {
-                    Debug.Log("DEBUG1");
                     var newPosReporter = createPosReporter(
                         data.newState.smoothPositionReporting,
                         this,
                         placementControlPair.posReporter.giveUpPositionReporting()
                     );
-                    Debug.Log("DEBUG2");
                     placementControlPair.placementController.changePositionReporter(newPosReporter);
                     var newPair = new PlacementControlPair(
                         newPosReporter,
@@ -149,6 +148,7 @@ namespace BookAR.Scripts.AR.PlacementMode
             }
            
         }
+  
         private IPlacementController createPlaceController(IPositionReporter posRep, AssetPlacementUpdateMode mode,
             MonoBehaviour context)
         {

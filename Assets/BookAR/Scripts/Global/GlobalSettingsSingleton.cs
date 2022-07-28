@@ -13,7 +13,7 @@ namespace Scenes.BookAR.Scripts.Global
         public event EventHandler<GlobalSettingsEventData> GlobalSettingsChanged; 
         private State _state = new(){
             placementUpdateMode = AssetPlacementUpdateMode.CONTINUOUS_UPDATE,
-            smoothPositionReporting = false,
+            smoothPositionReporting = true,
             enableOnScreenDebugMessages = false,
             depthFog = false,
             cameraGrain = false,

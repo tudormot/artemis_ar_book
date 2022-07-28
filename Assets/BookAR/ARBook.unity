@@ -355,7 +355,7 @@ GameObject:
   - component: {fileID: 119802525}
   m_Layer: 0
   m_Name: _Dynamic
-  m_TagString: Untagged
+  m_TagString: DynamicObjects
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1894,6 +1894,8 @@ GameObject:
   - component: {fileID: 369467451}
   - component: {fileID: 369467452}
   - component: {fileID: 369467453}
+  - component: {fileID: 369467454}
+  - component: {fileID: 369467455}
   m_Layer: 0
   m_Name: XR Origin
   m_TagString: Untagged
@@ -1967,7 +1969,7 @@ MonoBehaviour:
     imagePrefab: {fileID: 4534386966801022621, guid: fc404e091a48770a1a42c21b47350877,
       type: 3}
   - imageGuid: 0f38a63c-901d-4eaf-9307-f219a7119b40
-    imagePrefab: {fileID: 4534386966801022621, guid: fc404e091a48770a1a42c21b47350877,
+    imagePrefab: {fileID: 7676697292857479489, guid: 34388e032241f0645ae23ce6db1ec35c,
       type: 3}
   m_ImageLibrary: {fileID: 11400000, guid: 858f744ced42ce11981335fbe0572313, type: 2}
 --- !u!4 &369467450
@@ -2025,6 +2027,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PlanePrefab: {fileID: 0}
   m_DetectionMode: -1
+--- !u!114 &369467454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369467439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 728ad7fae8e460a4ba41265c7308d757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AnchorPrefab: {fileID: 0}
+--- !u!114 &369467455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369467439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad126bbd8ab346848ea00aab685d9e6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &404238520
 GameObject:
   m_ObjectHideFlags: 0

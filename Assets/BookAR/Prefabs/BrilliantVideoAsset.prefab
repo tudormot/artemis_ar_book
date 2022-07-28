@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 5342365157853892601}
   - component: {fileID: 5342365157853892606}
   m_Layer: 0
-  m_Name: RawImage
+  m_Name: VideoCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -357,7 +357,7 @@ VideoPlayer:
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: _MainTex
   m_RenderMode: 2
-  m_AspectRatio: 2
+  m_AspectRatio: 5
   m_DataSource: 0
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
@@ -367,7 +367,7 @@ VideoPlayer:
   - 1
   m_Url: 
   m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
+  m_DirectAudioMutes: 01
   m_ControlledAudioTrackCount: 1
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
@@ -511,6 +511,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131e6b7d771e425c924940ffb3574619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  videoObject: {fileID: 5342365157853892606}
+  playButton: {fileID: 5342365157232177215}
 --- !u!1 &7676697292857479489
 GameObject:
   m_ObjectHideFlags: 0
