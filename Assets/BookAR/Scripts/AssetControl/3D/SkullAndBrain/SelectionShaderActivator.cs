@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace BookAR.Scripts._3D.SkullAndBrain
+namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
 {
     public class SelectionShaderActivator : MonoBehaviour
     {

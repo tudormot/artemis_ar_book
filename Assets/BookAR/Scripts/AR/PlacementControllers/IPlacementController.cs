@@ -11,10 +11,5 @@ namespace BookAR.Scripts.AR.PlacementMode
         void changePositionReporter(IPositionReporter newReporter);
 
         
-        public static Vector3 calculateScaleFromImSize(Vector2 imageSize)
-        {
-            var minLocalScalar = Mathf.Min(imageSize.x, imageSize.y);
-            return new Vector3(minLocalScalar, minLocalScalar, minLocalScalar);
-        }
     }
 }

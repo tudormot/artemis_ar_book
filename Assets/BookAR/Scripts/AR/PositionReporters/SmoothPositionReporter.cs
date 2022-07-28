@@ -63,15 +63,10 @@ namespace BookAR.Scripts.AR.PlacementMode
             {
                 pos = smoothedPosition,
                 rot = smoothedRotation,
-                imageSize = getImageSize()
+                imageSize = trackableRawData.size
             };
         }
 
-        public Vector2 getImageSize()
-        {
-            return trackableRawData.size;
-        }
-        
         private IEnumerator calculateSmoothTransform()
             /*see wikipedia article on moving averages.
              Chose something which I think is pretty much equivalent to EMA for quaternion 

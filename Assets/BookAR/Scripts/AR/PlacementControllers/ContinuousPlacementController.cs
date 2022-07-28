@@ -1,4 +1,5 @@
 using System.Collections;
+using BookAR.Scripts.AR.PlacementControllers;
 using BookAR.Scripts.AR.PlacementMode.PositionReporters;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -7,6 +8,7 @@ namespace BookAR.Scripts.AR.PlacementMode
 {
     public class ContinuousPlacementController:IPlacementController
     {
+        private AssetScaler scaler;
         private IPositionReporter posReporter;
         private MonoBehaviour context;
         private GameObject controlledAsset;
@@ -20,6 +22,7 @@ namespace BookAR.Scripts.AR.PlacementMode
         public void startPrefabPlacementControl(GameObject prefab, bool prefabInstantiatedAlready )
         {
             controlledAsset = prefabInstantiatedAlready ? prefab : Object.Instantiate(prefab, GameObject.Find("/_Dynamic").transform);
+            scaler = new AssetScaler(controlledAsset);
             controlCoroutine = context.StartCoroutine(updatePositionContinuously());
         }
         
@@ -44,7 +47,7 @@ namespace BookAR.Scripts.AR.PlacementMode
                 controlledAsset.transform.localPosition = imageData.pos;
                 controlledAsset.transform.localRotation = imageData.rot;
                 controlledAsset.transform.localScale =
-                    IPlacementController.calculateScaleFromImSize(imageData.imageSize);
+                    scaler.computeScalingForAsset(imageData.imageSize);
                 yield return new WaitForEndOfFrame();
             }
         }

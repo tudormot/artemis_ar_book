@@ -1,9 +1,10 @@
 using UnityEngine;
 
-namespace Scenes.BookAR.Scripts
+namespace BookAR.Scripts.AssetControl._3D
 {
-    public class ShittyParrotControl : MonoBehaviour
+    public class ShittyParrotControl : MonoBehaviour, IAssetController
     {
+        AssetControllerType IAssetController.type { get; set; } = AssetControllerType.DEFAULT_ASSET_TYPE;
         public Animation parrotAnimation;
         private int State = 0;
 

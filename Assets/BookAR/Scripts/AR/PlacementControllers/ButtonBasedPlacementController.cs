@@ -1,3 +1,4 @@
+using BookAR.Scripts.AR.PlacementControllers;
 using BookAR.Scripts.AR.PlacementMode.PositionReporters;
 using Scenes.BookAR.Scripts.Global;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace BookAR.Scripts.AR.PlacementMode
 {
     public class ButtonBasedPlacementController: IPlacementController
     {
+        private AssetScaler scaler;
         private IPositionReporter posReporter;
         private GameObject controlledAsset;
         private Button updatePositionButton;
@@ -20,13 +22,14 @@ namespace BookAR.Scripts.AR.PlacementMode
             {
                 Debug.LogError("Could not find button that would update asset position on click");
             }
-
             updatePositionButton = buttonObj.transform.GetComponent<Button>(); 
         }
 
         public void startPrefabPlacementControl(GameObject prefab, bool prefabInstantiatedAlready = false)
         {
+
             controlledAsset = prefabInstantiatedAlready ? prefab : Object.Instantiate(prefab, GameObject.Find("/_Dynamic").transform);
+            scaler = new AssetScaler(controlledAsset);
             updatePositionButton.onClick.AddListener(onUpdateButtonClick);
         }
         
@@ -50,7 +53,7 @@ namespace BookAR.Scripts.AR.PlacementMode
             controlledAsset.transform.localPosition = imageData.pos;
             controlledAsset.transform.localRotation = imageData.rot;
             controlledAsset.transform.localScale = 
-                IPlacementController.calculateScaleFromImSize(imageData.imageSize);
+                scaler.computeScalingForAsset(imageData.imageSize);
 
             
         }

@@ -1,12 +1,12 @@
-using System;
 using UnityEngine;
 
-namespace Scenes.BookAR.Scripts
+namespace BookAR.Scripts.AssetControl.Audio
 {
-    public class PlayPauseAudioControl : MonoBehaviour
+    public class PlayPauseAudioControl : MonoBehaviour, IAssetController
     {
         [SerializeField] private Canvas PlayCanvas;
         [SerializeField] private Canvas PauseCanvas;
+        AssetControllerType IAssetController.type { get; set; } = AssetControllerType.DEFAULT_ASSET_TYPE;
 
         private void OnEnable()
         {
@@ -26,5 +26,6 @@ namespace Scenes.BookAR.Scripts
             PlayCanvas.gameObject.SetActive(true);
             PauseCanvas.gameObject.SetActive(false);
         }
+
     }
 }

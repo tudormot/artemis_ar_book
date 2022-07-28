@@ -98,22 +98,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
             foreach (var trackedImage in eventArgs.added)
             {
                 m_PrefabsDictionary.TryGetValue(trackedImage.referenceImage.guid, out var prefab);
-                var imageSizeContainer = prefab.transform.GetComponent<ImageDimensionAware>();
 
-                if ( imageSizeContainer == null)
-                {
-                    // Give the initial image a reasonable default scale
-                    var minLocalScalar = Mathf.Min(trackedImage.size.x, trackedImage.size.y) / 2;
-                    Debug.Log("In PrefabImgePairManager. Setting trackable to scale: "+minLocalScalar.ToString());
-                    trackedImage.transform.localScale = new Vector3(minLocalScalar, minLocalScalar, minLocalScalar);
-                }
-                else
-                {
-                    //the asset itself will take care of the scaling. Just let it know about the size
-                    Debug.Log("Size of image as reported by x,y : " + trackedImage.size.x + " " + trackedImage.size.y);
-                    imageSizeContainer.dimXaxis = trackedImage.size.x;
-                    imageSizeContainer.dimYaxis = trackedImage.size.y;
-                }
+                // Give the initial image a reasonable default scale
+                var minLocalScalar = Mathf.Min(trackedImage.size.x, trackedImage.size.y) / 2;
+                Debug.Log("In PrefabImagePairManager. Setting trackable to scale: "+minLocalScalar.ToString());
+                trackedImage.transform.localScale = new Vector3(minLocalScalar, minLocalScalar, minLocalScalar);
+
                 AssignPrefab(trackedImage);
             }
             
@@ -123,18 +113,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             if (m_PrefabsDictionary.TryGetValue(trackedImage.referenceImage.guid, out var prefab))
             {
-                if (ExtendedTrackableImageMode)
-                {
-                    var ExtendedTrackable = trackedImage.transform.GetComponent<ARTrackedImageExtended>();
-                    ExtendedTrackable.Asset = prefab;
-                    ExtendedTrackable.enabled = true;
-
-                }
-                else
-                {
-                    m_Instantiated[trackedImage.referenceImage.guid] = Instantiate(prefab, trackedImage.transform);
-                }
-
+                m_Instantiated[trackedImage.referenceImage.guid] = Instantiate(prefab, trackedImage.transform);
             }
             else
             {

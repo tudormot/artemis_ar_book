@@ -2,14 +2,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
 
-namespace Scenes.BookAR.Scripts
+namespace BookAR.Scripts.AssetControl._3D
 {
-    public class ToothAssetControl : MonoBehaviour
+    public class ToothAssetControl : MonoBehaviour, IAssetController
     {
+        AssetControllerType IAssetController.type { get; set; } = AssetControllerType.DEFAULT_ASSET_TYPE;
+
         private GameObject touchToInteractObj;
         private GameObject mainObj;
         private GameObject rootUIObj;
-    
         private Button swapAssetsButton;
 
     void Start()

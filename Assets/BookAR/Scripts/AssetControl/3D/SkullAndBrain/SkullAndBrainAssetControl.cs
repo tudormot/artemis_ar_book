@@ -3,11 +3,11 @@ using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.AR;
 
-namespace BookAR.Scripts._3D.SkullAndBrain
+namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
 {
-    public class SkullAndBrainAssetControl : MonoBehaviour
+    public class SkullAndBrainAssetControl : MonoBehaviour, IAssetController
     {
-
+        AssetControllerType IAssetController.type { get; set; } = AssetControllerType.DEFAULT_ASSET_TYPE;
         private GameObject touchToInteractObj;
         private GameObject mainObj;
         private GameObject rootUIObj;

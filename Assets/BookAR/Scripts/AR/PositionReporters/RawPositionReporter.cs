@@ -27,11 +27,7 @@ namespace BookAR.Scripts.AR.PlacementMode.PositionReporters
                 imageSize = trackableInfo.size
             };
         }
-
-        public Vector2 getImageSize()
-        {
-            return trackableInfo.size;
-        }
+        
 
         public ARTrackedImage giveUpPositionReporting()
         {

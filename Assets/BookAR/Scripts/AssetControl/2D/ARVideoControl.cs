@@ -1,49 +1,37 @@
 using System;
-using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
-using Debug = UnityEngine.Debug;
 
-namespace Scenes.BookAR.Scripts
+namespace BookAR.Scripts.AssetControl._2D
 {
     
-    public class ARVideoControl : MonoBehaviour
+    public class ARVideoControl : MonoBehaviour, IAssetController
     {   
+        AssetControllerType IAssetController.type { get; set; } = AssetControllerType.VIDEO_ASSET_TYPE;
+
         [SerializeField]
         private VideoPlayer videoObject;
         [SerializeField]
         private Button playButton;
-        // [SerializeField]
-        // private GameObject hideButton;
-        // private GameObject blurringCube;
+
         private void OnEnable()
         {
-            // playButton = transform.GetChild(0).gameObject;
-            // rawImage = transform.GetChild(1).gameObject;
-            // hideButton = transform.GetChild(2).gameObject;
-            // performVideoScaling();
+
             playButton.gameObject.SetActive(true);
             videoObject.gameObject.SetActive(false);
         }
 
         public void OnPlayButtonClick()
         {
-            //not much to do, just hide this button and enable the raw image containing the video
             playButton.gameObject.SetActive(false);
             videoObject.gameObject.SetActive(true);
-            // blurringCube.SetActive(true);
-            // hideButton.SetActive(true);
         }
 
         public void OnPauseButtonClick()
         {
             playButton.gameObject.SetActive(true);
             videoObject.gameObject.SetActive(false);
-            // hideButton.SetActive(false);
-            // blurringCube.SetActive(false);
-
-
         }
 
         private void performVideoScaling()

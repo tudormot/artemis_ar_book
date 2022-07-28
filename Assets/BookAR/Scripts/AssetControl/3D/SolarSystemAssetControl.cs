@@ -1,11 +1,12 @@
-using System;
+using Scenes.BookAR.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Scenes.BookAR.Scripts
+namespace BookAR.Scripts.AssetControl._3D
 {
-    public class SolarSystemAssetControl : MonoBehaviour
+    public class SolarSystemAssetControl : MonoBehaviour, IAssetController
     {
+        AssetControllerType IAssetController.type { get; set; } = AssetControllerType.DEFAULT_ASSET_TYPE;
         private GameObject rootUIObj;
         private GameObject touchToInteractObj;
         private GameObject solarSystemAsset;
