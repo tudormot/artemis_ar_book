@@ -8657,7 +8657,7 @@ IL_004b:
 		Exception_t* L_14 = V_0;
 		NullCheck(L_14);
 		String_t* L_15;
-		L_15 = VirtualFuncInvoker0< String_t* >::Invoke(9 /* System.String System.Exception::get_Source() */, L_14);
+		L_15 = VirtualFuncInvoker0< String_t* >::Invoke(10 /* System.String System.Exception::get_Source() */, L_14);
 		String_t* L_16 = L_15;
 		G_B3_0 = L_16;
 		G_B3_1 = _stringLiteral8C9E00B57BC60BA8DFE775104296F0D55A788667;
@@ -8686,7 +8686,7 @@ IL_0065:
 		Exception_t* L_17 = V_0;
 		NullCheck(L_17);
 		String_t* L_18;
-		L_18 = VirtualFuncInvoker0< String_t* >::Invoke(8 /* System.String System.Exception::get_StackTrace() */, L_17);
+		L_18 = VirtualFuncInvoker0< String_t* >::Invoke(9 /* System.String System.Exception::get_StackTrace() */, L_17);
 		String_t* L_19;
 		L_19 = String_Concat_mAF2CE02CC0CB7460753D0A1A91CCF2B1E9804C5D(_stringLiteral00B28FF06B788B9B67C6B259800F404F9F3761FD, L_18, NULL);
 		DiagnosticReport_AddSectionEntry_mB35A2E9838B3DEEF33C3E322A8611827912D5B3E(G_B4_3, _stringLiteral66F97747B2609F5F9C0F9E822D0939B6316AB822, L_19, NULL);

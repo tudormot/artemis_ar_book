@@ -343,8 +343,8 @@ struct Exception_t;
 struct IDictionary_t6D03155AF1FA9083817AA5B6AD7DEEACC26AB220;
 // BookAR.Scripts.AR.PlacementMode.IPlacementController
 struct IPlacementController_tE3DB616628C089D5DF540E1EDD23ACE4BE8DAED0;
-// BookAR.Scripts.AR.PlacementMode.IPositionReporter
-struct IPositionReporter_t53F2412E119F1891EE8D59BE8434BAEFEB6EEE4D;
+// BookAR.Scripts.AR.PlacementMode.PositionReporters.IPositionReporter
+struct IPositionReporter_tA868DC6334C9BEC7E20BF972C7E54C02C33D9272;
 // System.InvalidOperationException
 struct InvalidOperationException_t5DDE4D49B7405FAAB1E4576F4715A42A3FAD4BAB;
 // UnityEngine.Mesh
@@ -1806,7 +1806,7 @@ struct XRReferenceObject_tDC04E77BBDCC6428C8B852A7CF1208DD2AF9AE14_marshaled_com
 // BookAR.Scripts.AR.PlacementMode.ARPlacementModeManager/PlacementControlPair
 struct PlacementControlPair_t623F55539E1D8FE342858BBF636759C303A06017 
 {
-	// BookAR.Scripts.AR.PlacementMode.IPositionReporter BookAR.Scripts.AR.PlacementMode.ARPlacementModeManager/PlacementControlPair::posReporter
+	// BookAR.Scripts.AR.PlacementMode.PositionReporters.IPositionReporter BookAR.Scripts.AR.PlacementMode.ARPlacementModeManager/PlacementControlPair::posReporter
 	RuntimeObject* ___posReporter_0;
 	// BookAR.Scripts.AR.PlacementMode.IPlacementController BookAR.Scripts.AR.PlacementMode.ARPlacementModeManager/PlacementControlPair::placementController
 	RuntimeObject* ___placementController_1;

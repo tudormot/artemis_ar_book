@@ -1,6 +1,6 @@
 using System;
 
-namespace Scenes.BookAR.Scripts.Global
+namespace BookAR.Scripts.Global
 {
     public sealed class GlobalSettingsSingleton
     {

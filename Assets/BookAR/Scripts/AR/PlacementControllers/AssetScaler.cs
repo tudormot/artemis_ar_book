@@ -21,7 +21,7 @@ namespace BookAR.Scripts.AR.PlacementControllers
              
             if (assetType == AssetControllerType.VIDEO_ASSET_TYPE)
             {
-                return new Vector3(imageSize.x, imageSize.y, 0f);
+                return new Vector3(imageSize.x, imageSize.y, 1f);
             }
             else
             {

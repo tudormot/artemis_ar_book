@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using BookAR.Scripts.AR.PlacementMode.PositionReporters;
+using BookAR.Scripts.Global;
 using Scenes.BookAR.Scripts;
-using Scenes.BookAR.Scripts.Global;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
@@ -53,6 +53,7 @@ namespace BookAR.Scripts.AR.PlacementMode
         {
             foreach (var trackedImage in eventArgs.added)
             {
+                Debug.Log("Detected a trackable!");
                 prefabImagePairManager.m_PrefabsDictionary.TryGetValue(trackedImage.referenceImage.guid, out var prefab);
                 if (prefab == null)
                 {

@@ -1,12 +1,10 @@
 using System;
-using Scenes.BookAR.Scripts.Global;
-using UnityEditor;
+using BookAR.Scripts.Global;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Button = UnityEngine.UI.Button;
 
-namespace Scenes.BookAR.Scripts.UI
+namespace BookAR.Scripts.UI
 {
     [RequireComponent(typeof(Animator))]
     public class CommonSettingsUIController : MonoBehaviour

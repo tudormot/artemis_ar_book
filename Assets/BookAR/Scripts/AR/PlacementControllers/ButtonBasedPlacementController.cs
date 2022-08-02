@@ -1,6 +1,5 @@
 using BookAR.Scripts.AR.PlacementControllers;
 using BookAR.Scripts.AR.PlacementMode.PositionReporters;
-using Scenes.BookAR.Scripts.Global;
 using UnityEngine;
 using UnityEngine.InputSystem.HID;
 using UnityEngine.UI;

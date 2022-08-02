@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using BookAR.Scripts.Utils.Coroutines;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;

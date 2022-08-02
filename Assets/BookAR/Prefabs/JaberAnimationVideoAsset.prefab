@@ -136,6 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131e6b7d771e425c924940ffb3574619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  videoObject: {fileID: 0}
+  playButton: {fileID: 0}
 --- !u!1 &2054580888944287621
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,7 +147,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2054580888944287618}
-  - component: {fileID: 5481877868010549799}
   m_Layer: 0
   m_Name: JaberAnimationVideoAsset
   m_TagString: Untagged
@@ -170,20 +171,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5481877868010549799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2054580888944287621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef915c4d47574e91a3aacf138a633354, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dimXaxis: 0
-  dimYaxis: 0
 --- !u!1 &3063947030464482272
 GameObject:
   m_ObjectHideFlags: 0
