@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4534386966801022543}
   - component: {fileID: 4534386966801022547}
   m_Layer: 0
-  m_Name: brain_right
+  m_Name: brain__right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -229,7 +229,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4534386966801022632}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 3.508355e-15, y: 90, z: 0}
 --- !u!33 &4534386966801022531
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -307,7 +307,7 @@ GameObject:
   - component: {fileID: 4534386966801022640}
   - component: {fileID: 4534386966801022548}
   m_Layer: 0
-  m_Name: skull_cord
+  m_Name: skull_old_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -417,7 +417,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4534386966801022596}
   m_LocalRotation: {x: 0, y: 0.92387956, z: 0.38268343, w: 0}
-  m_LocalPosition: {x: 0.00067161, y: 0.37708, z: 0.026015}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.27069268, y: 0.27069268, z: 0.27069268}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -445,8 +445,8 @@ Animation:
   m_Animation: {fileID: 7400000, guid: 88f3c1faa1b744a1c8a052a1487d511c, type: 3}
   m_Animations:
   - {fileID: 7400000, guid: 88f3c1faa1b744a1c8a052a1487d511c, type: 3}
-  - {fileID: 7400002, guid: 88f3c1faa1b744a1c8a052a1487d511c, type: 3}
-  - {fileID: 7400004, guid: 88f3c1faa1b744a1c8a052a1487d511c, type: 3}
+  - {fileID: 7400000, guid: 84152f0499abdf5e5840d8d0da48b17d, type: 2}
+  - {fileID: 7400000, guid: 8d9caa77693754f9abed6306f9e56645, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -903,7 +903,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4534386966801022618}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0052317, y: 0.048, z: 0.053966}
+  m_LocalPosition: {x: 0.01, y: 0.306, z: 0.053966}
   m_LocalScale: {x: 0.607176, y: 0.607176, z: 0.607176}
   m_ConstrainProportionsScale: 0
   m_Children:
