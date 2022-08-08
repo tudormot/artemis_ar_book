@@ -1,3 +1,4 @@
+using BookAR.Scripts.Utils.Coroutines;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -5,94 +6,188 @@ using UnityEngine.XR.Interaction.Toolkit.AR;
 
 namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
 {
+    public enum SkullAssetState
+    {
+        TOUCH_TO_INTERACT_STATE, MINIMIZED_SKULL, EXPANDED_SKULL, LABELED_SKULL
+    }
+
     public class SkullAndBrainAssetControl : MonoBehaviour, IAssetController
     {
         AssetControllerType IAssetController.type { get; set; } = AssetControllerType.DEFAULT_ASSET_TYPE;
-        private GameObject touchToInteractObj;
-        private GameObject mainObj;
+        [SerializeField]private Button touchToInteractButton;
+        [SerializeField]private Canvas touchToInteractCanvas;
+        [SerializeField] private LabelController labelController;
+        [SerializeField]private Animation mainObjAnimation;
+        [SerializeField]private ARSelectionInteractable selectInteractable;
+
         private GameObject rootUIObj;
     
-        private Button swapAssetsButton;
-        private Button expandAssetButton;
+        private Button expandSkullButton;
+        private Button retractSkullButton;
         private Button collapseAssetButton;
-    
-        private Animation mainObjAnimation;
-        void Start()
+        private Button showLabelsButton;
+        private Button hideLabelsButton;
+
+        private SkullAssetState _state;
+        public SkullAssetState state
+        {
+            get => _state;
+            set
+            {
+                onStateChanged(value);
+                _state = value;
+                
+            }
+        }
+
+        private void onStateChanged(SkullAssetState newState)
+        {
+            switch (newState)
+            {
+                case SkullAssetState.TOUCH_TO_INTERACT_STATE:
+                    //touchToInteractObj is a world canvas, that apparently needs to have its camera set. Do that here:
+                    touchToInteractCanvas.worldCamera = Camera.main;
+                    mainObjAnimation.gameObject.SetActive(false); 
+                    touchToInteractCanvas.gameObject.SetActive(true);
+                    rootUIObj.SetActive(false);
+                    labelController.state = LabelControllerState.LABELS_HIDDEN;
+                    break;
+                case SkullAssetState.MINIMIZED_SKULL:
+                    rootUIObj.SetActive(true);
+                    touchToInteractCanvas.gameObject.SetActive(false);
+                    mainObjAnimation.gameObject.SetActive(true);
+                    expandSkullButton.gameObject.SetActive(true);
+                    retractSkullButton.gameObject.SetActive(false);
+                    collapseAssetButton.gameObject.SetActive(true);
+                    showLabelsButton.gameObject.SetActive(false);
+                    hideLabelsButton.gameObject.SetActive(false);
+                    labelController.state = LabelControllerState.LABELS_HIDDEN;
+                    break;
+                case SkullAssetState.EXPANDED_SKULL:
+                    expandSkullButton.gameObject.SetActive(false);
+                    retractSkullButton.gameObject.SetActive(true);
+                    collapseAssetButton.gameObject.SetActive(true);
+                    showLabelsButton.gameObject.SetActive(true);
+                    hideLabelsButton.gameObject.SetActive(false);
+                    labelController.state = LabelControllerState.LABELS_HIDDEN;
+                    break;
+                case SkullAssetState.LABELED_SKULL:
+                    expandSkullButton.gameObject.SetActive(false);
+                    retractSkullButton.gameObject.SetActive(true);
+                    collapseAssetButton.gameObject.SetActive(true);
+                    showLabelsButton.gameObject.SetActive(false);
+                    hideLabelsButton.gameObject.SetActive(true);
+                    labelController.state = LabelControllerState.LABELS_SHOWN;
+                    break;
+                    
+
+
+            }
+        }
+
+        void OnEnable()
         {
             rootUIObj = GameObject.FindGameObjectWithTag("MainCanvas").transform.Find("SkullAndBrainUI").gameObject;
-            touchToInteractObj = transform.GetChild(0).gameObject;
-            mainObj = transform.GetChild(1).gameObject;
-            mainObjAnimation = mainObj.transform.GetChild(0).GetComponent<Animation>();
-            if (touchToInteractObj == null || mainObj == null || rootUIObj == null || mainObjAnimation == null)
+            if (touchToInteractButton == null || rootUIObj == null || mainObjAnimation == null)
             {
-                Debug.Log("Having trouble initialising Skull and Brain asset");
+                Debug.LogError("Having trouble initialising Skull and Brain asset");
             }
-            //touchToInteractObj is a world canvas, that apparently needs to have its camera set. Do that here:
-            touchToInteractObj.transform.Find("Canvas").GetComponent<Canvas>().worldCamera = Camera.main;
-
-            mainObj.SetActive(false); 
-            touchToInteractObj.SetActive(true);
-        
-            //Add listeners internal to this asset.. I don't think that they need to be removed OnDestroy, as the observable get destroyed at the same time 
-            touchToInteractObj.transform.GetChild(0).GetChild(0).GetComponent<Button>().onClick.AddListener(_swapToMainObj);
-            var selectInteractable = mainObj.GetComponent<ARSelectionInteractable>();
-            selectInteractable.onSelectEntered.AddListener(showAssetUI);
-            selectInteractable.onSelectExited.AddListener(hideAssetUI);
+            
         
             //Add listeners to UI Buttons. These listeners need to be removed when this object is destroyed:
-            swapAssetsButton = rootUIObj.transform.Find("CollapseAssetButton").gameObject.GetComponent<Button>();
-            expandAssetButton = rootUIObj.transform.Find("ExpandButton").gameObject.GetComponent<Button>();
-            collapseAssetButton = rootUIObj.transform.Find("JoinButton").gameObject.GetComponent<Button>();
-            if (swapAssetsButton == null || expandAssetButton == null || collapseAssetButton == null)
+            collapseAssetButton = rootUIObj.transform.Find("CollapseAssetButton").gameObject.GetComponent<Button>();
+            expandSkullButton = rootUIObj.transform.Find("ExpandButton").gameObject.GetComponent<Button>();
+            retractSkullButton = rootUIObj.transform.Find("JoinButton").gameObject.GetComponent<Button>();
+            showLabelsButton = rootUIObj.transform.Find("ShowLabelsButton").gameObject.GetComponent<Button>();
+            hideLabelsButton = rootUIObj.transform.Find("HideLabelsButton").gameObject.GetComponent<Button>();
+
+            if (retractSkullButton == null || expandSkullButton == null || collapseAssetButton == null || showLabelsButton == null || hideLabelsButton == null )
             {
-                Debug.Log("Problem with finding required UI components for Skull and Brain Asset");
+                Debug.LogError("Problem with finding required UI components for Skull and Brain Asset");
             }
 
-            swapAssetsButton.onClick.AddListener(swapToInteractObj);
-            swapAssetsButton.onClick.AddListener(_hideAssetUI);
-            expandAssetButton.onClick.AddListener(() => mainObjAnimation.Play("expand"));
-            collapseAssetButton.onClick.AddListener(() => mainObjAnimation.Play("join"));
+            touchToInteractButton.onClick.AddListener(
+                () =>
+                {
+                    state = SkullAssetState.MINIMIZED_SKULL;
+                });
+            selectInteractable.selectEntered.AddListener( onSelectEntered);
+            selectInteractable.selectExited.AddListener(onSelectExited);
+            
+            collapseAssetButton.onClick.AddListener(() =>
+            {
+                state = SkullAssetState.TOUCH_TO_INTERACT_STATE;
+            });
+            retractSkullButton.onClick.AddListener(()=>{
+                state = SkullAssetState.MINIMIZED_SKULL;
+            });
+            expandSkullButton.onClick.AddListener(() =>
+            {
+                mainObjAnimation.Play("expand_tudor_mod");
+                StartCoroutine(
+                    ConditionalCoroutineUtils.ConditionalExecutionCoroutine(
+                        conditional: () => mainObjAnimation.isPlaying == false,
+                        () => state = SkullAssetState.EXPANDED_SKULL,
+                        timeout: 10 * 60 * 60
+                    )
+                );
+            });
+            
+            retractSkullButton.onClick.AddListener(() =>
+            {
+                mainObjAnimation.Play("join_tudor_mod");
+                StartCoroutine(
+                    ConditionalCoroutineUtils.ConditionalExecutionCoroutine(
+                        conditional: () => mainObjAnimation.isPlaying == false,
+                        () => state = SkullAssetState.MINIMIZED_SKULL,
+                        timeout: 10 * 60 * 60
+                    )
+                );
+            });
+            showLabelsButton.onClick.AddListener(
+                () =>
+                {
+                    state = SkullAssetState.LABELED_SKULL;
+                }
+            );
+            hideLabelsButton.onClick.AddListener(
+                () =>
+                {
+                    state = SkullAssetState.EXPANDED_SKULL;
+                }
+            );
+
+            state = SkullAssetState.TOUCH_TO_INTERACT_STATE;
 
         }
+        
 
-        void swapToMainObj(XRBaseInteractor i)
-        {
-            Debug.Log("swap to second prefab called");
-            _swapToMainObj();
-        }
-
-        public void _swapToMainObj()
-        {
-            touchToInteractObj.SetActive(false); 
-            mainObj.SetActive(true);
-            mainObjAnimation.Play("idle");
-        }
-
-        public void showAssetUI(XRBaseInteractor i)
+        private void onSelectEntered(SelectEnterEventArgs e)
         {   
             rootUIObj.SetActive(true);
         }
 
-        void hideAssetUI(XRBaseInteractor i)
+        void onSelectExited(SelectExitEventArgs e)
         {
-            _hideAssetUI();
+            if (e.isCanceled)
+            {
+                rootUIObj.SetActive(false);
+            }
+            else
+            {
+                Debug.Log("What is happening ? :)");
+            }
         }
 
-        void _hideAssetUI()
+        private void OnDisable()
         {
-            rootUIObj.SetActive(false);
-        }
-
-        public void swapToInteractObj()
-        {
-            mainObj.SetActive(false);
-            touchToInteractObj.SetActive(true);
-        }
-    
-
-        private void OnDestroy()
-        {
-            swapAssetsButton.onClick.RemoveAllListeners();
+            expandSkullButton.onClick.RemoveAllListeners();
+            retractSkullButton.onClick.RemoveAllListeners();
+            collapseAssetButton.onClick.RemoveAllListeners();
+            showLabelsButton.onClick.RemoveAllListeners();
+            hideLabelsButton.onClick.RemoveAllListeners();
+            selectInteractable.selectEntered.RemoveAllListeners();
+            selectInteractable.selectExited.RemoveAllListeners();
             rootUIObj.SetActive(false);
         }
     }

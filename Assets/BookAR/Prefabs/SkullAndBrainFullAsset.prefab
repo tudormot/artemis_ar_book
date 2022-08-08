@@ -741,15 +741,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1892796593522550736}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.00000005960463, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.98, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7739598001407673470}
   - {fileID: 217235170446126545}
-  m_Father: {fileID: 4534386966801022630}
-  m_RootOrder: 1
+  m_Father: {fileID: 4534386966801022634}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2303850948792344062
 GameObject:
@@ -1890,7 +1890,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4534386966801022632}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 4.4440113e-15, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 3.508355e-15, y: 90, z: 0}
 --- !u!33 &4534386966801022531
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2064,6 +2064,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4534386966801022632}
   - component: {fileID: 4534386966801022571}
+  - component: {fileID: 6468197374191676925}
   m_Layer: 0
   m_Name: Skull and Brain with Collider
   m_TagString: Untagged
@@ -2113,6 +2114,34 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &6468197374191676925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4534386966801022596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dc848f0d4bb4962841c26516ec28431, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MaxFOVCenterOffsetAngle: 180
+  m_MinAnnotationRange: 0.02
+  m_MaxAnnotationRange: 2
+  annotationPairs:
+  - m_AnnotationVisualization: {fileID: 2303850948792344062}
+    m_AnnotationParent: {fileID: 4534386966801022592}
+  - m_AnnotationVisualization: {fileID: 2895041795836714135}
+    m_AnnotationParent: {fileID: 4534386966801022601}
+  - m_AnnotationVisualization: {fileID: 5924579984914949314}
+    m_AnnotationParent: {fileID: 4534386966801022598}
+  - m_AnnotationVisualization: {fileID: 1892796593522550736}
+    m_AnnotationParent: {fileID: 4534386966801022599}
+  - m_AnnotationVisualization: {fileID: 4619137546610135992}
+    m_AnnotationParent: {fileID: 4534386966801022597}
+  - m_AnnotationVisualization: {fileID: 1733669061717829062}
+    m_AnnotationParent: {fileID: 4534386966801022595}
 --- !u!1 &4534386966801022597
 GameObject:
   m_ObjectHideFlags: 0
@@ -2244,7 +2273,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5750100403950308389}
-  - {fileID: 2663147938659130102}
   m_Father: {fileID: 4534386966801022632}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2342,7 +2370,8 @@ Transform:
   m_LocalPosition: {x: -0.0021483572, y: 0.13043055, z: 0.30051893}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2663147938659130102}
   m_Father: {fileID: 4534386966801022632}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2920,6 +2949,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3289d2b1ea3d7646db64be150c1aad20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  touchToInteractButton: {fileID: 6648535272867968344}
+  touchToInteractCanvas: {fileID: 6648535272867968332}
+  labelController: {fileID: 6468197374191676925}
+  mainObjAnimation: {fileID: 4534386966801022571}
+  selectInteractable: {fileID: 4534386966801022579}
 --- !u!1 &4534386966801022622
 GameObject:
   m_ObjectHideFlags: 0
@@ -4101,7 +4135,7 @@ GameObject:
   m_Component:
   - component: {fileID: 166171492963882108}
   m_Layer: 0
-  m_Name: LabelPivot
+  m_Name: PivotTextFollowing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4452,6 +4486,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 093676844ef992b37973a7ee59681ddb, type: 3}
+--- !u!223 &6648535272867968332 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 4650875919433788553, guid: 093676844ef992b37973a7ee59681ddb,
+    type: 3}
+  m_PrefabInstance: {fileID: 2075997366480525765}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6648535272867968344 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4650875919433788573, guid: 093676844ef992b37973a7ee59681ddb,
+    type: 3}
+  m_PrefabInstance: {fileID: 2075997366480525765}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6648535272867968447 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4650875919433788538, guid: 093676844ef992b37973a7ee59681ddb,

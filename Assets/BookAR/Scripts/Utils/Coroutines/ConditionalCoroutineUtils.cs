@@ -4,23 +4,23 @@ using UnityEngine;
 
 namespace BookAR.Scripts.Utils.Coroutines
 {
-    internal static class ConditionalCoroutineUtils
+    public static class ConditionalCoroutineUtils
     {
-        public static IEnumerator ConditionalExecutionCoroutine(Func<bool> conditional, Action executable, int timeout = WaitForCondition.DEFAULT_TIMEOUT_IN_FRAMES)
+        public static IEnumerator ConditionalExecutionCoroutine(Func<bool> conditional, Action executable, int timeout = WaitForConditionWithTimeout.DEFAULT_TIMEOUT_IN_FRAMES)
         {
-            yield return new WaitForCondition(conditional, timeout);
+            yield return new WaitForConditionWithTimeout(conditional, timeout);
             executable.Invoke();
         }
 
     }
-    public class WaitForCondition : CustomYieldInstruction
+    public class WaitForConditionWithTimeout : CustomYieldInstruction
     {
         private Func<bool> conditional;
         public override bool keepWaiting => conditional.Invoke();
         public const int DEFAULT_TIMEOUT_IN_FRAMES = 60*60*3;
         private int timeout;
         private int currentFrame = 0;
-        public WaitForCondition(Func<bool> conditional, int timeout = DEFAULT_TIMEOUT_IN_FRAMES)
+        public WaitForConditionWithTimeout(Func<bool> nonTimeoutCondition, int timeout = DEFAULT_TIMEOUT_IN_FRAMES)
         {
             this.timeout = timeout;
             this.conditional = ()=>
@@ -28,11 +28,10 @@ namespace BookAR.Scripts.Utils.Coroutines
                 currentFrame += 1;
                 if (currentFrame >= this.timeout)
                 {
-                    Debug.LogError("Conditional did not become true after timeout!! A coroutine is  not accomplishing its purpose, care!!");
+                    UnityEngine.Debug.LogError("Conditional did not become true after timeout!! A coroutine is  not accomplishing its purpose, care!!");
                     return false;
                 }
-
-                return !conditional.Invoke();
+                return !nonTimeoutCondition.Invoke();
             };
         }
     }
