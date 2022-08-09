@@ -5334,6 +5334,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe37efa40c714ffba5c683a5292e45ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainSpeed: 5
+  shiftAdd: 10
+  maxShift: 50
+  camSens: 0.25
+  mouseSensitivity: 5
 --- !u!1 &1296247427
 GameObject:
   m_ObjectHideFlags: 0
