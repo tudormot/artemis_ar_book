@@ -15,6 +15,7 @@
 
 using System;
 using System.Collections.Generic;
+using BookAR.Scripts.AssetControl.Common.ARLabels;
 
 namespace UnityEngine.XR.Interaction.Toolkit.AR
 {
@@ -91,6 +92,9 @@ namespace UnityEngine.XR.Interaction.Toolkit.AR
         [SerializeField]
         List<CustomARAnnotation> m_Annotations = new List<CustomARAnnotation>();
 
+        [SerializeField]
+        public LineDrawer lineDrawer;
+
         /// <summary>
         /// The list of annotations.
         /// </summary>
@@ -119,6 +123,8 @@ namespace UnityEngine.XR.Interaction.Toolkit.AR
                 {
                     
                     annotation.annotationVisualization.SetActive(false);
+                    lineDrawer.SetActive(false);
+
                 }
             }
 
@@ -139,8 +145,6 @@ namespace UnityEngine.XR.Interaction.Toolkit.AR
             var cameraTransform = camera.transform;
             var fromCamera = transform.position - cameraTransform.position;
             var distSquare = fromCamera.sqrMagnitude;
-            var fromCameraAlt = new Vector3(fromCamera.x, fromCamera.y,fromCamera.z );
-            fromCameraAlt.Normalize();
             fromCamera.y = 0f;
             fromCamera.Normalize();
             var dotProd = Vector3.Dot(fromCamera, cameraTransform.forward);
@@ -156,30 +160,24 @@ namespace UnityEngine.XR.Interaction.Toolkit.AR
                     if (enableThisFrame && !annotation.annotationVisualization.activeSelf)
                     {
                         annotation.annotationVisualization.SetActive(true);
-                        
-
+                        lineDrawer.SetActive(true);
 
                     }
                     else if (!enableThisFrame && annotation.annotationVisualization.activeSelf)
                     {
                         annotation.annotationVisualization.SetActive(false);
-                        
+                        lineDrawer.SetActive(false);
+
+
                     }
 
 
                     // If enabled, align to camera
                     if (annotation.annotationVisualization.activeSelf)
                     {
-                        // annotation.annotationVisualization.transform.rotation =
-                        //     Quaternion.LookRotation(fromCameraAlt, transform.up);
-                        // annotation.annotationVisualization.transform.LookAt(cameraTransform,annotation.annotationVisualization.transform.up);
                         annotation.annotationVisualization.transform.forward = cameraTransform.forward;
-                        //introduce line renderer here TODO
-                        if (annotation.labelLineEndPoint != null)
-                        {
-                            // Debug.Log("We here");
-                            Debug.DrawLine(annotation.labelLineEndPoint.position,annotation.labelLineStartPoint.position,Color.red, duration:5);
-                        }
+                        //annotation.annotationVisualization.transform.LookAt(cameraTransform,annotation.annotationVisualization.transform.up);
+                        lineDrawer.DrawLineInGameView(annotation.labelLineEndPoint.position, annotation.labelLineStartPoint.position);
                     }
                 }
                 else
@@ -190,6 +188,24 @@ namespace UnityEngine.XR.Interaction.Toolkit.AR
             }
             
         }
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            if (lineDrawer != null) {
+                lineDrawer.SetActive(false);
+            }
+
+        }
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            if (lineDrawer != null)
+            {
+                lineDrawer.Destroy();
+            }
+
+        }
+
     }
 }
 

@@ -7,40 +7,27 @@ namespace BookAR.Scripts.AssetControl.Common.ARLabels
         private LineRenderer lineRenderer;
         private float lineSize;
 
-        public LineDrawer(float lineSize = 0.2f)
+        public LineDrawer( string uniqueTag, Material lineMaterial, float lineSize = 0.001f)
         {
-            GameObject lineObj = new GameObject("LineObj");
-            lineRenderer = lineObj.AddComponent<LineRenderer>();
-            //Particles/Additive
-            lineRenderer.material = new Material(Shader.Find("Hidden/Internal-Colored"));
-
-            this.lineSize = lineSize;
-        }
-
-        private void init(float lineSize = 0.2f)
-        {
-            if (lineRenderer == null)
-            {
-                GameObject lineObj = new GameObject("LineObj");
-                lineRenderer = lineObj.AddComponent<LineRenderer>();
-                //Particles/Additive
-                lineRenderer.material = new Material(Shader.Find("Hidden/Internal-Colored"));
-
-                this.lineSize = lineSize;
+            Debug.Log($"LineDrawer was create! uniquetag : {uniqueTag}");
+            GameObject lineObj = new GameObject(uniqueTag);
+            lineObj.transform.parent = GameObject.FindGameObjectWithTag("DynamicObjects").transform;
+            if (lineObj == null) {
+                Debug.Log("how the fuck is lineObj null?");
             }
+            lineRenderer = lineObj.AddComponent<LineRenderer>();
+            lineRenderer.material = lineMaterial;
+            this.lineSize = lineSize;
+            SetActive(false);
+
         }
+
 
         //Draws lines through the provided vertices
-        public void DrawLineInGameView(Vector3 start, Vector3 end, Color color)
+        public void DrawLineInGameView(Vector3 start, Vector3 end)
         {
-            if (lineRenderer == null)
-            {
-                init(0.2f);
-            }
 
-            //Set color
-            lineRenderer.startColor = color;
-            lineRenderer.endColor = color;
+            SetActive(true);
 
             //Set width
             lineRenderer.startWidth = lineSize;
@@ -54,11 +41,17 @@ namespace BookAR.Scripts.AssetControl.Common.ARLabels
             lineRenderer.SetPosition(1, end);
         }
 
+        public void SetActive(bool active) {
+            // Debug.Log($"SetActive {active} . {lineRenderer.gameObject.name}");
+            lineRenderer.gameObject.SetActive(active);
+            
+        }
+
         public void Destroy()
         {
             if (lineRenderer != null)
             {
-                UnityEngine.Object.Destroy(lineRenderer.gameObject);
+                GameObject.Destroy(lineRenderer.gameObject);
             }
         }
     

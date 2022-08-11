@@ -10,6 +10,15 @@ namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
     {
         TOUCH_TO_INTERACT_STATE, MINIMIZED_SKULL, EXPANDED_SKULL, LABELED_SKULL
     }
+    public enum SkullSelectionState
+    {
+        SELECTED, NOT_SELECTED
+    }
+    public struct SkullFullState {
+        public SkullSelectionState selectState;
+        public SkullAssetState assetState;
+
+    }
 
     public class SkullAndBrainAssetControl : MonoBehaviour, IAssetController
     {
@@ -28,8 +37,8 @@ namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
         private Button showLabelsButton;
         private Button hideLabelsButton;
 
-        private SkullAssetState _state;
-        public SkullAssetState state
+        private SkullFullState _state;
+        public SkullFullState state
         {
             get => _state;
             set
@@ -40,16 +49,15 @@ namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
             }
         }
 
-        private void onStateChanged(SkullAssetState newState)
+        private void onStateChanged(SkullFullState newState)
         {
-            switch (newState)
+            switch (newState.assetState)
             {
                 case SkullAssetState.TOUCH_TO_INTERACT_STATE:
                     //touchToInteractObj is a world canvas, that apparently needs to have its camera set. Do that here:
                     touchToInteractCanvas.worldCamera = Camera.main;
                     mainObjAnimation.gameObject.SetActive(false); 
                     touchToInteractCanvas.gameObject.SetActive(true);
-                    rootUIObj.SetActive(false);
                     labelController.state = LabelControllerState.LABELS_HIDDEN;
                     break;
                 case SkullAssetState.MINIMIZED_SKULL:
@@ -79,23 +87,27 @@ namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
                     hideLabelsButton.gameObject.SetActive(true);
                     labelController.state = LabelControllerState.LABELS_SHOWN;
                     break;
-                    
 
+            }
+            switch (newState.selectState) {
+                case SkullSelectionState.SELECTED:
+                    rootUIObj.SetActive(true);
 
+                    break;
+                case SkullSelectionState.NOT_SELECTED:
+                    rootUIObj.SetActive(false);
+                    break;
             }
         }
 
         void OnEnable()
         {
-            Debug.Log("DEBUG1");
             rootUIObj = GameObject.FindGameObjectWithTag("MainCanvas").transform.Find("SkullAndBrainUI").gameObject;
-            Debug.Log("DEBUG1.1");
 
             if (touchToInteractButton == null || rootUIObj == null || mainObjAnimation == null)
             {
                 Debug.LogError("Having trouble initialising Skull and Brain asset");
             }
-            Debug.Log("DEBUG1.2");
 
         
             //Add listeners to UI Buttons. These listeners need to be removed when this object is destroyed:
@@ -104,7 +116,6 @@ namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
             retractSkullButton = rootUIObj.transform.Find("JoinButton").gameObject.GetComponent<Button>();
             showLabelsButton = rootUIObj.transform.Find("ShowLabelsButton").gameObject.GetComponent<Button>();
             hideLabelsButton = rootUIObj.transform.Find("HideLabelsButton").gameObject.GetComponent<Button>();
-            Debug.Log("DEBUG1.3");
 
 
             if (retractSkullButton == null || expandSkullButton == null || collapseAssetButton == null || showLabelsButton == null || hideLabelsButton == null )
@@ -112,25 +123,34 @@ namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
                 Debug.LogError("Problem with finding required UI components for Skull and Brain Asset");
             }
 
-            Debug.Log("DEBUG1.4");
 
             touchToInteractButton.onClick.AddListener(
                 () =>
                 {
-                    state = SkullAssetState.MINIMIZED_SKULL;
+                    state = new SkullFullState
+                    {
+                        selectState = state.selectState,
+                        assetState = SkullAssetState.MINIMIZED_SKULL
+                    }; 
                 });
-            Debug.Log("DEBUG1.42");
 
             selectInteractable.selectEntered.AddListener( onSelectEntered);
             selectInteractable.selectExited.AddListener(onSelectExited);
-            Debug.Log("DEBUG1.5");
 
             collapseAssetButton.onClick.AddListener(() =>
             {
-                state = SkullAssetState.TOUCH_TO_INTERACT_STATE;
+                state = new SkullFullState
+                {
+                    selectState = state.selectState,
+                    assetState = SkullAssetState.TOUCH_TO_INTERACT_STATE
+                };
             });
             retractSkullButton.onClick.AddListener(()=>{
-                state = SkullAssetState.MINIMIZED_SKULL;
+                state = new SkullFullState
+                {
+                    selectState = state.selectState,
+                    assetState = SkullAssetState.MINIMIZED_SKULL
+                };
             });
             expandSkullButton.onClick.AddListener(() =>
             {
@@ -138,12 +158,16 @@ namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
                 StartCoroutine(
                     ConditionalCoroutineUtils.ConditionalExecutionCoroutine(
                         conditional: () => mainObjAnimation.isPlaying == false,
-                        () => state = SkullAssetState.EXPANDED_SKULL,
+                        () =>
+                        state = new SkullFullState
+                        {
+                            selectState = state.selectState,
+                            assetState = SkullAssetState.EXPANDED_SKULL
+                        },
                         timeout: 10 * 60 * 60
                     )
                 );
             });
-            Debug.Log("DEBUG2");
 
             
             retractSkullButton.onClick.AddListener(() =>
@@ -152,7 +176,12 @@ namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
                 StartCoroutine(
                     ConditionalCoroutineUtils.ConditionalExecutionCoroutine(
                         conditional: () => mainObjAnimation.isPlaying == false,
-                        () => state = SkullAssetState.MINIMIZED_SKULL,
+                        () =>
+                        state = new SkullFullState
+                        {
+                            selectState = state.selectState,
+                            assetState = SkullAssetState.MINIMIZED_SKULL
+                        },
                         timeout: 10 * 60 * 60
                     )
                 );
@@ -160,40 +189,53 @@ namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
             showLabelsButton.onClick.AddListener(
                 () =>
                 {
-                    state = SkullAssetState.LABELED_SKULL;
+                    state = new SkullFullState
+                    {
+                        selectState = state.selectState,
+                        assetState = SkullAssetState.LABELED_SKULL
+                    };
                 }
             );
-            Debug.Log("DEBUG2.5");
 
             hideLabelsButton.onClick.AddListener(
                 () =>
                 {
                     Debug.Log("Hide labels button was clicked!");
-                    state = SkullAssetState.EXPANDED_SKULL;
+                    state = new SkullFullState
+                    {
+                        selectState = state.selectState,
+                        assetState = SkullAssetState.EXPANDED_SKULL
+                    };
                 }
             );
 
-            state = SkullAssetState.TOUCH_TO_INTERACT_STATE;
-            Debug.Log("DEBUG3");
+            state = new SkullFullState
+            {
+                selectState = SkullSelectionState.NOT_SELECTED,
+                assetState = SkullAssetState.TOUCH_TO_INTERACT_STATE
+            };
 
         }
         
 
         private void onSelectEntered(SelectEnterEventArgs e)
-        {   
-            rootUIObj.SetActive(true);
+        {
+            state = new SkullFullState
+            {
+                selectState = SkullSelectionState.SELECTED,
+                assetState = state.assetState
+            };
         }
 
         void onSelectExited(SelectExitEventArgs e)
         {
-            if (e.isCanceled)
+
+            state = new SkullFullState
             {
-                rootUIObj.SetActive(false);
-            }
-            else
-            {
-                Debug.Log("What is happening ? :)");
-            }
+                selectState = SkullSelectionState.NOT_SELECTED,
+                assetState = state.assetState
+            };
+
         }
 
         private void OnDisable()

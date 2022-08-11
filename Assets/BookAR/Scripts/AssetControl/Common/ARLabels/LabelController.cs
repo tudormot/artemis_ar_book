@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using BookAR.Scripts.AssetControl.Common.ARLabels;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.AR;
 
@@ -77,9 +79,15 @@ namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
                 get => m_MaxAnnotationRange;
                 set => m_MaxAnnotationRange = value;
             }
-            
+
+        [SerializeField]
+        Material annotationLineMaterial;
+
         [SerializeField]
         List<ARAnnotationPair> annotationPairs;
+
+
+        
 
         private LabelControllerState _state = LabelControllerState.CONTROLLER_UNINITIALIZED;
         public LabelControllerState state
@@ -135,23 +143,30 @@ namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
                                 labelLineEndPoint = pair.labelLineEndPoint
                             }
                         );
+                        interactable.lineDrawer = new LineDrawer(pair.annotationVisualization.name, annotationLineMaterial);
+                        Debug.Log($"added a line drawer for {pair.annotationVisualization.name}");
                         interactable.enabled = state == LabelControllerState.LABELS_SHOWN;
                     }
                 }
-                Debug.Log("LabelController OnEnable finished");
+
+
+                GetComponentsInChildren<Canvas>().Select(
+                    (r) => {
+                        if (r.renderMode == RenderMode.WorldSpace && r.worldCamera == null) {
+                            r.worldCamera = Camera.main;
+                        }
+                        return r;
+                    } 
+                );
             }
             foreach (var pair in annotationPairs)
             {
-                Debug.Log($"DEBUG, WE are here, newState = {newState}");
-                Debug.Log($"pair is : {pair}");
                 pair.AnnotationParent.GetComponent<CustomARAnnotationInteractable>().enabled =
                     newState == LabelControllerState.LABELS_SHOWN;
-                Debug.Log($"we here 1");
             
                 pair.annotationVisualization.SetActive(
                     newState == LabelControllerState.LABELS_SHOWN
                 );
-                Debug.Log($"we here 2");
             
             }
         }
