@@ -67,7 +67,8 @@ namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
                     expandSkullButton.gameObject.SetActive(true);
                     retractSkullButton.gameObject.SetActive(false);
                     collapseAssetButton.gameObject.SetActive(true);
-                    showLabelsButton.gameObject.SetActive(false);
+                    showLabelsButton.gameObject.SetActive(true);
+                    showLabelsButton.interactable = false;
                     hideLabelsButton.gameObject.SetActive(false);
                     labelController.state = LabelControllerState.LABELS_HIDDEN;
                     break;
@@ -75,7 +76,7 @@ namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
                     expandSkullButton.gameObject.SetActive(false);
                     retractSkullButton.gameObject.SetActive(true);
                     collapseAssetButton.gameObject.SetActive(true);
-                    showLabelsButton.gameObject.SetActive(true);
+                    showLabelsButton.interactable = true;
                     hideLabelsButton.gameObject.SetActive(false);
                     labelController.state = LabelControllerState.LABELS_HIDDEN;
                     break;
