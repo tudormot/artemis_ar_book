@@ -35,6 +35,21 @@ namespace BookAR.Scripts.UI
             }
         }
 
+        private void contractCanvas()
+        {
+            Debug.Log("We are clicking the transparent canvas!");
+            state = SettingsUIState.SETTINGS_PANEL_CONTRACTED;
+            expandCanvasButton.onClick.RemoveListener(contractCanvas);
+            expandCanvasButton.onClick.AddListener(expandCanvas);
+        }
+        private void expandCanvas()
+        {
+            Debug.Log("We are clicking the settings image!");
+            state = SettingsUIState.SETTINGS_PANEL_EXPANDED;
+            expandCanvasButton.onClick.RemoveListener(expandCanvas);
+            expandCanvasButton.onClick.AddListener(contractCanvas);
+        }
+
         private void OnEnable()
         {
             screenDebuggingToggle.isOn = GlobalSettingsSingleton.instance.state.enableOnScreenDebugMessages;
@@ -47,17 +62,12 @@ namespace BookAR.Scripts.UI
             
             globalSettingsUIAnimator = GetComponent<Animator>();
             expandCanvasButton.onClick.AddListener(
-                () =>
-                {
-                    Debug.Log("We are clicking the settings image!");
-                    state = SettingsUIState.SETTINGS_PANEL_EXPANDED;
-                }
+                expandCanvas
             );
             contractCanvasButton.onClick.AddListener(
                 () =>
                 {
-                    Debug.Log("We are clicking the transparent canvas!");
-                    state = SettingsUIState.SETTINGS_PANEL_CONTRACTED;
+                    Debug.Log("Button disabled for the time being");
                 }
             );
             screenDebuggingToggle.onValueChanged.AddListener(
