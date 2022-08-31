@@ -73,8 +73,7 @@ namespace BookAR.Scripts.AssetControl._3D
             //finally enable introAsset to start the experience:
             touchToInteractCanvas.gameObject.SetActive(true);
             spaceGameController.enabled = false;
-            
-
+            solarSystemAsset.SetActive(false);
 
         }
 

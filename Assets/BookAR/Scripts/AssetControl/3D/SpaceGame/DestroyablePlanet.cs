@@ -7,7 +7,7 @@ namespace Scenes.BookAR.Scripts
     // [RequireComponent(typeof(ParticleSystem))]
     public class DestroyablePlanet : MonoBehaviour
     {
-        [SerializeField] private int PlanetHP = 30;
+        [SerializeField] int PlanetHP = 30;
         public bool isShieldActive = false;
 
         [SerializeField] private ParticleSystem PlanetExplosionParticleSystem = null;
