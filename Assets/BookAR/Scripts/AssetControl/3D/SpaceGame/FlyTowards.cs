@@ -20,12 +20,9 @@ namespace Scenes.BookAR.Scripts
 
         private void OnCollisionEnter(Collision other)
         {
-            Debug.Log("Seems like our rocket has hit something: " + other.gameObject.name);
             
             Assert.AreEqual(Target,other.gameObject,"Hmm, we hit another target for some reason? "+ Target.ToString() + other.gameObject.ToString());
-            Debug.Log("debug1");
             other.gameObject.GetComponent<DestroyablePlanet>().OnHit(damage);
-            Debug.Log("debug2");
 
             DestroyMissile();
 
@@ -55,9 +52,5 @@ namespace Scenes.BookAR.Scripts
             Destroy(gameObject);
         }
 
-        private void OnDisable()
-        {
-            Debug.Log("FlyTowards script was disabled, this probably means that projectile was destroyed");
-        }
     }
 }

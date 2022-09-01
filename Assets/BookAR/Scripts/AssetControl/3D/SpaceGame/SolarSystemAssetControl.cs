@@ -1,11 +1,11 @@
 using Scenes.BookAR.Scripts;
+using ThirdPartyAssets.solar_system.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace BookAR.Scripts.AssetControl._3D
 {
     /* These shitty required components are all thirs party scripts, part of the original solar system asset */
-    [RequireComponent(typeof(toggleChange))]
     [RequireComponent(typeof(GlobalSoundManager))]
     [RequireComponent(typeof(ShowInfo))]
     [RequireComponent(typeof(OpenCloseCanvas))]
@@ -15,7 +15,6 @@ namespace BookAR.Scripts.AssetControl._3D
         AssetControllerType IAssetController.type { get; set; } = AssetControllerType.DEFAULT_ASSET_TYPE;
 
         private GameObject rootUIObj;
-        private toggleChange toggleChangeScript;
         private GlobalSoundManager soundManagerScript;
         private ShowInfo showInfoScript;
         private OpenCloseCanvas openCloseCanvasScript;
@@ -39,7 +38,6 @@ namespace BookAR.Scripts.AssetControl._3D
             touchToInteractCanvas.worldCamera = Camera.main;
             touchToInteractButton.onClick.AddListener(swapToMainAsset);
 
-            toggleChangeScript = GetComponent<toggleChange>();
             soundManagerScript = GetComponent<GlobalSoundManager>();
             showInfoScript = GetComponent<ShowInfo>();
             openCloseCanvasScript = GetComponent<OpenCloseCanvas>();
@@ -51,9 +49,10 @@ namespace BookAR.Scripts.AssetControl._3D
                 rootUIObj.transform.Find("StandardUI").transform.Find("SoundOnOff").GetComponent<Button>();
             openCloseCanvasScript.canvas = rootUIObj.transform.Find("InfoUI").gameObject;
 
-            toggleChangeScript.labelsToggle = rootUIObj.transform.Find("StandardUI").transform.Find("Toggle labels").GetComponent<Toggle>();
-            toggleChangeScript.pathsToggle = rootUIObj.transform.Find("StandardUI").transform.Find("Toggle paths").GetComponent<Toggle>();
-            toggleChangeScript.SolarSystem = solarSystemAsset;
+            rootUIObj.transform.Find("StandardUI").Find("Toggle labels").GetComponent<Toggle>().onValueChanged.AddListener(
+                b => { solarSystemAsset.GetComponent<SolarSystemManager>().ShowLabels = b; });
+            rootUIObj.transform.Find("StandardUI").Find("Toggle paths").GetComponent<Toggle>().onValueChanged.AddListener(
+                b => { solarSystemAsset.GetComponent<SolarSystemManager>().ShowPaths = b; });
 
             showInfoScript.DescriptionCanvas = rootUIObj.transform.Find("InfoUI").gameObject;
             showInfoScript.description = showInfoScript.DescriptionCanvas.transform.Find("Scroll View").GetChild(0).GetChild(0).GetChild(0)
@@ -64,8 +63,6 @@ namespace BookAR.Scripts.AssetControl._3D
             rootUIObj.transform.Find("StandardUI").Find("Slider").GetComponent<sliderChange>().SolarSystem =
                 solarSystemAsset;
             rootUIObj.transform.Find("StandardUI").Find("SoundOnOff").GetComponent<Button>().onClick.AddListener(soundManagerScript.SoundManager);
-            rootUIObj.transform.Find("StandardUI").Find("Toggle paths").GetComponent<Toggle>().onValueChanged.AddListener(b=>toggleChangeScript.TogglePaths());
-            rootUIObj.transform.Find("StandardUI").Find("Toggle labels").GetComponent<Toggle>().onValueChanged.AddListener(b=> toggleChangeScript.ToggleLabels());
             rootUIObj.transform.Find("InfoUI").Find("Close").GetComponent<Button>().onClick.AddListener(openCloseCanvasScript.close);
             rootUIObj.transform.Find("StandardUI").Find("CollapseAssetButton").GetComponent<Button>().onClick.AddListener(swapToIntroAsset);
             rootUIObj.transform.Find("StandardUI").Find("GameModeButton").GetComponent<Button>().onClick.AddListener(startGameMode);
@@ -82,8 +79,8 @@ namespace BookAR.Scripts.AssetControl._3D
             touchToInteractCanvas.gameObject.SetActive(false);
             solarSystemAsset.SetActive(true);
             rootUIObj.SetActive(true);
+            rootUIObj.transform.Find("StandardUI").gameObject.SetActive(true);
 
-            toggleChangeScript.enabled = true;
             soundManagerScript.enabled = true;
             showInfoScript.enabled = true;
             openCloseCanvasScript.enabled = true;
@@ -98,7 +95,6 @@ namespace BookAR.Scripts.AssetControl._3D
             solarSystemAsset.SetActive(false);
             rootUIObj.SetActive(false);
 
-            toggleChangeScript.enabled = false;
             soundManagerScript.enabled = false;
             showInfoScript.enabled = false;
             openCloseCanvasScript.enabled = false;

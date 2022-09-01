@@ -48,7 +48,7 @@ MonoBehaviour:
   X: 0
   Y: 1
   Z: 0
-  RotationSpeed: -0.6
+  RotationSpeed: -1
 --- !u!1 &4366267135289365588
 GameObject:
   m_ObjectHideFlags: 0
@@ -13298,7 +13298,6 @@ GameObject:
   - component: {fileID: 7708507773906339867}
   - component: {fileID: 7845157850185361825}
   - component: {fileID: 8336372777103437443}
-  - component: {fileID: 615196232694894495}
   - component: {fileID: 7941830315062115529}
   - component: {fileID: 5050896385313473288}
   m_Layer: 0
@@ -13373,21 +13372,6 @@ MonoBehaviour:
   SoundOn: {fileID: 21300000, guid: fa73598b48b32d14eb1b497526aeb2f2, type: 3}
   SoundOff: {fileID: 21300000, guid: f0e8c6da1d481fb4f95b0e2db416c535, type: 3}
   sndbutton: {fileID: 0}
---- !u!114 &615196232694894495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4368104853761719299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd1c6306ae87a6c46bb06a41a57fa26f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pathsToggle: {fileID: 0}
-  labelsToggle: {fileID: 0}
-  SolarSystem: {fileID: 0}
 --- !u!114 &7941830315062115529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14280,7 +14264,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: c06e577cb94027143bb008090cda096f, type: 3}
       propertyPath: m_Name
-      value: PlanetIce
+      value: Uranus
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: c06e577cb94027143bb008090cda096f, type: 3}
       propertyPath: m_TagString
@@ -14846,7 +14830,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 6c7d2847befb9c14698813597eaa4b8f, type: 3}
       propertyPath: m_Name
-      value: PlanetGasRing2
+      value: Saturn
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 6c7d2847befb9c14698813597eaa4b8f, type: 3}
       propertyPath: m_Layer
@@ -15001,7 +14985,7 @@ MonoBehaviour:
   X: 0
   Y: 1
   Z: 0
-  RotationSpeed: -20
+  RotationSpeed: -4
 --- !u!4 &8919873920745904236 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 6c7d2847befb9c14698813597eaa4b8f,
