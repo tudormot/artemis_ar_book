@@ -2764,7 +2764,7 @@ MonoBehaviour:
     imagePrefab: {fileID: 4534386966801022621, guid: fc404e091a48770a1a42c21b47350877,
       type: 3}
   - imageGuid: af1ff663-7588-41ec-964f-9cf0ab08fcd6
-    imagePrefab: {fileID: 4368104853761719299, guid: 97445eec578880ed0837963d7dea8a43,
+    imagePrefab: {fileID: 4534386966801022621, guid: fc404e091a48770a1a42c21b47350877,
       type: 3}
   m_ImageLibrary: {fileID: 11400000, guid: 858f744ced42ce11981335fbe0572313, type: 2}
 --- !u!4 &369467450
@@ -11796,8 +11796,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

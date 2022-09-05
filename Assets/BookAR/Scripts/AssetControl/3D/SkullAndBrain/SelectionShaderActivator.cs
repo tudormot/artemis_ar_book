@@ -13,15 +13,22 @@ namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
 
         private void OnEnable()
         {
+            Debug.Log("SelectionShaderActivator enabled!");
             materials = selectableObject.GetComponentsInChildren<MeshRenderer>().Select(
                 (r)=>r.material
-                ).ToList();
+                ).Concat(
+                selectableObject.GetComponentsInChildren<SkinnedMeshRenderer>().Select(
+                    (r)=>r.material
+                )).Append(
+                selectableObject.GetComponent<SkinnedMeshRenderer>().material)
+                .Append(
+                selectableObject.GetComponent<SkinnedMeshRenderer>().material).ToList();
+            Debug.Log($"materials: {materials}");
             foreach (var material in materials)
             {
                 if (material.shader.name == "EasyGameStudio/SelectEffect")
                 {
                     material.SetFloat(IsSelected,1);
-
                 }
                 else
                 {
@@ -32,6 +39,8 @@ namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
 
         private void OnDisable()
         {
+            Debug.Log($"onDisable called!");
+
             foreach (var material in materials)
             {
                 if (material.shader.name == "EasyGameStudio/SelectEffect")

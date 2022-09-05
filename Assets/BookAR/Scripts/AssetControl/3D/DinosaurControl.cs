@@ -5,6 +5,7 @@ using BookAR.Scripts.AssetControl;
 using BookAR.Scripts.Global;
 using DG.Tweening;
 using UnityEngine.UI;
+using UnityEngine.XR.Interaction.Toolkit.AR;
 
 namespace BookAR.Scripts.AssetControl._3D
 {
@@ -16,6 +17,8 @@ namespace BookAR.Scripts.AssetControl._3D
         [SerializeField] private Button touchToInteractButton;
         [SerializeField] private Canvas touchToInteractCanvas;
         [SerializeField] private Animator mainAsset;
+        
+
 
 
         private void OnEnable()
@@ -23,7 +26,7 @@ namespace BookAR.Scripts.AssetControl._3D
             touchToInteractCanvas.worldCamera = Camera.main;
             (this as IStatefulController<DinosaurState>).state = DinosaurState.TOUCH_TO_INTERACT_PHASE;
             touchToInteractButton.onClick.AddListener(
-                ()=> (this as IStatefulController<DinosaurState>).state = DinosaurState.ASSET_INTRO_STATE
+                ()=> (this as IStatefulController<DinosaurState>).state = DinosaurState.WALKING_STATE
                 );
         }
 
@@ -40,21 +43,20 @@ namespace BookAR.Scripts.AssetControl._3D
                     touchToInteractCanvas.gameObject.SetActive(true);
                     mainAsset.gameObject.SetActive(false);
                     break;
-                case DinosaurState.ASSET_INTRO_STATE:
-                    StartCoroutine(AssetIntroManualAnimation());
-                    break;
                 case DinosaurState.WALKING_STATE:
                     // animator.SetBool("isWalkingState",true);
                     // animator.SetBool("isHeadMovingState", false);
+                    touchToInteractCanvas.gameObject.SetActive(false);
+                    mainAsset.gameObject.SetActive(true);
                     Debug.Log("DEBUG, we are in DinosaurState.WALKING_STATE");
                     // mainAsset.
-                    mainAsset.SetBool("isWalking",true);
+                    //mainAsset.SetBool("isWalking",true);
                     
                     break;
                 case DinosaurState.MOVING_HEAD_STATE:
                     // animator.SetBool("isHeadMovingState", true);
                     // animator.SetBool("isWalkingState",false);
-                    mainAsset.SetBool("isWalking",true);
+                    //mainAsset.SetBool("isWalking",true);
                     break;
 
                     
