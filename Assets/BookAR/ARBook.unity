@@ -2755,6 +2755,12 @@ MonoBehaviour:
   - imageGuid: ae44a5f3-2123-4eee-97e1-919ba1a9f77b
     imagePrefab: {fileID: 4534386966801022621, guid: fc404e091a48770a1a42c21b47350877,
       type: 3}
+  - imageGuid: fb799c9a-b9ce-4cd8-82d1-e806e872a357
+    imagePrefab: {fileID: 4534386966801022621, guid: fc404e091a48770a1a42c21b47350877,
+      type: 3}
+  - imageGuid: fb537412-08d9-41f9-8487-44b2def8b916
+    imagePrefab: {fileID: 4534386966801022621, guid: fc404e091a48770a1a42c21b47350877,
+      type: 3}
   m_ImageLibrary: {fileID: 11400000, guid: 858f744ced42ce11981335fbe0572313, type: 2}
 --- !u!4 &369467450
 Transform:
