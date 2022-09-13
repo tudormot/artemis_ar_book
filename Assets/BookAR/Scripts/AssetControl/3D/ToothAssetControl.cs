@@ -15,7 +15,7 @@ namespace BookAR.Scripts.AssetControl._3D
 
     void Start()
     {
-        rootUIObj = GameObject.FindGameObjectWithTag("MainCanvas").transform.Find("ToothUI").gameObject;
+        rootUIObj = GameObject.FindGameObjectWithTag("MainCanvas").transform.Find("StandaloneAssetUIs").Find("ToothUI").gameObject;
         touchToInteractObj = transform.Find("TouchToInteractCanvas").gameObject;
         mainObj = transform.Find("InteractableTooth").gameObject;
         if (touchToInteractObj == null || mainObj == null || rootUIObj == null )

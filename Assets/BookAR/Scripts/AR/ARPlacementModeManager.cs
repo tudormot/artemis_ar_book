@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using BookAR.Scripts.AR.PlacementMode.PositionReporters;
+using BookAR.Scripts.AR.PositionReporters;
 using BookAR.Scripts.Global;
 using Scenes.BookAR.Scripts;
 using UnityEngine;
@@ -16,20 +17,22 @@ namespace BookAR.Scripts.AR.PlacementMode
         private ARTrackedImageManager trackedImageManager;
         private CustomPrefabImagePairManager prefabImagePairManager;
 
-        struct PlacementControlPair
-        { 
+        struct PlacementControlTrio
+        {
+            internal TrackingStateReporter trackingStateReporter;
             internal IPositionReporter posReporter;
             internal IPlacementController placementController;
 
-            internal PlacementControlPair(IPositionReporter posReporter, IPlacementController placementController)
+            internal PlacementControlTrio(IPositionReporter posReporter, IPlacementController placementController,TrackingStateReporter trackingStateReporter)
             {
                 this.posReporter = posReporter;
                 this.placementController = placementController;
+                this.trackingStateReporter = trackingStateReporter;
             }
         }
 
-        private List<PlacementControlPair> managedControlPairs =
-             new List<PlacementControlPair>();
+        private List<PlacementControlTrio> managedControlTrios =
+             new List<PlacementControlTrio>();
 
         void Awake()
         {
@@ -60,19 +63,26 @@ namespace BookAR.Scripts.AR.PlacementMode
                     Debug.LogError("Could not find a prefab to instantiate for the detected image. Check the ImagePairManager, whether the pair exists.");
                 }
 
+                var trackingStateReporter = createTrackingStateReporter(
+                    GlobalSettingsSingleton.instance.state.smoothTrackingStateReporting,
+                    trackedImage
+                );
                 var posReporter = createPosReporter(GlobalSettingsSingleton.instance.state
-                    .smoothPositionReporting, this, trackedImage);
-                var newPair = new PlacementControlPair(
+                    .smoothPositionReporting, this, trackedImage, trackingStateReporter);
+                
+                var newTrio = new PlacementControlTrio(
                     posReporter,
                     createPlaceController(
                         posReporter,
                         GlobalSettingsSingleton.instance.state.placementUpdateMode,
                         this
-                    )
+                    ),
+                    trackingStateReporter
                 );
-                managedControlPairs.Add(newPair);
-                newPair.placementController.startPrefabPlacementControl(prefab,prefabInstantiatedAlready:false);
+                managedControlTrios.Add(newTrio);
+                newTrio.placementController.startPrefabPlacementControl(prefab,prefabInstantiatedAlready:false);
             }
+
 
             foreach (var trackedImage in eventArgs.removed)
             {
@@ -86,48 +96,61 @@ namespace BookAR.Scripts.AR.PlacementMode
             Debug.Log("OnGlobalSettingsChanged!");
             if (data.oldState.placementUpdateMode != data.newState.placementUpdateMode)
             {
-                var newManagedControlPairs = new List<PlacementControlPair>();
-                foreach (var placementControlPair in managedControlPairs)
+                var newManagedControlTrios = new List<PlacementControlTrio>();
+                foreach (var placementControlTrio in managedControlTrios)
                 {
-                    var newPair = new PlacementControlPair(
-                        placementControlPair.posReporter,
+                    var newTrio = new PlacementControlTrio(
+                        placementControlTrio.posReporter,
                         createPlaceController(
-                            placementControlPair.posReporter,
+                            placementControlTrio.posReporter,
                             data.newState.placementUpdateMode,
-                            this)
+                            this),
+                        placementControlTrio.trackingStateReporter
                     );
-                    var managedObject = placementControlPair.placementController.giveUpPrefabPlacementControl();
-                    newPair.placementController.startPrefabPlacementControl(managedObject,prefabInstantiatedAlready:true);
-                    newManagedControlPairs.Add(newPair);
+                    var managedObject = placementControlTrio.placementController.giveUpPrefabPlacementControl();
+                    newTrio.placementController.startPrefabPlacementControl(managedObject,prefabInstantiatedAlready:true);
+                    newManagedControlTrios.Add(newTrio);
                 }
-                managedControlPairs = newManagedControlPairs;
+                managedControlTrios = newManagedControlTrios;
             }
             if (data.oldState.smoothPositionReporting != data.newState.smoothPositionReporting)
             {
-                var newManagedControlPairs = new List<PlacementControlPair>();
-                foreach (var placementControlPair in managedControlPairs)
+                var newManagedControlTrios = new List<PlacementControlTrio>();
+                foreach (var placementControlTrio in managedControlTrios)
                 {
                     var newPosReporter = createPosReporter(
                         data.newState.smoothPositionReporting,
                         this,
-                        placementControlPair.posReporter.giveUpPositionReporting()
+                        placementControlTrio.posReporter.giveUpPositionReporting(),
+                        placementControlTrio.trackingStateReporter
                     );
-                    placementControlPair.placementController.changePositionReporter(newPosReporter);
-                    var newPair = new PlacementControlPair(
+                    placementControlTrio.placementController.changePositionReporter(newPosReporter);
+                    var newTrio = new PlacementControlTrio(
                         newPosReporter,
-                        placementControlPair.placementController
+                        placementControlTrio.placementController,
+                        placementControlTrio.trackingStateReporter
                     );
-                    newManagedControlPairs.Add(newPair);
+                    newManagedControlTrios.Add(newTrio);
                 }
-                managedControlPairs = newManagedControlPairs;
+                managedControlTrios = newManagedControlTrios;
             }
-
-            
-            
+            if (data.oldState.smoothTrackingStateReporting != data.newState.smoothTrackingStateReporting)
+            {
+                foreach (var placementControlTrio in managedControlTrios)
+                {
+                    placementControlTrio.trackingStateReporter.changeTrackingMode(
+                        data.newState.smoothTrackingStateReporting
+                        );
+                }
+            }
         }
 
+        private TrackingStateReporter createTrackingStateReporter( bool smoothTrackingStateReporting, ARTrackedImage trackedImage)
+        {
+            return new TrackingStateReporter(trackedImage, smoothTrackingStateReporting);
+        }
         private IPositionReporter createPosReporter( bool smoothPosReportingMode,
-            MonoBehaviour context, ARTrackedImage trackedImage)
+            MonoBehaviour context, ARTrackedImage trackedImage, TrackingStateReporter trackingStateReporter)
         {
             if (trackedImage == null)
             {
@@ -138,16 +161,17 @@ namespace BookAR.Scripts.AR.PlacementMode
             {
                 return new SmoothPositionReporter(
                     trackedImage,
-                    context
+                    context,
+                    trackingStateReporter
                 );
             }
             else
             {
                 return new RawPositionReporter(
-                    trackedImage
+                    trackedImage,
+                    trackingStateReporter
                 );
             }
-           
         }
   
         private IPlacementController createPlaceController(IPositionReporter posRep, AssetPlacementUpdateMode mode,

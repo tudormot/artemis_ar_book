@@ -16,6 +16,11 @@ namespace BookAR.Scripts.UI
         private void OnEnable()
         {
             textView = GetComponent<TextMeshProUGUI>();
+            if (textView == null)
+            {
+                Debug.LogError("DebugTextview is null! no good!");
+            }
+
             transform.GetComponent<TextMeshPro>();
             
             GlobalSettingsSingleton.instance.GlobalSettingsChanged += onSettingsChanged;
@@ -43,14 +48,17 @@ namespace BookAR.Scripts.UI
             foreach (var im in imageManager.trackables)
             {
                 messages.Add(
-                    $"Im size: {im.size}, ratio: {im.size.x / im.size.y}\n"
+              //      $"Im size: {im.size}, ratio: {im.size.x / im.size.y}\n"
+                    $"Im detection state: {im.trackingState}, {im.name}"
                     );
+                
             }
             textView.text = string.Concat(messages);
         }
 
         private void onSettingsChanged(object obj, GlobalSettingsEventData data )
         {
+            Debug.Log("in DebugMessageSManager, onSettingsChanged called!");
             textView.enabled = data.newState.enableOnScreenDebugMessages;
         }
     }

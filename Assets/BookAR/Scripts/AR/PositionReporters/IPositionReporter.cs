@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
@@ -7,7 +8,6 @@ namespace BookAR.Scripts.AR.PlacementMode.PositionReporters
     {
         TrackedImageData getImageData();
         public ARTrackedImage giveUpPositionReporting();
-        
 
         
     }
@@ -16,6 +16,7 @@ namespace BookAR.Scripts.AR.PlacementMode.PositionReporters
         public Vector3 pos;
         public Quaternion rot;
         public Vector2 imageSize;
+        public bool isTracked;
     }
     
     

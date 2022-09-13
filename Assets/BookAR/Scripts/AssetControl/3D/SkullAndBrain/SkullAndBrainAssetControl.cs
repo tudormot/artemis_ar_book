@@ -103,7 +103,7 @@ namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
 
         void OnEnable()
         {
-            rootUIObj = GameObject.FindGameObjectWithTag("MainCanvas").transform.Find("SkullAndBrainUI").gameObject;
+            rootUIObj = GameObject.FindGameObjectWithTag("MainCanvas").transform.Find("StandaloneAssetUIs").Find("SkullAndBrainUI").gameObject;
 
             if (touchToInteractButton == null || rootUIObj == null || mainObjAnimation == null)
             {

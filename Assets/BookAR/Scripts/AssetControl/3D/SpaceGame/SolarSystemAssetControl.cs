@@ -30,7 +30,7 @@ namespace BookAR.Scripts.AssetControl._3D
         private GameObject soundAsset;
         private void OnEnable()
         {   
-            rootUIObj = GameObject.FindGameObjectWithTag("MainCanvas").transform.Find("SolarSystemUI").gameObject;
+            rootUIObj = GameObject.FindGameObjectWithTag("MainCanvas").transform.Find("StandaloneAssetUIs").Find("SolarSystemUI").gameObject;
             if(rootUIObj == null){
                 Debug.LogError("Did not find solarSystem main canvas!");
             }

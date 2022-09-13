@@ -45,7 +45,7 @@ namespace Scenes.BookAR.Scripts
             //first add/enable gun stuck to the camera
             //secondly add/enable a script/object to each planet that can respond to hits
             //enable game gui: button available: exit game, shoot. also a label panel to communicate with the user
-            GameUI = GameObject.FindGameObjectWithTag("MainCanvas").transform.Find("SolarSystemUI").Find("GameUI").gameObject;
+            GameUI = GameObject.FindGameObjectWithTag("MainCanvas").transform.Find("StandaloneAssetUIs").Find("SolarSystemUI").Find("GameUI").gameObject;
             userInfoText = GameUI.transform.Find("UserInfoPanel").GetChild(0).GetComponent<TextMeshProUGUI>();
             
             GameUI.transform.Find("Buttons").transform.Find("Toggle labels").GetComponent<Toggle>().onValueChanged.AddListener(

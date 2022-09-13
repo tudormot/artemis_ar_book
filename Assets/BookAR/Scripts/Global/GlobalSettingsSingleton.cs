@@ -14,9 +14,11 @@ namespace BookAR.Scripts.Global
         private State _state = new(){
             placementUpdateMode = AssetPlacementUpdateMode.CONTINUOUS_UPDATE,
             smoothPositionReporting = true,
+            smoothTrackingStateReporting = true,
             enableOnScreenDebugMessages = false,
             depthFog = false,
             cameraGrain = false,
+            isVideoPlayerUIInUse = false
         };
         public State state
         {
@@ -40,10 +42,13 @@ namespace BookAR.Scripts.Global
             public AssetPlacementUpdateMode placementUpdateMode { get; set; }
             public bool enableOnScreenDebugMessages { get; set; }
 
-
+            public bool smoothTrackingStateReporting { get; set; }
             public bool depthFog { get; set; }
             public bool smoothPositionReporting { get; set; }
             public bool cameraGrain { get; set; }
+            
+            public bool isVideoPlayerUIInUse { get; set; }
+
            
         }  
         private GlobalSettingsSingleton()

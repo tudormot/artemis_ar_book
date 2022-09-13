@@ -11,6 +11,12 @@ namespace BookAR.Scripts.Utils.Coroutines
             yield return new WaitForConditionWithTimeout(conditional, timeout);
             executable.Invoke();
         }
+        
+        public static IEnumerator ExecuteOnceAfterPeriod(float periodInSeconds, Action executable)
+        {
+            yield return new WaitForSeconds(periodInSeconds);
+            executable.Invoke();
+        }
 
     }
     public class WaitForConditionWithTimeout : CustomYieldInstruction

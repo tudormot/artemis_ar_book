@@ -1,5 +1,6 @@
 using BookAR.Scripts.AR.PlacementControllers;
 using BookAR.Scripts.AR.PlacementMode.PositionReporters;
+using BookAR.Scripts.AssetControl.Common;
 using UnityEngine;
 using UnityEngine.InputSystem.HID;
 using UnityEngine.UI;
@@ -9,6 +10,13 @@ namespace BookAR.Scripts.AR.PlacementMode
 {
     public class ButtonBasedPlacementController: IPlacementController
     {
+        private enum PlacementControllerState
+        {
+            AR_ASSET_ENABLED,
+            AR_ASSET_DISABLED  
+        }
+        private PlacementControllerState state;
+        
         private AssetScaler scaler;
         private IPositionReporter posReporter;
         private GameObject controlledAsset;
@@ -28,8 +36,10 @@ namespace BookAR.Scripts.AR.PlacementMode
         {
 
             controlledAsset = prefabInstantiatedAlready ? prefab : Object.Instantiate(prefab, GameObject.Find("/_Dynamic").transform);
+            state = PlacementControllerState.AR_ASSET_ENABLED;
             scaler = new AssetScaler(controlledAsset);
             updatePositionButton.onClick.AddListener(onUpdateButtonClick);
+            onUpdateButtonClick(); // call once manually
         }
         
         public GameObject giveUpPrefabPlacementControl()
@@ -42,19 +52,54 @@ namespace BookAR.Scripts.AR.PlacementMode
 
         public void changePositionReporter(IPositionReporter newReporter)
         {
-            Debug.Log("In changePositionReporter, this is not implemented yet");
-            throw new System.NotImplementedException();
+            posReporter = newReporter;
         }
 
         private void onUpdateButtonClick()
         {
             var imageData = posReporter.getImageData();
-            controlledAsset.transform.localPosition = imageData.pos;
-            controlledAsset.transform.localRotation = imageData.rot;
-            controlledAsset.transform.localScale = 
-                scaler.computeScalingForAsset(imageData.imageSize);
+            if (imageData.isTracked)
+            {
+                if (state == PlacementControllerState.AR_ASSET_DISABLED)
+                {
+                    state = PlacementControllerState.AR_ASSET_ENABLED;
+                    var quitter = controlledAsset.GetComponent<ARExperienceQuitter>();
+                    if (quitter != null )
+                    {
+                        quitter.enableARExperience();
+                    }
+                    else
+                    {
+                        Debug.LogError("ERROR, reenabling an AR experience is not yet implemented! Quitter is not added to this asset");
+                    };
+                }
 
-            
+                controlledAsset.transform.localPosition = imageData.pos;
+                controlledAsset.transform.localRotation = imageData.rot;
+                controlledAsset.transform.localScale = 
+                    scaler.computeScalingForAsset(imageData.imageSize);
+            }
+            else
+            {
+                if (state == PlacementControllerState.AR_ASSET_ENABLED)
+                {
+                    state = PlacementControllerState.AR_ASSET_DISABLED;
+                    var quitter = controlledAsset.GetComponent<ARExperienceQuitter>();
+                    if (quitter != null )
+                    {
+                        quitter.disableARExperience();
+                    }
+                    else
+                    {
+                        Debug.LogError("ERROR, disabling an AR experience is not yet implemented! Quitter is not added to this asset");
+                    }
+                    
+                }
+            }
+
+
+
+
         }
 
     }

@@ -11,6 +11,8 @@ namespace BookAR.Scripts.AR.PlacementMode
     public class SmoothPositionReporter:IPositionReporter
     {
         private readonly ARTrackedImage trackableRawData;
+        private readonly TrackingStateReporter trackingStateReporter;
+
         private readonly MonoBehaviour context;
         private readonly Coroutine posCalculatingCoroutine;
         private readonly Queue<Vector3> positions = new Queue<Vector3>();
@@ -18,9 +20,10 @@ namespace BookAR.Scripts.AR.PlacementMode
         public Vector3 smoothedPosition;
         public Quaternion smoothedRotation;
 
-        public SmoothPositionReporter(ARTrackedImage trackable, MonoBehaviour context)
+        public SmoothPositionReporter(ARTrackedImage trackable, MonoBehaviour context, TrackingStateReporter trackingStateReporter)
         {
             this.context = context;
+            this.trackingStateReporter = trackingStateReporter;
             trackableRawData = trackable;
             
             if (trackableRawData == null)
@@ -63,7 +66,9 @@ namespace BookAR.Scripts.AR.PlacementMode
             {
                 pos = smoothedPosition,
                 rot = smoothedRotation,
-                imageSize = trackableRawData.size
+                imageSize = trackableRawData.size,
+                isTracked = trackingStateReporter.getTrackedImageState()
+
             };
         }
 

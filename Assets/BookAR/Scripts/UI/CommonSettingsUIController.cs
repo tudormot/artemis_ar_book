@@ -17,6 +17,7 @@ namespace BookAR.Scripts.UI
         
         [SerializeField] private Toggle screenDebuggingToggle;
         [SerializeField] private Toggle smoothPositionToggle;
+        [SerializeField] private Toggle smoothTrackingStateToggle;
         [SerializeField] private Toggle manualAssetPositionUpdateToggle;
         [SerializeField] public Button manualAssetPositionUpdateButton;
         
@@ -54,7 +55,7 @@ namespace BookAR.Scripts.UI
         {
             screenDebuggingToggle.isOn = GlobalSettingsSingleton.instance.state.enableOnScreenDebugMessages;
             smoothPositionToggle.isOn = GlobalSettingsSingleton.instance.state.smoothPositionReporting;
-
+            smoothTrackingStateToggle.isOn = GlobalSettingsSingleton.instance.state.smoothTrackingStateReporting;
             manualAssetPositionUpdateToggle.isOn = GlobalSettingsSingleton.instance.state.placementUpdateMode ==
                                                    AssetPlacementUpdateMode.UPDATE_ON_BUTTON_CLICK;
             manualAssetPositionUpdateButton.interactable = GlobalSettingsSingleton.instance.state.placementUpdateMode ==
@@ -85,6 +86,15 @@ namespace BookAR.Scripts.UI
                     GlobalSettingsSingleton.instance.state = GlobalSettingsSingleton.instance.state with
                     {
                         smoothPositionReporting = isToggleChecked
+                    };
+                }
+            );
+            smoothTrackingStateToggle.onValueChanged.AddListener(
+                (bool isToggleChecked) =>
+                {
+                    GlobalSettingsSingleton.instance.state = GlobalSettingsSingleton.instance.state with
+                    {
+                        smoothTrackingStateReporting = isToggleChecked
                     };
                 }
             );
