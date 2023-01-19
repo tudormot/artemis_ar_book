@@ -4551,7 +4551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableUI: 1
-  debugCanvas1: {fileID: 1572510041}
+  debugCanvas1: {fileID: 250233548}
   debugCanvas2: {fileID: 1759447376}
   debugCanvas3: {fileID: 1446321452}
   isUIVisibleToggle: {fileID: 1093399207}
@@ -7332,7 +7332,7 @@ RectTransform:
   m_GameObject: {fileID: 1093399205}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.23, y: 3.23, z: 3.23}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1433638043}
@@ -10928,7 +10928,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1572510042
 RectTransform:
   m_ObjectHideFlags: 0

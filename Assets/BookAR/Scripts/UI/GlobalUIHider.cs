@@ -16,6 +16,8 @@ namespace BookAR.Scripts.UI
         private bool debugCanvas2SavedStateIsVisible;
         private bool debugCanvas3SavedStateIsVisible;
 
+        private GameObject consoleObj;
+
         
         [SerializeField] private Toggle isUIVisibleToggle;
         [SerializeField] private GameObject assetUIsObject;
@@ -31,6 +33,8 @@ namespace BookAR.Scripts.UI
                     debugCanvas3?.SetActive(debugCanvas3SavedStateIsVisible);
                 }
                 assetUIsObject.SetActive(true);
+                consoleObj?.SetActive(true);
+                
             }
             else
             {
@@ -41,12 +45,20 @@ namespace BookAR.Scripts.UI
                 debugCanvas1?.SetActive(false);
                 debugCanvas2?.SetActive(false);
                 debugCanvas3?.SetActive(false);
+                consoleObj?.SetActive(false);
+
             }
         }
 
 
         private void OnEnable()
         {
+            consoleObj = GameObject.Find("IngameDebugConsole");
+            if (consoleObj == null)
+            {
+                Debug.Log("In GlobalUIHider. Could not find an ingame console object!");
+            }
+
             debugCanvas1SavedStateIsVisible = debugCanvas1.activeSelf;
             debugCanvas2SavedStateIsVisible = debugCanvas2.activeSelf;
             debugCanvas3SavedStateIsVisible = debugCanvas3.activeSelf;
