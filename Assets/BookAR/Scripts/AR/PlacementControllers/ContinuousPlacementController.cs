@@ -51,6 +51,19 @@ namespace BookAR.Scripts.AR.PlacementMode
             posReporter = newReporter;
         }
 
+        private bool isInImageDetectionFrustum(Vector3 position)
+        {
+            /*detectionFrustumConstant has to do with the fact that the image does not get detected by the
+             framework as soon as its center enters the camera frustum. Hence, the "imageDetectionFrustum"
+             is smaller than the camera frustum*/
+            const float detectionFrustumConstant = 0.3f;
+            var uvCoord = mainCamera.WorldToViewportPoint(position);
+            var isInImageDetectionFrustum = uvCoord.x is >= detectionFrustumConstant and <= (1-detectionFrustumConstant) &&
+                                            uvCoord.y is >= detectionFrustumConstant and <= (1-detectionFrustumConstant) &&
+                                            uvCoord.z >= 0;
+            return isInImageDetectionFrustum;
+        }
+
         private IEnumerator updatePositionContinuously()
         {
             while (true)
@@ -81,11 +94,7 @@ namespace BookAR.Scripts.AR.PlacementMode
                 {
                     if (state == PlacementControllerState.AR_ASSET_ENABLED)
                     {
-                        var uvCoord = mainCamera.WorldToViewportPoint(imageData.pos);
-                        var isInCameraFrustum = uvCoord.x is >= 0 and <= 1 &&
-                                                uvCoord.y is >= 0 and <= 1 &&
-                                                uvCoord.z >= 0;
-                        if (isInCameraFrustum)
+                        if (isInImageDetectionFrustum(imageData.pos))
                         {
                             //if tracking state is limited but object is still in camera frustrum, it is most likely that the image has disappeared, IE the page of the AR book has
                             //been turned. Hence, stop the AR experience
