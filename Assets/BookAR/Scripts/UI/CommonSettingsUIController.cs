@@ -37,6 +37,12 @@ namespace BookAR.Scripts.UI
 
         private void toggleCanvas()
         {
+            if (GlobalSettingsSingleton.DEMO_MODE)
+            {
+                SSTools.ShowMessage("Experimental disabled in DEMO",
+                    SSTools.Position.bottom, SSTools.Time.twoSecond);
+                return;
+            }
             if (state == SettingsUIState.SETTINGS_PANEL_EXPANDED)
             {
                 state = SettingsUIState.SETTINGS_PANEL_CONTRACTED;

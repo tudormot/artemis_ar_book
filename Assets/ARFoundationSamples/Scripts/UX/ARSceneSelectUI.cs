@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using BookAR.Scripts.Global;
 using BookAR.Scripts.Utils.Coroutines;
 using UnityEngine;
 using UnityEngine.UI;
@@ -343,11 +344,20 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         public void SamplesButtonPressed()
         {
-            Debug.Log("Samples Button Pressed!");
-            ActiveMenu.currentMenu = MenuType.SamplesMenu;
-            m_SamplesMenu.SetActive(true);
-            m_ARtemisMenu.SetActive(false);
-            ScrollToStartPosition();
+            if (GlobalSettingsSingleton.DEMO_MODE)
+            {
+                SSTools.ShowMessage("Extra scenes disabled in DEMO mode!",
+                    SSTools.Position.bottom, SSTools.Time.twoSecond);
+            }
+            else
+            {
+                ActiveMenu.currentMenu = MenuType.SamplesMenu;
+                m_SamplesMenu.SetActive(true);
+                m_ARtemisMenu.SetActive(false);
+                ScrollToStartPosition();
+            }
+
+            
         }
         public void ArtemisBookButtonPressed()
         {
