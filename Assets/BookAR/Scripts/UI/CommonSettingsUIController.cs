@@ -10,8 +10,7 @@ namespace BookAR.Scripts.UI
     public class CommonSettingsUIController : MonoBehaviour
     {
 
-        [SerializeField] private Button expandCanvasButton;
-        [SerializeField] private Button contractCanvasButton;
+        [SerializeField] private Button toggleCanvasButton;
         
         private Animator globalSettingsUIAnimator;
         
@@ -36,20 +35,19 @@ namespace BookAR.Scripts.UI
             }
         }
 
-        private void contractCanvas()
+        private void toggleCanvas()
         {
-            Debug.Log("We are clicking the transparent canvas!");
-            state = SettingsUIState.SETTINGS_PANEL_CONTRACTED;
-            expandCanvasButton.onClick.RemoveListener(contractCanvas);
-            expandCanvasButton.onClick.AddListener(expandCanvas);
+            if (state == SettingsUIState.SETTINGS_PANEL_EXPANDED)
+            {
+                state = SettingsUIState.SETTINGS_PANEL_CONTRACTED;
+            }
+            else
+            {
+                state = SettingsUIState.SETTINGS_PANEL_EXPANDED;
+
+            }
         }
-        private void expandCanvas()
-        {
-            Debug.Log("We are clicking the settings image!");
-            state = SettingsUIState.SETTINGS_PANEL_EXPANDED;
-            expandCanvasButton.onClick.RemoveListener(expandCanvas);
-            expandCanvasButton.onClick.AddListener(contractCanvas);
-        }
+
 
         private void OnEnable()
         {
@@ -62,15 +60,9 @@ namespace BookAR.Scripts.UI
                                                            AssetPlacementUpdateMode.UPDATE_ON_BUTTON_CLICK;
             
             globalSettingsUIAnimator = GetComponent<Animator>();
-            expandCanvasButton.onClick.AddListener(
-                expandCanvas
-            );
-            contractCanvasButton.onClick.AddListener(
-                () =>
-                {
-                    Debug.Log("Button disabled for the time being");
-                }
-            );
+            toggleCanvasButton.onClick.AddListener(
+                () => { toggleCanvas(); }
+                );
             screenDebuggingToggle.onValueChanged.AddListener(
                 (bool isToggleChecked) =>
                 {
@@ -117,14 +109,12 @@ namespace BookAR.Scripts.UI
 
         private void OnDisable()
         {
-            contractCanvasButton.onClick.RemoveAllListeners();
-            expandCanvasButton.onClick.RemoveAllListeners();
+            toggleCanvasButton.onClick.RemoveAllListeners();
             manualAssetPositionUpdateToggle.onValueChanged.RemoveAllListeners();
         }
 
         private void OnStateChanged(SettingsUIState oldState, SettingsUIState newState)
         {
-            Debug.Log("OnStateChanged called!");
             switch (newState)
             {
                 case SettingsUIState.SETTINGS_PANEL_EXPANDED:

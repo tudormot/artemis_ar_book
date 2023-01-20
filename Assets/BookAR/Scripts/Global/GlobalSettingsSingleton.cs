@@ -8,7 +8,7 @@ namespace BookAR.Scripts.Global
             new Lazy<GlobalSettingsSingleton>(() => new GlobalSettingsSingleton());
 
         public static GlobalSettingsSingleton instance { get { return lazy.Value; } }
-        
+        public const bool DEMO_MODE = true; //  a bool which controls whether some functionality should be hidden or not 
         
         public event EventHandler<GlobalSettingsEventData> GlobalSettingsChanged; 
         private State _state = new(){
