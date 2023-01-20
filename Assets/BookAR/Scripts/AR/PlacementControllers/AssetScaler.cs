@@ -18,7 +18,6 @@ namespace BookAR.Scripts.AR.PlacementControllers
 
         public Vector3 computeScalingForAsset(Vector2 imageSize)
         {
-             
             if (assetType == AssetControllerType.VIDEO_ASSET_TYPE)
             {
                 return new Vector3(imageSize.x * 1.05f, 1f, imageSize.y * 1.05f);
