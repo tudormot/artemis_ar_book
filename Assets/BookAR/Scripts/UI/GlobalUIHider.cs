@@ -52,7 +52,7 @@ namespace BookAR.Scripts.UI
 
         private void OnEnable()
         {
-            Debug.Log("This is a mess of a script, which does not hide" +
+            Debug.LogError("This is a mess of a script, which does not hide" +
                       " all the UI all the time, needs to be rethought and rewritten if it is ever used again");
 
             consoleObj = GameObject.Find("IngameDebugConsole");

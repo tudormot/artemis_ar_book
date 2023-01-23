@@ -12,6 +12,7 @@ namespace BookAR.Scripts.AssetControl
 
         protected virtual void onTouchToInteractButtonPressed()
         {
+            Debug.Log("Starting onTouchToInteractButtonPressed");
             if (GlobalSettingsSingleton.instance.state.assetCurrentlyDisplayed != null)
             {
                 GlobalSettingsSingleton.instance.state.assetCurrentlyDisplayed.reactToCollapseRequest();
@@ -20,6 +21,8 @@ namespace BookAR.Scripts.AssetControl
             {
                 assetCurrentlyDisplayed = this
             };
+            Debug.Log("Finished onTouchToInteractButtonPressed");
+
         }
 
     }

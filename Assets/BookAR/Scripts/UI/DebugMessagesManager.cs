@@ -36,7 +36,7 @@ namespace BookAR.Scripts.UI
         }
         private void OnDisable()
         {
-            GlobalSettingsSingleton.instance.GlobalSettingsChanged += onSettingsChanged;
+            GlobalSettingsSingleton.instance.GlobalSettingsChanged -= onSettingsChanged;
             StopCoroutine(coroutine);
         }
 
