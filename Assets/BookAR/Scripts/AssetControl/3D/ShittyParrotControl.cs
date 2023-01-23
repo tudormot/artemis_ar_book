@@ -2,9 +2,11 @@ using UnityEngine;
 
 namespace BookAR.Scripts.AssetControl._3D
 {
-    public class ShittyParrotControl : MonoBehaviour, IAssetController
+    public class ShittyParrotControl : IAssetController
     {
-        AssetControllerType IAssetController.type { get; set; } = AssetControllerType.DEFAULT_ASSET_TYPE;
+        public override AssetControllerType type { get; protected set; } = AssetControllerType.DEFAULT_ASSET_TYPE;
+        
+
         public Animation parrotAnimation;
         private int State = 0;
 
@@ -45,5 +47,16 @@ namespace BookAR.Scripts.AssetControl._3D
             parrotAnimation.Play("Takeflight_anim");
 
         }
+        
+        public override void reactToCollapseRequest()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void reactToOcclusionEvent(OcclusionEvent e)
+        {
+            throw new System.NotImplementedException();
+        }
+        
     }
 }

@@ -20,9 +20,19 @@ namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
 
     }
 
-    public class SkullAndBrainAssetControl : MonoBehaviour, IAssetController
+    public class SkullAndBrainAssetControl : IAssetController
     {
-        AssetControllerType IAssetController.type { get; set; } = AssetControllerType.DEFAULT_ASSET_TYPE;
+        public override AssetControllerType type { get; protected set; } = AssetControllerType.DEFAULT_ASSET_TYPE;
+        public override void reactToCollapseRequest()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void reactToOcclusionEvent(OcclusionEvent e)
+        {
+            throw new System.NotImplementedException();
+        }
+
         [SerializeField]private Button touchToInteractButton;
         [SerializeField]private Canvas touchToInteractCanvas;
         [SerializeField] private LabelController labelController;

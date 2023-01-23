@@ -19507,7 +19507,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1567472733621540050}
   - component: {fileID: 4899807169573684310}
-  - component: {fileID: 3663648462216621919}
   m_Layer: 0
   m_Name: FlyingExplodingRocket
   m_TagString: Untagged
@@ -19552,22 +19551,6 @@ MonoBehaviour:
   propulsionParticles2: {fileID: 4437202099709456001}
   explosionParticles1: {fileID: 2878707395061082578}
   explosionParticles2: {fileID: 5762264734570261353}
---- !u!114 &3663648462216621919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7722376444093406409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d5a3b4eb7ad4d76940f73304c9f6be9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameObjectsToDisable:
-  - {fileID: 7474376456488480096}
-  - {fileID: 3303352266475945471}
-  mainUIComponentName: 
 --- !u!1001 &2824155851362468103
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19637,12 +19620,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 093676844ef992b37973a7ee59681ddb, type: 3}
---- !u!1 &7474376456488480096 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4650875919433788519, guid: 093676844ef992b37973a7ee59681ddb,
-    type: 3}
-  m_PrefabInstance: {fileID: 2824155851362468103}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7474376456488480125 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4650875919433788538, guid: 093676844ef992b37973a7ee59681ddb,

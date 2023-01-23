@@ -1,4 +1,5 @@
 using System;
+using BookAR.Scripts.AssetControl;
 
 namespace BookAR.Scripts.Global
 {
@@ -18,7 +19,7 @@ namespace BookAR.Scripts.Global
             enableOnScreenDebugMessages = false,
             depthFog = false,
             cameraGrain = false,
-            isVideoPlayerUIInUse = false
+            assetCurrentlyDisplayed = null
         };
         public State state
         {
@@ -47,7 +48,7 @@ namespace BookAR.Scripts.Global
             public bool smoothPositionReporting { get; set; }
             public bool cameraGrain { get; set; }
             
-            public bool isVideoPlayerUIInUse { get; set; }
+            public IAssetController assetCurrentlyDisplayed { get; set; }
 
            
         }  

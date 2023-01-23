@@ -8,6 +8,8 @@ namespace BookAR.Scripts.AR.PlacementMode.PositionReporters
     {
         TrackedImageData getImageData();
         public ARTrackedImage giveUpPositionReporting();
+        public delegate void TrackingEvent(CustomTrackingState state);
+        public event TrackingEvent TrackingStateChanged;
 
         
     }
@@ -16,7 +18,7 @@ namespace BookAR.Scripts.AR.PlacementMode.PositionReporters
         public Vector3 pos;
         public Quaternion rot;
         public Vector2 imageSize;
-        public bool isTracked;
+        public CustomTrackingState isTracked;
     }
     
     

@@ -2,11 +2,11 @@ using UnityEngine;
 
 namespace BookAR.Scripts.AssetControl.Audio
 {
-    public class PlayPauseAudioControl : MonoBehaviour, IAssetController
+    public class PlayPauseAudioControl : IAssetController
     {
         [SerializeField] private Canvas PlayCanvas;
         [SerializeField] private Canvas PauseCanvas;
-        AssetControllerType IAssetController.type { get; set; } = AssetControllerType.DEFAULT_ASSET_TYPE;
+        public override AssetControllerType type { get; protected set; }
 
         private void OnEnable()
         {
@@ -27,5 +27,14 @@ namespace BookAR.Scripts.AssetControl.Audio
             PauseCanvas.gameObject.SetActive(false);
         }
 
+        public override void reactToCollapseRequest()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void reactToOcclusionEvent(OcclusionEvent e)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

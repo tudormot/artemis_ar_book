@@ -31,6 +31,8 @@ namespace BookAR.Scripts.AR.PlacementMode
                 Debug.Log("trackableRawData is null in SmoothPositionReporter-constructor!!!");
 
             }
+            trackingStateReporter.TrackingStateChanged += propagateEventFurther;
+
 
             posCalculatingCoroutine = context.StartCoroutine(
                 calculateSmoothTransform());
@@ -51,6 +53,7 @@ namespace BookAR.Scripts.AR.PlacementMode
             {
                 Debug.Log("posCalculatingCoroutine is null ! giveUpPositionReporting");
             }
+            trackingStateReporter.TrackingStateChanged -= propagateEventFurther;
 
             context.StopCoroutine(posCalculatingCoroutine);
             if (trackableRawData == null)
@@ -108,6 +111,14 @@ namespace BookAR.Scripts.AR.PlacementMode
                 }
             }
         }
+        private void propagateEventFurther(CustomTrackingState state)
+        {
+            Debug.Log("SmoothPositionReporter:, state propagated further:" + state.ToString());
+
+            TrackingStateChanged?.Invoke(state);
+        }
+
+        public event IPositionReporter.TrackingEvent TrackingStateChanged;
 
     }
 }

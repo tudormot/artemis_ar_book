@@ -9,16 +9,38 @@ using UnityEngine.XR.Interaction.Toolkit.AR;
 
 namespace BookAR.Scripts.AssetControl._3D
 {
-    public class DinosaurControl : MonoBehaviour, IAssetController, IStatefulController<DinosaurState>
+    class DinosaurControl : IAssetController, IStatefulController<DinosaurState> 
     {
-        AssetControllerType IAssetController.type { get; set; } = AssetControllerType.DEFAULT_ASSET_TYPE;
-        DinosaurState IStatefulController<DinosaurState>._state { get; set; }
+        public override AssetControllerType type { get; protected set; } = AssetControllerType.DEFAULT_ASSET_TYPE;
+        public override void reactToCollapseRequest()
+        {
+            if ((this as IStatefulController<DinosaurState>).state == DinosaurState.WALKING_STATE)
+            {
+                (this as IStatefulController<DinosaurState>).state = DinosaurState.TOUCH_TO_INTERACT_PHASE;
+
+            }
+
+        }
+
+        public override void reactToOcclusionEvent(OcclusionEvent e)
+        {
+            if (e == OcclusionEvent.IMAGE_OCCLUDED)
+            {
+                (this as IStatefulController<DinosaurState>).state = DinosaurState.OCCLUDED_STATE;
+
+            }
+            else
+            {
+                (this as IStatefulController<DinosaurState>).state = DinosaurState.TOUCH_TO_INTERACT_PHASE;
+
+            }
+
+        }
+
 
         [SerializeField] private Button touchToInteractButton;
         [SerializeField] private Canvas touchToInteractCanvas;
         [SerializeField] private Animator mainAsset;
-        
-
 
 
         private void OnEnable()
@@ -26,15 +48,22 @@ namespace BookAR.Scripts.AssetControl._3D
             touchToInteractCanvas.worldCamera = Camera.main;
             (this as IStatefulController<DinosaurState>).state = DinosaurState.TOUCH_TO_INTERACT_PHASE;
             touchToInteractButton.onClick.AddListener(
-                ()=> (this as IStatefulController<DinosaurState>).state = DinosaurState.WALKING_STATE
-                );
+                () =>
+                {
+                    base.onTouchToInteractButtonPressed();
+                    (this as IStatefulController<DinosaurState>).state = DinosaurState.WALKING_STATE;
+                }
+            );
         }
 
         private void OnDisable()
         {
             touchToInteractButton.onClick.RemoveAllListeners();
         }
-        
+
+
+        public DinosaurState _state { get; set; }
+
         void IStatefulController<DinosaurState>.OnStateChanged(DinosaurState oldState, DinosaurState newState)
         {
             switch (newState)
@@ -44,46 +73,23 @@ namespace BookAR.Scripts.AssetControl._3D
                     mainAsset.gameObject.SetActive(false);
                     break;
                 case DinosaurState.WALKING_STATE:
-                    // animator.SetBool("isWalkingState",true);
-                    // animator.SetBool("isHeadMovingState", false);
                     touchToInteractCanvas.gameObject.SetActive(false);
                     mainAsset.gameObject.SetActive(true);
-                    Debug.Log("DEBUG, we are in DinosaurState.WALKING_STATE");
-                    // mainAsset.
-                    //mainAsset.SetBool("isWalking",true);
-                    
+
                     break;
-                case DinosaurState.MOVING_HEAD_STATE:
-                    // animator.SetBool("isHeadMovingState", true);
-                    // animator.SetBool("isWalkingState",false);
-                    //mainAsset.SetBool("isWalking",true);
+                case DinosaurState.OCCLUDED_STATE:
+                    touchToInteractCanvas.gameObject.SetActive(false);
+                    mainAsset.gameObject.SetActive(false);
                     break;
 
-                    
             }
         }
-
-        private IEnumerator AssetIntroManualAnimation()
-        {
-            float inflationTimeInSeconds = 5f;
-            var goalScale = mainAsset.transform.localScale;
-            mainAsset.transform.localScale = new Vector3(0, 0, 0);
-            mainAsset.gameObject.SetActive(true);
-            touchToInteractCanvas.gameObject.SetActive(false);
-            mainAsset.transform.DOScale(goalScale, inflationTimeInSeconds);
-            yield return new WaitForSeconds(inflationTimeInSeconds);
-            (this as IStatefulController<DinosaurState>).state = DinosaurState.WALKING_STATE;
-
-
-        }
-
     }
     enum DinosaurState
     {
+        OCCLUDED_STATE,
         TOUCH_TO_INTERACT_PHASE,
-        ASSET_INTRO_STATE,
         WALKING_STATE,
-        MOVING_HEAD_STATE
     }
 
 

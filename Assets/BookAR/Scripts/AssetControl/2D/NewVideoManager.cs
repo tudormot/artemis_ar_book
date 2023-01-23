@@ -2,16 +2,24 @@ using System;
 using BookAR.Scripts.AssetControl.Common;
 using BookAR.Scripts.Global;
 using UnityEngine;
-using UnityEngine.Analytics;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
 namespace BookAR.Scripts.AssetControl._2D
 {
-    public class NewVideoManager : MonoBehaviour, IDragHandler, IPointerDownHandler, IAssetController
+    public class NewVideoManager : IAssetController, IDragHandler, IPointerDownHandler
     {
-        AssetControllerType IAssetController.type { get; set; } = AssetControllerType.VIDEO_ASSET_TYPE;
+        public override AssetControllerType type { get; protected set; } = AssetControllerType.VIDEO_ASSET_TYPE;
+        public override void reactToCollapseRequest()
+        {
+            Debug.LogError("reactToCollapseRequest not implemented for video manager");
+        }
+
+        public override void reactToOcclusionEvent(OcclusionEvent e)
+        {
+            Debug.LogError("reactToOcclusionEvent not implemented for video manager");
+        }
 
         [SerializeField] private Button revealAssetButton;
 
@@ -75,7 +83,7 @@ namespace BookAR.Scripts.AssetControl._2D
                         smallScreenPlayer.frame = 0;
                         bigScreenCanvas.SetActive(false);
                         smallScreenRawImage.gameObject.SetActive(false);
-                        GlobalSettingsSingleton.instance.state.isVideoPlayerUIInUse = false;
+                        //GlobalSettingsSingleton.instance.state.isVideoPlayerUIInUse = false;
                         playButton.onClick.RemoveListener(onPlayButtonPress);
                         pauseButton.onClick.RemoveListener(onPauseButtonPress);
                         fullScreenButton.onClick.RemoveListener(onFullScreenButtonPress);
@@ -196,13 +204,15 @@ namespace BookAR.Scripts.AssetControl._2D
             revealAssetButton.onClick.AddListener(
                 () =>
                 {
-                    if (GlobalSettingsSingleton.instance.state.isVideoPlayerUIInUse)
+                    //if (GlobalSettingsSingleton.instance.state.isVideoPlayerUIInUse)
+                    if (false)
+
                     {
                         Debug.Log("Another video player instance is using the video player UI, collapse that player before trying to start this video (or turn the page).");
                     }
                     else
                     {
-                        GlobalSettingsSingleton.instance.state.isVideoPlayerUIInUse = true;
+                        //GlobalSettingsSingleton.instance.state.isVideoPlayerUIInUse = true;
                         revealAssetButton.gameObject.SetActive(false);
                         bigScreenCanvas.gameObject.SetActive(true);
                         bigScreenPlayer.gameObject.SetActive(false);
@@ -222,12 +232,12 @@ namespace BookAR.Scripts.AssetControl._2D
                 }
             );
 
-            gameObject.GetComponent<ARExperienceQuitter>().ARExperienceChanged += onARExperienceVisibilityChanged;
+            //gameObject.GetComponent<ARExperienceQuitter>().ARExperienceChanged += onARExperienceVisibilityChanged;
 
 
         }
 
-        private void onARExperienceVisibilityChanged(object obj, ARExperienceQuitter.ARExperienceState visibilityState)
+        /*private void onARExperienceVisibilityChanged(object obj, ARExperienceQuitter.ARExperienceState visibilityState)
         {
             if (visibilityState == ARExperienceQuitter.ARExperienceState.AR_EXPERIENCE_ENABLED)
             {
@@ -238,11 +248,11 @@ namespace BookAR.Scripts.AssetControl._2D
                 //AR experience disabled
                 state = VideoPlayerState.AR_EXPERIENCE_DISABLED;
             }
-        }
+        }*/
 
         private void OnDisable()
         {
-            gameObject.GetComponent<ARExperienceQuitter>().ARExperienceChanged -= onARExperienceVisibilityChanged;
+            //gameObject.GetComponent<ARExperienceQuitter>().ARExperienceChanged -= onARExperienceVisibilityChanged;
             state = VideoPlayerState.AR_EXPERIENCE_DISABLED;
         }
 

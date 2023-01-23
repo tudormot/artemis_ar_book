@@ -1,18 +1,28 @@
+using BookAR.Scripts.AssetControl;
 using Scenes.BookAR.Scripts;
-using ThirdPartyAssets.solar_system.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace BookAR.Scripts.AssetControl._3D
+namespace BookAR.Scripts.AssetControl._3D.SpaceGame
 {
+
     /* These shitty required components are all thirs party scripts, part of the original solar system asset */
     [RequireComponent(typeof(GlobalSoundManager))]
     [RequireComponent(typeof(ShowInfo))]
     [RequireComponent(typeof(OpenCloseCanvas))]
     [RequireComponent(typeof(SpaceGameController))]
-    public class SolarSystemAssetControl : MonoBehaviour, IAssetController
+    public class SolarSystemAssetControl : IAssetController
     {
-        AssetControllerType IAssetController.type { get; set; } = AssetControllerType.DEFAULT_ASSET_TYPE;
+        public override AssetControllerType type { get; protected set; } = AssetControllerType.DEFAULT_ASSET_TYPE;
+        public override void reactToCollapseRequest()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void reactToOcclusionEvent(OcclusionEvent e)
+        {
+            throw new System.NotImplementedException();
+        }
 
         private GameObject rootUIObj;
         private GlobalSoundManager soundManagerScript;

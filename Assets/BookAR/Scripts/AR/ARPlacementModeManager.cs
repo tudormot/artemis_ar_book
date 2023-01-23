@@ -147,7 +147,7 @@ namespace BookAR.Scripts.AR.PlacementMode
 
         private TrackingStateReporter createTrackingStateReporter( bool smoothTrackingStateReporting, ARTrackedImage trackedImage)
         {
-            return new TrackingStateReporter(trackedImage, smoothTrackingStateReporting);
+            return new TrackingStateReporter(Camera.main, trackedImage, smoothTrackingStateReporting);
         }
         private IPositionReporter createPosReporter( bool smoothPosReportingMode,
             MonoBehaviour context, ARTrackedImage trackedImage, TrackingStateReporter trackingStateReporter)

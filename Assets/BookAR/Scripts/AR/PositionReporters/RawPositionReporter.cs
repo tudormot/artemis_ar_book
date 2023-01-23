@@ -15,16 +15,13 @@ namespace BookAR.Scripts.AR.PositionReporters
         {
             this.trackableInfo = trackableInfo;
             this.trackingStateReporter = trackingStateReporter;
+            trackingStateReporter.TrackingStateChanged += propagateEventFurther;
 
             if (trackableInfo == null)
             {
                 Debug.Log("TrackableInfo null in RawPositionReporter-constructor!");
             }
             
-            /*TODO: removed the following two lines from here, this functionality should not be here, it should be the job of the placement controllers to scale assets
-             But if problems arise, investigate*/
-            //var minLocalScalar = Mathf.Min(trackableInfo.size.x, trackableInfo.size.y) / 2;
-            //trackableInfo.transform.localScale = new Vector3(minLocalScalar, minLocalScalar, minLocalScalar);
         }
 
         public TrackedImageData getImageData()
@@ -48,11 +45,16 @@ namespace BookAR.Scripts.AR.PositionReporters
                 Debug.Log("TrackableInfo null in RawPositionReporter-giveUpPositionReporting");
             }
 
+            trackingStateReporter.TrackingStateChanged -= propagateEventFurther;
+
             return trackableInfo;
         }
 
-        
-        
+        private void propagateEventFurther(CustomTrackingState state)
+        {
+            TrackingStateChanged?.Invoke(state);
+        }
 
+        public event IPositionReporter.TrackingEvent TrackingStateChanged;
     }
 }

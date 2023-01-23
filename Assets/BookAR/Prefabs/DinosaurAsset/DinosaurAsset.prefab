@@ -12581,7 +12581,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8424652797944335297}
   - component: {fileID: 8424652797944335296}
-  - component: {fileID: 8778139347968019093}
   m_Layer: 0
   m_Name: DinosaurAsset
   m_TagString: Untagged
@@ -12622,23 +12621,6 @@ MonoBehaviour:
   touchToInteractButton: {fileID: 3774397006474815851}
   touchToInteractCanvas: {fileID: 3774397006474815871}
   mainAsset: {fileID: 787334882661854093}
---- !u!114 &8778139347968019093
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8424652797944335302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d5a3b4eb7ad4d76940f73304c9f6be9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameObjectsToDisable:
-  - {fileID: 3774397006474815889}
-  - {fileID: 4909094044353249190}
-  - {fileID: 1449282316314800395}
-  mainUIComponentName: 
 --- !u!1 &8439598885508610401
 GameObject:
   m_ObjectHideFlags: 0
@@ -13806,12 +13788,6 @@ Canvas:
 --- !u!4 &3774397006474815884 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4650875919433788538, guid: 093676844ef992b37973a7ee59681ddb,
-    type: 3}
-  m_PrefabInstance: {fileID: 8424652798129227254}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3774397006474815889 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4650875919433788519, guid: 093676844ef992b37973a7ee59681ddb,
     type: 3}
   m_PrefabInstance: {fileID: 8424652798129227254}
   m_PrefabAsset: {fileID: 0}

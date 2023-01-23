@@ -53,7 +53,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1130867295455276340}
   - component: {fileID: 1130867295455276341}
-  - component: {fileID: 967787362434216583}
   m_Layer: 0
   m_Name: FullCuteZooAsset
   m_TagString: Untagged
@@ -105,22 +104,6 @@ MonoBehaviour:
   - {fileID: 1072805798501652444}
   - {fileID: 1073458883973236504}
   - {fileID: 1073516605954437215}
---- !u!114 &967787362434216583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1130867295455276343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d5a3b4eb7ad4d76940f73304c9f6be9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameObjectsToDisable:
-  - {fileID: 5709050100474190553}
-  - {fileID: 1130867294746294589}
-  mainUIComponentName: CuteZooUI
 --- !u!1 &1130975736158892709
 GameObject:
   m_ObjectHideFlags: 0
@@ -11346,12 +11329,6 @@ Canvas:
 --- !u!4 &5709050100474190532 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4650875919433788538, guid: 093676844ef992b37973a7ee59681ddb,
-    type: 3}
-  m_PrefabInstance: {fileID: 1130867296028915390}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5709050100474190553 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4650875919433788519, guid: 093676844ef992b37973a7ee59681ddb,
     type: 3}
   m_PrefabInstance: {fileID: 1130867296028915390}
   m_PrefabAsset: {fileID: 0}

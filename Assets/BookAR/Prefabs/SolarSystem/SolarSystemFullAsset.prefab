@@ -13208,7 +13208,6 @@ GameObject:
   - component: {fileID: 8336372777103437443}
   - component: {fileID: 7941830315062115529}
   - component: {fileID: 5050896385313473288}
-  - component: {fileID: 6807487987089518603}
   m_Layer: 0
   m_Name: SolarSystemFullAsset
   m_TagString: Untagged
@@ -13307,24 +13306,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SolarSystem: {fileID: 4367749318177911990}
   Projectile: {fileID: 5578084638801377631}
---- !u!114 &6807487987089518603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4368104853761719299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d5a3b4eb7ad4d76940f73304c9f6be9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameObjectsToDisable:
-  - {fileID: 5340349566553764378}
-  - {fileID: 4368104854336382308}
-  - {fileID: 4367749318177911990}
-  - {fileID: 5578084638801377631}
-  mainUIComponentName: SolarSystemUI
 --- !u!1 &4368104854336382308
 GameObject:
   m_ObjectHideFlags: 0
@@ -13535,12 +13516,6 @@ PrefabInstance:
 --- !u!4 &5340349566553764359 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4650875919433788538, guid: 093676844ef992b37973a7ee59681ddb,
-    type: 3}
-  m_PrefabInstance: {fileID: 763220099608731261}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5340349566553764378 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4650875919433788519, guid: 093676844ef992b37973a7ee59681ddb,
     type: 3}
   m_PrefabInstance: {fileID: 763220099608731261}
   m_PrefabAsset: {fileID: 0}

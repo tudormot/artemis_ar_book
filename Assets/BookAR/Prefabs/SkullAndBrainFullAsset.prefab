@@ -2506,7 +2506,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4534386966801022628}
   - component: {fileID: 4534386966801022578}
-  - component: {fileID: 4710271131668011918}
   m_Layer: 0
   m_Name: SkullAndBrainFullAsset
   m_TagString: Untagged
@@ -2548,22 +2547,6 @@ MonoBehaviour:
   labelController: {fileID: 6468197374191676925}
   mainObjAnimation: {fileID: 4534386966801022571}
   selectInteractable: {fileID: 4534386966801022579}
---- !u!114 &4710271131668011918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4534386966801022621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d5a3b4eb7ad4d76940f73304c9f6be9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameObjectsToDisable:
-  - {fileID: 6648535272867968418}
-  - {fileID: 4534386966801022618}
-  mainUIComponentName: SkullAndBrainUI
 --- !u!1 &4534386966801022622
 GameObject:
   m_ObjectHideFlags: 0
@@ -4111,12 +4094,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &6648535272867968418 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4650875919433788519, guid: 093676844ef992b37973a7ee59681ddb,
-    type: 3}
-  m_PrefabInstance: {fileID: 2075997366480525765}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6648535272867968447 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4650875919433788538, guid: 093676844ef992b37973a7ee59681ddb,

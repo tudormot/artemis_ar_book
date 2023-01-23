@@ -9,13 +9,32 @@ namespace BookAR.Scripts.AssetControl._3D.ExplodingRocket
 {
     public enum RocketAssetState
     {
-        TOUCH_TO_INTERACT_STATE,PREPARING_FOR_TAKEOFF, FLYING_ROCKET, EXPLODING_ROCKET
+        TOUCH_TO_INTERACT_STATE,PREPARING_FOR_TAKEOFF, FLYING_ROCKET, OCCLUDED_STATE
     }
 
 
-    public class ExplodingRocketControl : MonoBehaviour, IAssetController, IStatefulController<RocketAssetState>
+    public class ExplodingRocketControl : IAssetController, IStatefulController<RocketAssetState>
     {
-        AssetControllerType IAssetController.type { get; set; } = AssetControllerType.DEFAULT_ASSET_TYPE;
+        public override AssetControllerType type { get; protected set; } = AssetControllerType.DEFAULT_ASSET_TYPE;
+        public override void reactToCollapseRequest()
+        {
+            if ((this as IStatefulController<RocketAssetState>).state != RocketAssetState.OCCLUDED_STATE)
+            {
+                (this as IStatefulController<RocketAssetState>).state = RocketAssetState.TOUCH_TO_INTERACT_STATE;
+            }
+        }
+
+        public override void reactToOcclusionEvent(OcclusionEvent e)
+        {
+            if (e == OcclusionEvent.IMAGE_OCCLUDED)
+            {
+                (this as IStatefulController<RocketAssetState>).state = RocketAssetState.OCCLUDED_STATE;
+            }
+            else
+            {
+                (this as IStatefulController<RocketAssetState>).state = RocketAssetState.TOUCH_TO_INTERACT_STATE;
+            }
+        }
 
 
         [SerializeField]private Button touchToInteractButton;
@@ -29,33 +48,42 @@ namespace BookAR.Scripts.AssetControl._3D.ExplodingRocket
         [SerializeField]private ParticleSystem explosionParticles1;
         [SerializeField]private ParticleSystem explosionParticles2;
 
-
+        private Transform initialRocketPosition;
         private float TAKEOFF_PERIOD = 0.01f;
         private float FLYING_PERIOD = 5f;
-        private float FLYING_DISTANCE = 2.5f;
+        private float FLYING_DISTANCE = 2f;
         private float EXPLOSION_PERIOD = 1f;
-        private RocketAssetState state;
 
 
-        RocketAssetState IStatefulController<RocketAssetState>._state
-        {
-            get => state;
-            set => state = value;
-        }
+        public RocketAssetState _state { get; set; }
 
         void IStatefulController<RocketAssetState>.OnStateChanged(RocketAssetState oldState, RocketAssetState newState)
         {
             switch (newState)
             {
                 case RocketAssetState.TOUCH_TO_INTERACT_STATE:
-                    Debug.Log("we are in TOUCH_TO_INTERACT_STATE");
-                    touchToInteractCanvas.worldCamera = Camera.main;
+                    propulsionParticles1.Stop();
+                    propulsionParticles2.Stop();
+                    explosionParticles1.Stop();
+                    explosionParticles2.Stop();
+
                     touchToInteractCanvas.gameObject.SetActive(true);
+                    fullRocket.SetActive(false);
+                    destroyablePartOfRocket.gameObject.SetActive(true);
+                    break;
+                case RocketAssetState.OCCLUDED_STATE:
+                    Debug.Log("in OCCLUDED STATE");
+                    propulsionParticles1.Stop();
+                    propulsionParticles2.Stop();
+                    explosionParticles1.Stop();
+                    explosionParticles2.Stop();
+                    touchToInteractCanvas.gameObject.SetActive(false);
                     fullRocket.SetActive(false);
                     break;
                 case RocketAssetState.PREPARING_FOR_TAKEOFF:
                     touchToInteractCanvas.gameObject.SetActive(false);
                     fullRocket.SetActive(true);
+                    fullRocket.transform.DOLocalMoveY(0, 0);
 
                     propulsionParticles1.Play();
                     propulsionParticles2.Play();
@@ -74,7 +102,7 @@ namespace BookAR.Scripts.AssetControl._3D.ExplodingRocket
 
                     StartCoroutine(ConditionalCoroutineUtils.ExecuteOnceAfterPeriod(
                         FLYING_PERIOD,
-                        () => { state = RocketAssetState.EXPLODING_ROCKET; }));
+                        () => { (this as IStatefulController<RocketAssetState>).state = RocketAssetState.TOUCH_TO_INTERACT_STATE; }));
                     StartCoroutine(ConditionalCoroutineUtils.ExecuteOnceAfterPeriod(
                         FLYING_PERIOD * 3 / 4,
                         () =>
@@ -89,16 +117,18 @@ namespace BookAR.Scripts.AssetControl._3D.ExplodingRocket
                         FLYING_PERIOD * 5 / 6,
                         () => { destroyablePartOfRocket.gameObject.SetActive(false); }));
                     break;
-                case RocketAssetState.EXPLODING_ROCKET:
-                    break;
+
             }
         }
 
         void OnEnable()
         {
+            touchToInteractCanvas.worldCamera = Camera.main;
+            initialRocketPosition = fullRocket.transform;
             touchToInteractButton.onClick.AddListener(
                 () =>
                 {
+                    base.onTouchToInteractButtonPressed();
                     (this as IStatefulController<RocketAssetState>).state = RocketAssetState.PREPARING_FOR_TAKEOFF;
                 });
             (this as IStatefulController<RocketAssetState>).state = RocketAssetState.TOUCH_TO_INTERACT_STATE;
