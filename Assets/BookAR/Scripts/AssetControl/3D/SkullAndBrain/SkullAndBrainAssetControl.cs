@@ -8,7 +8,7 @@ namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
 {
     public enum SkullAssetState
     {
-        TOUCH_TO_INTERACT_STATE, MINIMIZED_SKULL, EXPANDED_SKULL, LABELED_SKULL
+        TOUCH_TO_INTERACT_STATE, MINIMIZED_SKULL, EXPANDED_SKULL, LABELED_SKULL, OCCLUDED_STATE
     }
     public enum SkullSelectionState
     {
@@ -22,17 +22,7 @@ namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
 
     public class SkullAndBrainAssetControl : IAssetController
     {
-        public override AssetControllerType type { get; protected set; } = AssetControllerType.DEFAULT_ASSET_TYPE;
-        public override void reactToCollapseRequest()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void reactToOcclusionEvent(OcclusionEvent e)
-        {
-            throw new System.NotImplementedException();
-        }
-
+        
         [SerializeField]private Button touchToInteractButton;
         [SerializeField]private Canvas touchToInteractCanvas;
         [SerializeField] private LabelController labelController;
@@ -58,6 +48,49 @@ namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
                 
             }
         }
+        public override AssetControllerType type { get; protected set; } = AssetControllerType.DEFAULT_ASSET_TYPE;
+        public override void reactToCollapseRequest()
+        {
+            if (state.assetState == SkullAssetState.OCCLUDED_STATE)
+            {
+                preOcclusionsState.assetState = SkullAssetState.TOUCH_TO_INTERACT_STATE;
+            }
+            else
+            {
+                state = new SkullFullState
+                {
+                    selectState = SkullSelectionState.NOT_SELECTED,
+                    assetState = SkullAssetState.TOUCH_TO_INTERACT_STATE
+                }; 
+            }
+        }
+
+        private SkullFullState preOcclusionsState;
+        public override void reactToOcclusionEvent(OcclusionEvent e)
+        {
+            if (e == OcclusionEvent.IMAGE_NOT_OCCLUDED)
+            {
+                state = new SkullFullState
+                {
+                    selectState = preOcclusionsState.selectState,
+                    assetState = preOcclusionsState.assetState
+                };
+            }
+            else
+            {
+                preOcclusionsState = new SkullFullState
+                {
+                    selectState = state.selectState,
+                    assetState = state.assetState
+                };
+                state = new SkullFullState
+                {
+                    selectState = SkullSelectionState.NOT_SELECTED,
+                    assetState = SkullAssetState.OCCLUDED_STATE
+                }; 
+            }
+        }
+
 
         private void onStateChanged(SkullFullState newState)
         {
@@ -66,12 +99,12 @@ namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
                 case SkullAssetState.TOUCH_TO_INTERACT_STATE:
                     //touchToInteractObj is a world canvas, that apparently needs to have its camera set. Do that here:
                     touchToInteractCanvas.worldCamera = Camera.main;
+                    rootUIObj.SetActive(false);
                     mainObjAnimation.gameObject.SetActive(false); 
                     touchToInteractCanvas.gameObject.SetActive(true);
                     labelController.state = LabelControllerState.LABELS_HIDDEN;
                     break;
                 case SkullAssetState.MINIMIZED_SKULL:
-                    // rootUIObj.SetActive(true);
                     touchToInteractCanvas.gameObject.SetActive(false);
                     mainObjAnimation.gameObject.SetActive(true);
                     expandSkullButton.gameObject.SetActive(true);
@@ -83,6 +116,7 @@ namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
                     labelController.state = LabelControllerState.LABELS_HIDDEN;
                     break;
                 case SkullAssetState.EXPANDED_SKULL:
+                    mainObjAnimation.gameObject.SetActive(true);
                     expandSkullButton.gameObject.SetActive(false);
                     retractSkullButton.gameObject.SetActive(true);
                     collapseAssetButton.gameObject.SetActive(true);
@@ -91,6 +125,7 @@ namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
                     labelController.state = LabelControllerState.LABELS_HIDDEN;
                     break;
                 case SkullAssetState.LABELED_SKULL:
+                    mainObjAnimation.gameObject.SetActive(true);
                     expandSkullButton.gameObject.SetActive(false);
                     retractSkullButton.gameObject.SetActive(true);
                     collapseAssetButton.gameObject.SetActive(true);
@@ -98,12 +133,19 @@ namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
                     hideLabelsButton.gameObject.SetActive(true);
                     labelController.state = LabelControllerState.LABELS_SHOWN;
                     break;
-
+                case SkullAssetState.OCCLUDED_STATE:
+                    mainObjAnimation.gameObject.SetActive(false); 
+                    touchToInteractCanvas.gameObject.SetActive(false);
+                    labelController.state = LabelControllerState.LABELS_HIDDEN;
+                    break;
             }
             switch (newState.selectState) {
                 case SkullSelectionState.SELECTED:
-                    rootUIObj.SetActive(true);
-
+                    if (newState.assetState != SkullAssetState.TOUCH_TO_INTERACT_STATE)
+                    {
+                        //this ugly if statement is required due to object remaining selected even in this state...
+                        rootUIObj.SetActive(true);
+                    }
                     break;
                 case SkullSelectionState.NOT_SELECTED:
                     rootUIObj.SetActive(false);
@@ -138,6 +180,7 @@ namespace BookAR.Scripts.AssetControl._3D.SkullAndBrain
             touchToInteractButton.onClick.AddListener(
                 () =>
                 {
+                    base.onTouchToInteractButtonPressed();
                     state = new SkullFullState
                     {
                         selectState = state.selectState,

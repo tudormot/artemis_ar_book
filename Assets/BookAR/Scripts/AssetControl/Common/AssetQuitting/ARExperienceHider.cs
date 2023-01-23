@@ -20,14 +20,13 @@ namespace BookAR.Scripts.AssetControl.Common.AssetQuitting
         {
             for (var i = 0; i < gameObjectsToDisable.Count; i++)
             {
-                gameObjectsToDisable[i].SetActive(savedStatesGameObjectIsActive[i]);
+                gameObjectsToDisable[i].SetActive(true);
             }
         }
         public void disableARExperience()
         {
             for (var i = 0; i < gameObjectsToDisable.Count; i++)
             {
-                savedStatesGameObjectIsActive[i] = gameObjectsToDisable[i].activeSelf;
                 gameObjectsToDisable[i].SetActive(false);
             }
         }

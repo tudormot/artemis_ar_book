@@ -1,4 +1,5 @@
-﻿using UnityEngine.InputSystem;
+﻿using BookAR.Scripts.Global;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 namespace UnityEngine.XR.ARFoundation.Samples
@@ -28,7 +29,12 @@ namespace UnityEngine.XR.ARFoundation.Samples
         public void BackButtonPressed()
         {
             if (Application.CanStreamedLevelBeLoaded("Menu"))
+            {
                 SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+                GlobalSettingsSingleton.instance.state.assetCurrentlyDisplayed = null;
+            }
+
+            
         }
     }
 }

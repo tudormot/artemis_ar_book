@@ -59,6 +59,7 @@ namespace BookAR.Scripts.AssetControl._3D
                     hider?.enableARExperience();
                     hider = null;
                     touchToInteractCanvas.gameObject.SetActive(true);
+                    mainCuteZooUI.SetActive(false);
                     fullCuteZoo.SetActive(false);
                     break;
                 case CuteZooState.READY_TO_INTERACT:
@@ -71,7 +72,7 @@ namespace BookAR.Scripts.AssetControl._3D
                     break;
                 case CuteZooState.READY_TO_INTERACT_OCCLUDED:
                     Debug.Log("CuteZoo in READY_TO_INTERACT_OCCLUDED");
-                    hider = new ARExperienceHider(new List<GameObject>() { fullCuteZoo });
+                    hider = new ARExperienceHider(new List<GameObject>() { fullCuteZoo, mainCuteZooUI });
                     hider.disableARExperience();
                     break;
                 case CuteZooState.TOUCH_TO_INTERACT_OCCLUDED:
@@ -136,7 +137,10 @@ namespace BookAR.Scripts.AssetControl._3D
         
         public override void reactToCollapseRequest()
         {
+            Debug.Log("In CuteZoo, reacting to collapse request");
             (this as IStatefulController<CuteZooState>).state = CuteZooState.TOUCH_TO_INTERACT_STATE;
+            Debug.Log("In CuteZoo, finished reacting to collapse request");
+
         }
 
         public override void reactToOcclusionEvent(OcclusionEvent e)
