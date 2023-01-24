@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using ThirdPartyAssets.solar_system.Scripts;
 using TMPro;
 using UnityEngine;
@@ -22,10 +23,12 @@ namespace Scenes.BookAR.Scripts
         private ParticleSystem GunParticleSystem;
 
         [SerializeField]
+        private List<DestroyablePlanet> allDestroyablePlanets;
+
+        [SerializeField]
         private GameObject Projectile;
 
-        private List<String> planets = new List<string>
-        {
+        private static readonly List<string> allPlanets = new List<string>{
             "Saturn",
             "Jupiter",
             "Sun",
@@ -37,6 +40,10 @@ namespace Scenes.BookAR.Scripts
             "Uranus",
             "Neptune"
         };
+
+        private List<String> planets = allPlanets.ToList();
+        
+
 
         private string currentPlanetTargetName;
 
@@ -65,21 +72,22 @@ namespace Scenes.BookAR.Scripts
 
             userInfoPanelAnimator = GameUI.GetComponent<Animator>();
             GameUI.transform.Find("Buttons").transform.Find("ShootButton").GetComponent<Button>().onClick.AddListener(ShootProjectile);
-            GameUI.transform.Find("Buttons").transform.Find("BackButton").GetComponent<Button>().onClick.AddListener(
-                ()=>SSTools.ShowMessage("Demo..restart scene to quit.",SSTools.Position.bottom,SSTools.Time.threeSecond)
-                );
+            
 
-            int randomInt = new Random().Next(planets.Count);
-            currentPlanetTargetName = planets[randomInt];
-            userInfoText.text = $"{currentPlanetTargetName}'s energy field malfunctioned! This is your chance to strike, Commander!";
-
+            
             userInfoPanelAnimator.SetBool(IsPanelShown, true);
-            SolarSystem.GetComponent<SolarSystemManager>().ShowLabels = false;
-            SolarSystem.GetComponent<SolarSystemManager>().ShowPaths = false;
+            SolarSystem.GetComponent<SolarSystemManager>().ShowLabels = GameUI.transform.Find("Buttons").transform.Find("Toggle labels").GetComponent<Toggle>().isOn;
+            SolarSystem.GetComponent<SolarSystemManager>().ShowPaths = GameUI.transform.Find("Buttons").transform.Find("Toggle paths").GetComponent<Toggle>().isOn;
+            
+            StartGame();
 
         }
 
-       
+        private String getNewPlanetTargetName()
+        {
+            int randomInt = new Random().Next(planets.Count);
+            return planets[randomInt];
+        }
 
         private void ShootProjectile()
         {
@@ -102,18 +110,15 @@ namespace Scenes.BookAR.Scripts
                      {
                          if (hitsLeft == 0)
                          {
-                             Debug.Log($"DEBUGGG. planets array is: {planets}");
-                             Debug.Log($"DEBUGGG. trying to remove {hit.collider.gameObject.name}, from index : {planets.IndexOf(hit.collider.gameObject.name)}");
-
                              planets.RemoveAt(planets.IndexOf(currentPlanetTargetName));
+
                              if (planets.Count == 0)
                              {
                                  userInfoText.text = $"The solar system was completely destroyed. You sure can fire those missiles, Commander! ;)";
                              }
                              else
                              {
-                                 int randomInt = new Random().Next(planets.Count);
-                                 var newTarget = planets[randomInt];
+                                 var newTarget = getNewPlanetTargetName();
                                  userInfoText.text = $"Nice one Commander! {currentPlanetTargetName} successfully destroyed! Your new target is {newTarget}. Give them hell!";
                                  currentPlanetTargetName = newTarget;
                              }
@@ -129,9 +134,6 @@ namespace Scenes.BookAR.Scripts
                      {
                          if (hitsLeft == 0)
                          {
-                             Debug.Log($"DEBUGGG. planets array is: {planets}");
-                             Debug.Log($"DEBUGGG. trying to remove {hit.collider.gameObject.name}, from index : {planets.IndexOf(hit.collider.gameObject.name)}");
-
                              planets.RemoveAt(planets.IndexOf(hit.collider.gameObject.name));
                              if (planets.Count > 0)
                              {
@@ -173,17 +175,46 @@ namespace Scenes.BookAR.Scripts
 
             
             return sunAvgSize / projectileAvgSize / 4;
-
-
-
         }
+
+        public void ResetGame()
+        {
+            planets = allPlanets.ToList();
+            foreach (var planet in allDestroyablePlanets)
+            {
+                planet.resetPlanet();
+            }
+        }
+
+        public void StartGame()
+        {
+            currentPlanetTargetName = getNewPlanetTargetName();
+            userInfoText.text = $"{currentPlanetTargetName}'s energy field malfunctioned! This is your chance to strike, Commander!";
+        }
+
+        public void HideGame()
+        {
+            if (isActiveAndEnabled)
+            {
+                GameUI.SetActive(false);
+                ShootingModule.SetActive(false);
+            }
+        }
+
+        public void RevealGame()
+        {
+            GameUI.SetActive(true);
+            ShootingModule.SetActive(true);
+        }
+
 
         private void OnDisable()
         {
+            ResetGame();
             GameUI.SetActive(false);
             ShootingModule.SetActive(false);
-            GameUI.transform.Find("SunButton").GetComponent<Button>().onClick.RemoveAllListeners();
-            GameUI.transform.Find("ShootButton").GetComponent<Button>().onClick.RemoveAllListeners();
+            GameUI.transform.Find("Buttons").Find("ShootButton").GetComponent<Button>().onClick.RemoveAllListeners();
+
         }
     }
 }

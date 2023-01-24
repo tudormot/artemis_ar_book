@@ -1,4 +1,5 @@
 using System;
+using System.Net.Mail;
 using BookAR.Scripts.AssetControl.Common;
 using BookAR.Scripts.Global;
 using UnityEngine;
@@ -11,18 +12,8 @@ namespace BookAR.Scripts.AssetControl._2D
     public class NewVideoManager : IAssetController, IDragHandler, IPointerDownHandler
     {
         public override AssetControllerType type { get; protected set; } = AssetControllerType.VIDEO_ASSET_TYPE;
-        public override void reactToCollapseRequest()
-        {
-            Debug.LogError("reactToCollapseRequest not implemented for video manager");
-        }
-
-        public override void reactToOcclusionEvent(OcclusionEvent e)
-        {
-            Debug.LogError("reactToOcclusionEvent not implemented for video manager");
-        }
 
         [SerializeField] private Button revealAssetButton;
-
         [SerializeField] private VideoPlayer smallScreenPlayer;
         [SerializeField] private RawImage smallScreenRawImage;
         [SerializeField] private Canvas smallScreenCanvas;
@@ -37,11 +28,10 @@ namespace BookAR.Scripts.AssetControl._2D
         private Button fullScreenButton;
         private Button smallScreenButton;
         private Button collapseVideoButton;
-
-
+        private Button forwardButton;
+        private Button reverseButton;
 
         private VideoPlayerState _state;
-
         private VideoPlayerState state
         {
             get => _state;
@@ -53,11 +43,8 @@ namespace BookAR.Scripts.AssetControl._2D
             }
         }
 
-        
-
         private enum VideoPlayerState
         {
-            AR_EXPERIENCE_DISABLED,
             TOUCH_TO_INTERACT_STATE,
             HAS_CONTROL_OF_VIDEO_PLAYER_UI_SMALL_PLAYER_ACTIVE,
             HAS_CONTROL_OF_VIDEO_PLAYER_UI_BIG_PLAYER_ACTIVE
@@ -68,30 +55,11 @@ namespace BookAR.Scripts.AssetControl._2D
             switch (newState)
             {
                 case VideoPlayerState.TOUCH_TO_INTERACT_STATE:
-                    revealAssetButton.gameObject.SetActive(true);
-                    smallScreenCanvas.gameObject.SetActive(true);
-                    bigScreenPlayer.gameObject.SetActive(false);
                     break;
-
-                case VideoPlayerState.AR_EXPERIENCE_DISABLED:
-                    if (oldState == VideoPlayerState.HAS_CONTROL_OF_VIDEO_PLAYER_UI_BIG_PLAYER_ACTIVE ||
-                        oldState == VideoPlayerState.HAS_CONTROL_OF_VIDEO_PLAYER_UI_SMALL_PLAYER_ACTIVE)
-                    {
-                        bigScreenPlayer.Pause();
-                        bigScreenPlayer.frame = 0;
-                        smallScreenPlayer.Pause();
-                        smallScreenPlayer.frame = 0;
-                        bigScreenCanvas.SetActive(false);
-                        smallScreenRawImage.gameObject.SetActive(false);
-                        //GlobalSettingsSingleton.instance.state.isVideoPlayerUIInUse = false;
-                        playButton.onClick.RemoveListener(onPlayButtonPress);
-                        pauseButton.onClick.RemoveListener(onPauseButtonPress);
-                        fullScreenButton.onClick.RemoveListener(onFullScreenButtonPress);
-                        smallScreenButton.onClick.RemoveListener(onSmallScreenButtonPress);
-                        collapseVideoButton.onClick.RemoveListener(onCollapseButtonPress);
-                    }
-                    smallScreenCanvas.gameObject.SetActive(false);
+                
+                case VideoPlayerState.HAS_CONTROL_OF_VIDEO_PLAYER_UI_SMALL_PLAYER_ACTIVE:
                     break;
+                
                 default:
                     break;
             }
@@ -99,7 +67,9 @@ namespace BookAR.Scripts.AssetControl._2D
 
         void Update()
         {
-            if (smallScreenPlayer.isPlaying || bigScreenPlayer.isPlaying)
+            bool hasVideoControl = state != VideoPlayerState.TOUCH_TO_INTERACT_STATE &&
+                                   !isOccluded;
+            if (hasVideoControl && (smallScreenPlayer.isPlaying || bigScreenPlayer.isPlaying))
             {
                 var currentPlayer = smallScreenPlayer;
                 if (state == VideoPlayerState.HAS_CONTROL_OF_VIDEO_PLAYER_UI_BIG_PLAYER_ACTIVE)
@@ -170,12 +140,17 @@ namespace BookAR.Scripts.AssetControl._2D
         }
         private void onCollapseButtonPress()
         {
-            Debug.LogError("Collapse button is not implemented yet, but it is very important!");
+            unbindFromBigUI();
+            smallScreenPlayer.Pause();
+            smallScreenPlayer.frame = 0;
+            smallScreenRawImage.gameObject.SetActive(false);
+            revealAssetButton.gameObject.SetActive(true);
+            smallScreenCanvas.gameObject.SetActive(true);
+            state = VideoPlayerState.TOUCH_TO_INTERACT_STATE;
         }
 
-        private void OnEnable()
+        private void bindToBigUI()
         {
-            Debug.Log("in NewVideoManager OnEnable!");
             bigScreenCanvas =  GameObject.FindGameObjectWithTag("MainCanvas").transform.Find("StandaloneAssetUIs").Find("FullScreenVideoCanvas").gameObject;
             bigScreenRawImage = bigScreenCanvas.transform.Find("FullScreenVideoPlayer").GetComponent<RawImage>();
             bigScreenPlayer = bigScreenCanvas.transform.Find("FullScreenVideoPlayer").GetComponent<VideoPlayer>();
@@ -185,75 +160,110 @@ namespace BookAR.Scripts.AssetControl._2D
             fullScreenButton = bigScreenCanvas.transform.Find("FullScreenButton").GetComponent<Button>();
             smallScreenButton = bigScreenCanvas.transform.Find("SmallScreenButton").GetComponent<Button>();
             collapseVideoButton = bigScreenCanvas.transform.Find("CollapseVideoButton").GetComponent<Button>();
-
+            forwardButton = bigScreenCanvas.transform.Find("FastForwardButton").GetComponent<Button>();
+            reverseButton = bigScreenCanvas.transform.Find("FastBackwardsButton").GetComponent<Button>();
+            
             if (bigScreenCanvas == null || bigScreenRawImage == null || bigScreenPlayer == null ||
                 progress == null || playButton == null || pauseButton == null ||
                 fullScreenButton == null || smallScreenButton == null)
             {
                 Debug.LogError("The NewVideoManagerScript this not manage to find all the required components in the fullScreenCanvas. Please Check");
             }
-
-            bigScreenPlayer.clip = smallScreenPlayer.clip;
-            var videoOriginalWidth = smallScreenPlayer.clip.width;
-            var videoOriginalHeight = smallScreenPlayer.clip.height;
-            var textureBestWidth =(int) Math.Pow(2 ,(int)Math.Log(videoOriginalWidth, 2));
-            var textureBestHeight =(int) Math.Pow(2, (int)Math.Log(videoOriginalHeight, 2));
-            smallScreenCanvas.worldCamera = Camera.main;
             
-        
+            
+            playButton.onClick.AddListener(onPlayButtonPress);
+            pauseButton.onClick.AddListener(onPauseButtonPress);
+            fullScreenButton.onClick.AddListener(onFullScreenButtonPress);
+            smallScreenButton.onClick.AddListener(onSmallScreenButtonPress);
+            collapseVideoButton.onClick.AddListener(onCollapseButtonPress);
+            forwardButton.onClick.AddListener(
+                ()=> SSTools.ShowMessage("DEMO, not implemented.",SSTools.Position.top,SSTools.Time.threeSecond)
+                );
+            reverseButton.onClick.AddListener(
+                ()=> SSTools.ShowMessage("DEMO, not implemented.",SSTools.Position.top,SSTools.Time.threeSecond)
+            );
+            
+            bigScreenPlayer.clip = smallScreenPlayer.clip;
+            
+        }
+
+        private void unbindFromBigUI()
+        {
+            bigScreenPlayer.Pause();
+            bigScreenPlayer.frame = 0;
+            bigScreenPlayer.gameObject.SetActive(false);
+            bigScreenCanvas.SetActive(false);
+            
+            playButton.onClick.RemoveListener(onPlayButtonPress);
+            pauseButton.onClick.RemoveListener(onPauseButtonPress);
+            fullScreenButton.onClick.RemoveListener(onFullScreenButtonPress);
+            smallScreenButton.onClick.RemoveListener(onSmallScreenButtonPress);
+            collapseVideoButton.onClick.RemoveListener(onCollapseButtonPress);
+            forwardButton.onClick.RemoveAllListeners();
+            reverseButton.onClick.RemoveAllListeners();
+
+            bigScreenCanvas = null;
+            bigScreenRawImage = null;
+            bigScreenPlayer = null;
+            progress = null;
+            playButton = null;
+            pauseButton = null;
+            fullScreenButton = null;
+            smallScreenButton = null;
+            collapseVideoButton = null;
+            forwardButton = null;
+            reverseButton = null;
+        }
+
+        private void OnEnable()
+        {
+
+            smallScreenCanvas.worldCamera = Camera.main;
             revealAssetButton.onClick.AddListener(
                 () =>
                 {
-                    //if (GlobalSettingsSingleton.instance.state.isVideoPlayerUIInUse)
-                    if (false)
+                    Debug.Log("DEBUG1");
+                    base.onTouchToInteractButtonPressed();
+                    Debug.Log("DEBUG2");
 
-                    {
-                        Debug.Log("Another video player instance is using the video player UI, collapse that player before trying to start this video (or turn the page).");
-                    }
-                    else
-                    {
-                        //GlobalSettingsSingleton.instance.state.isVideoPlayerUIInUse = true;
-                        revealAssetButton.gameObject.SetActive(false);
-                        bigScreenCanvas.gameObject.SetActive(true);
-                        bigScreenPlayer.gameObject.SetActive(false);
-                        smallScreenPlayer.gameObject.SetActive(true);
-                        smallScreenPlayer.Play();
-                        fullScreenButton.gameObject.SetActive(true);
-                        smallScreenButton.gameObject.SetActive(false);
-                        playButton.gameObject.SetActive(false);
-                        pauseButton.gameObject.SetActive(true);
-                        playButton.onClick.AddListener(onPlayButtonPress);
-                        pauseButton.onClick.AddListener(onPauseButtonPress);
-                        fullScreenButton.onClick.AddListener(onFullScreenButtonPress);
-                        smallScreenButton.onClick.AddListener(onSmallScreenButtonPress);
-                        collapseVideoButton.onClick.AddListener(onCollapseButtonPress);
-                        state = VideoPlayerState.HAS_CONTROL_OF_VIDEO_PLAYER_UI_SMALL_PLAYER_ACTIVE;
-                    }
+                    bindToBigUI();
+                    Debug.Log("DEBUG3");
+
+                    revealAssetButton.gameObject.SetActive(false);
+                    Debug.Log("DEBUG4");
+
+                    bigScreenCanvas.gameObject.SetActive(true);
+                    Debug.Log("DEBUG5");
+
+                    bigScreenPlayer.gameObject.SetActive(false);
+                    Debug.Log("DEBUG6");
+
+                    smallScreenPlayer.gameObject.SetActive(true);
+                    Debug.Log("DEBUG7");
+
+                    fullScreenButton.gameObject.SetActive(true);
+                    Debug.Log("DEBUG8");
+
+                    smallScreenButton.gameObject.SetActive(false);
+                    Debug.Log("DEBUG9");
+
+                    onPlayButtonPress();
+                    Debug.Log("DEBUG10");
+
+                    state = VideoPlayerState.HAS_CONTROL_OF_VIDEO_PLAYER_UI_SMALL_PLAYER_ACTIVE;
+                    Debug.Log("DEBUG11");
+
                 }
             );
-
-            //gameObject.GetComponent<ARExperienceQuitter>().ARExperienceChanged += onARExperienceVisibilityChanged;
-
-
+            state = VideoPlayerState.TOUCH_TO_INTERACT_STATE;
         }
 
-        /*private void onARExperienceVisibilityChanged(object obj, ARExperienceQuitter.ARExperienceState visibilityState)
-        {
-            if (visibilityState == ARExperienceQuitter.ARExperienceState.AR_EXPERIENCE_ENABLED)
-            {
-                state = VideoPlayerState.TOUCH_TO_INTERACT_STATE;
-            }
-            else
-            {
-                //AR experience disabled
-                state = VideoPlayerState.AR_EXPERIENCE_DISABLED;
-            }
-        }*/
+        
 
         private void OnDisable()
         {
             //gameObject.GetComponent<ARExperienceQuitter>().ARExperienceChanged -= onARExperienceVisibilityChanged;
-            state = VideoPlayerState.AR_EXPERIENCE_DISABLED;
+            //state = VideoPlayerState.AR_EXPERIENCE_DISABLED;
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -284,6 +294,57 @@ namespace BookAR.Scripts.AssetControl._2D
                 float pct = Mathf.InverseLerp(progress.rectTransform.rect.xMin, progress.rectTransform.rect.xMax, localPoint.x);
                 SkipToPercent(pct);
             }
+        }
+
+        //private VideoPlayerState preOcclusionState
+        private bool isOccluded = false;
+        public override void reactToCollapseRequest()
+        {
+            if(state != VideoPlayerState.TOUCH_TO_INTERACT_STATE){
+                onCollapseButtonPress();
+            }
+            if (isOccluded)
+            {
+                smallScreenCanvas.gameObject.SetActive(false);
+            }
+        }
+
+        public override void reactToOcclusionEvent(OcclusionEvent e)
+        {
+            if (e == OcclusionEvent.IMAGE_OCCLUDED)
+            {
+                isOccluded = true;
+                if (state == VideoPlayerState.TOUCH_TO_INTERACT_STATE)
+                {
+                    revealAssetButton.gameObject.SetActive(false);
+                }
+                else 
+                {
+                    onPauseButtonPress();
+                    smallScreenCanvas.gameObject.SetActive(false);
+                    if (bigScreenCanvas != null)
+                    {
+                        bigScreenCanvas?.gameObject.SetActive(false);
+                    }
+                }
+
+            }
+            else
+            {
+                isOccluded = false;
+                if (state == VideoPlayerState.TOUCH_TO_INTERACT_STATE)
+                {
+                    revealAssetButton.gameObject.SetActive(true);
+                }
+                else 
+                {
+                    onPauseButtonPress();
+                    smallScreenCanvas.gameObject.SetActive(true);
+                    if (bigScreenCanvas != null)
+                    {
+                        bigScreenCanvas?.gameObject.SetActive(true);
+                    }
+                }            }
         }
 
   

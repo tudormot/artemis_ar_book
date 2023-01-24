@@ -11,18 +11,14 @@ namespace BookAR.Scripts.AssetControl._3D.SpaceGame
     [RequireComponent(typeof(ShowInfo))]
     [RequireComponent(typeof(OpenCloseCanvas))]
     [RequireComponent(typeof(SpaceGameController))]
+
     public class SolarSystemAssetControl : IAssetController
     {
         public override AssetControllerType type { get; protected set; } = AssetControllerType.DEFAULT_ASSET_TYPE;
-        public override void reactToCollapseRequest()
-        {
-            Debug.LogError("This was not implemented yet!");
-        }
+        private bool isCurrentlyOccluded = false;
+        private bool isCurrentlyInTouchToInteractState = true;
+        private bool isSpaceGameActive = false;
 
-        public override void reactToOcclusionEvent(OcclusionEvent e)
-        {
-            Debug.LogError("This was not implemented yet!");
-        }
 
         private GameObject rootUIObj;
         private GlobalSoundManager soundManagerScript;
@@ -70,6 +66,9 @@ namespace BookAR.Scripts.AssetControl._3D.SpaceGame
 
 
             //now connect stuff to the UI:
+            rootUIObj.transform.Find("GameUI").Find("Buttons").Find("BackButton").GetComponent<Button>().onClick.AddListener(
+                stopGameMode
+            );
             rootUIObj.transform.Find("StandardUI").Find("Slider").GetComponent<sliderChange>().SolarSystem =
                 solarSystemAsset;
             rootUIObj.transform.Find("StandardUI").Find("SoundOnOff").GetComponent<Button>().onClick.AddListener(soundManagerScript.SoundManager);
@@ -86,6 +85,8 @@ namespace BookAR.Scripts.AssetControl._3D.SpaceGame
 
         private void swapToMainAsset()
         {
+            base.onTouchToInteractButtonPressed();
+            isCurrentlyInTouchToInteractState = false;
             touchToInteractCanvas.gameObject.SetActive(false);
             solarSystemAsset.SetActive(true);
             rootUIObj.SetActive(true);
@@ -101,6 +102,12 @@ namespace BookAR.Scripts.AssetControl._3D.SpaceGame
 
         private void swapToIntroAsset()
         {
+            if (isSpaceGameActive)
+            {
+                stopGameMode();
+            }
+
+            isCurrentlyInTouchToInteractState = true;
             touchToInteractCanvas.gameObject.SetActive(true);
             solarSystemAsset.SetActive(false);
             rootUIObj.SetActive(false);
@@ -115,11 +122,83 @@ namespace BookAR.Scripts.AssetControl._3D.SpaceGame
 
         private void startGameMode()
         {
+            isSpaceGameActive = true;
             rootUIObj.transform.Find("StandardUI").gameObject.SetActive(false);
             rootUIObj.transform.Find("InfoUI").gameObject.SetActive(false);
             showInfoScript.enabled = false;
-            Debug.Log("got here, enabling spaceGameController script");
-            transform.GetComponent<SpaceGameController>().enabled = true;
+            spaceGameController.enabled = true;
+        }
+
+        private void stopGameMode()
+        {
+            isSpaceGameActive = false;
+            rootUIObj.transform.Find("StandardUI").gameObject.SetActive(true);
+            showInfoScript.enabled = true;
+            spaceGameController.enabled = false;
+            solarSystemAsset.GetComponent<SolarSystemManager>().ShowLabels = rootUIObj.transform
+                .Find("StandardUI").Find("Toggle labels").GetComponent<Toggle>().isOn;
+            solarSystemAsset.GetComponent<SolarSystemManager>().ShowPaths = rootUIObj.transform.Find("StandardUI")
+                .Find("Toggle paths").GetComponent<Toggle>().isOn;
+
+        }
+        public override void reactToCollapseRequest()
+        {
+            swapToIntroAsset();
+            if (isCurrentlyOccluded)
+            {
+                touchToInteractCanvas.gameObject.SetActive(false);
+            }
+        }
+
+        public override void reactToOcclusionEvent(OcclusionEvent e)
+        {
+            if (e == OcclusionEvent.IMAGE_OCCLUDED)
+            {
+                isCurrentlyOccluded = true;
+                if (isCurrentlyInTouchToInteractState)
+                {
+                    touchToInteractCanvas.gameObject.SetActive(false);
+                }
+                else
+                {
+                    if (isSpaceGameActive)
+                    {
+                        spaceGameController.HideGame();
+                    }
+                    else
+                    {
+                        rootUIObj.transform.Find("StandardUI").gameObject.SetActive(false);
+                        rootUIObj.transform.Find("InfoUI").gameObject.SetActive(false);
+                        showInfoScript.enabled = false;
+                    }
+                    solarSystemAsset.SetActive(false);
+                    soundAsset.SetActive(false);
+                    
+
+                }
+            }
+            else
+            {
+                isCurrentlyOccluded = false;
+                if (isCurrentlyInTouchToInteractState)
+                {
+                    touchToInteractCanvas.gameObject.SetActive(true);
+                }
+                else
+                {
+                    solarSystemAsset.SetActive(true);
+                    soundAsset.SetActive(true);
+                    if (isSpaceGameActive)
+                    {
+                        spaceGameController.RevealGame();
+                    }
+                    else
+                    {
+                        rootUIObj.transform.Find("StandardUI").gameObject.SetActive(true);
+                        showInfoScript.enabled = true;
+                    }
+                }
+            }
         }
 
         private void OnDisable()
@@ -133,6 +212,8 @@ namespace BookAR.Scripts.AssetControl._3D.SpaceGame
             rootUIObj.transform.Find("InfoUI").Find("Close").GetComponent<Button>().onClick.RemoveAllListeners();
             rootUIObj.transform.Find("StandardUI").Find("CollapseAssetButton").GetComponent<Button>().onClick.RemoveAllListeners();
             rootUIObj.transform.Find("StandardUI").Find("GameModeButton").GetComponent<Button>().onClick.RemoveAllListeners();
+            rootUIObj.transform.Find("GameUI").Find("Buttons").Find("BackButton").GetComponent<Button>().onClick
+                .RemoveAllListeners();
             rootUIObj.SetActive(false);
         }
     }
