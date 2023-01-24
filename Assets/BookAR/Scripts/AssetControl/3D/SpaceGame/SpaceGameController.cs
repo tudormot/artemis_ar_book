@@ -65,12 +65,9 @@ namespace Scenes.BookAR.Scripts
 
             userInfoPanelAnimator = GameUI.GetComponent<Animator>();
             GameUI.transform.Find("Buttons").transform.Find("ShootButton").GetComponent<Button>().onClick.AddListener(ShootProjectile);
-            GameUI.transform.Find("Buttons").transform.Find("DebugButton").GetComponent<Button>().onClick.AddListener(
-                () =>
-                {
-                    userInfoPanelAnimator.SetBool(IsPanelShown,!userInfoPanelAnimator.GetBool(IsPanelShown));
-                }
-            );       
+            GameUI.transform.Find("Buttons").transform.Find("BackButton").GetComponent<Button>().onClick.AddListener(
+                ()=>SSTools.ShowMessage("Demo..restart scene to quit.",SSTools.Position.bottom,SSTools.Time.threeSecond)
+                );
 
             int randomInt = new Random().Next(planets.Count);
             currentPlanetTargetName = planets[randomInt];

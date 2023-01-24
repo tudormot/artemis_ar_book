@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace BookAR.Scripts.AssetControl._3D.SpaceGame
 {
 
-    /* These shitty required components are all thirs party scripts, part of the original solar system asset */
+    /* These shitty required components are all third party scripts, part of the original solar system asset */
     [RequireComponent(typeof(GlobalSoundManager))]
     [RequireComponent(typeof(ShowInfo))]
     [RequireComponent(typeof(OpenCloseCanvas))]
@@ -16,12 +16,12 @@ namespace BookAR.Scripts.AssetControl._3D.SpaceGame
         public override AssetControllerType type { get; protected set; } = AssetControllerType.DEFAULT_ASSET_TYPE;
         public override void reactToCollapseRequest()
         {
-            throw new System.NotImplementedException();
+            Debug.LogError("This was not implemented yet!");
         }
 
         public override void reactToOcclusionEvent(OcclusionEvent e)
         {
-            throw new System.NotImplementedException();
+            Debug.LogError("This was not implemented yet!");
         }
 
         private GameObject rootUIObj;
